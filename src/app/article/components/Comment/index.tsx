@@ -2,13 +2,12 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { addCommentDataAPI, getArticleCommentListAPI } from '@/api/comment';
-import { Comment } from '@/types/app/comment';
+import { addCommentDataAPI } from '@/api/comment';
 import { ToastContainer, toast } from 'react-toastify';
+import { Spinner } from '@nextui-org/react';
 import List from './components/List';
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss"
-import { Spinner } from '@nextui-org/react';
 
 interface Props {
     articleId: number,
@@ -23,21 +22,14 @@ interface CommentForm {
     avatar: string
 }
 
-const CommentForm = ({ articleId, articleTitle }: Props) => {
+const CommentForm = ({ articleId }: Props) => {
     const contentRef = useRef<HTMLTextAreaElement>(null);
     const [commentId, setCommentId] = useState(articleId);
     const [placeholder, setPlaceholder] = useState("来发一针见血的评论吧~");
 
     const [loading, setLoading] = useState(false)
-    const [list, setList] = useState<Comment[]>([])
-    const getCommentList = async () => {
-        const { data } = await getArticleCommentListAPI(+articleId!) || { data: {} as Paginate<Comment[]> }
-        setList(data?.result)
-    }
 
-    useEffect(() => {
-        getCommentList()
-    }, [])
+    const commentRef = useRef<{ getCommentList: () => void }>(null)
 
     const { register, control, formState: { errors }, handleSubmit, reset, setValue } = useForm<CommentForm>({});
 
@@ -71,7 +63,7 @@ const CommentForm = ({ articleId, articleTitle }: Props) => {
         setCommentId(articleId)
         setValue('content', "");
         setPlaceholder("来发一针见血的评论吧~");
-        getCommentList()
+        commentRef.current?.getCommentList()
         setLoading(false)
 
         // 提交成功后把评论的数据持久化到本地
@@ -127,7 +119,7 @@ const CommentForm = ({ articleId, articleTitle }: Props) => {
                     {loading ? <div className='w-full h-10 flex justify-center !mt-4'><Spinner /></div> : <button className="w-full h-10 !mt-4 text-white rounded-md bg-primary text-center" type="submit">发表评论</button>}
                 </form>
 
-                <List id={articleId} list={list} reply={replyComment} />
+                <List ref={commentRef} id={articleId} reply={replyComment} />
             </div>
 
             <ToastContainer />
