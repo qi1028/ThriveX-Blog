@@ -1,3 +1,4 @@
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import Link from 'next/link';
 import Show from '@/components/Show';
 import Empty from '@/components/Empty';
@@ -5,26 +6,47 @@ import RandomAvatar from '@/components/RandomAvatar';
 import { Comment } from '@/types/app/comment'
 import { RiMessage3Line } from "react-icons/ri";
 import dayjs from 'dayjs';
+import { getArticleCommentListAPI } from '@/api/comment';
+import { Pagination } from '@nextui-org/react';
 import "./index.scss"
 
 interface Props {
     id: number,
-    list: Comment[],
     reply: (id: number, name: string) => void
 }
 
-const CommentList = ({ list, reply }: Props) => {
-    // 获取评论
+const CommentList = forwardRef(({ id, reply }: Props, ref) => {
+    const [data, setData] = useState<Paginate<Comment[]>>({} as Paginate<Comment[]>)
+    const getCommentList = async (page: number = 1) => {
+        const { data } = await getArticleCommentListAPI(+id!, { page, size: 8 }) || { data: {} as Paginate<Comment[]> }
+        setData(data)
+    }
+
+    useEffect(() => {
+        getCommentList()
+    }, [])
+
+    const [page, setPage] = useState(1)
+    const onPaginateChange = (page: number) => {
+        setPage(page)
+        getCommentList(page)
+    }
+
+    // 回复评论
     const replyComment = (id: number, name: string) => {
         reply(id, name)
     }
 
+    useImperativeHandle(ref, () => ({
+        getCommentList
+    }))
+
     // 这里的逻辑有点乱，暂时先这样，有空再优化！！！
     return (
         <div className='CommentListComponent'>
-            <Show is={!!list?.length} children={
+            <Show is={!!data.result?.length} children={
                 <ul className="list">
-                    {list?.map(one => (
+                    {data.result?.map(one => (
                         <li className="item" key={one.id}>
                             <div className="comment_user_one">
                                 {
@@ -179,9 +201,18 @@ const CommentList = ({ list, reply }: Props) => {
                 </ul>
             } />
 
-            <Show is={!list?.length} children={<Empty info='评论列表为空~'></Empty>} />
+            <Show is={!data.result?.length} children={<Empty info='评论列表为空~'></Empty>} />
+
+            <Pagination
+                showControls
+                total={data.pages}
+                page={page}
+                onChange={onPaginateChange}
+                className='flex justify-center mt-2'
+                classNames={{ item: "shadow-none bg-transparent dark:hover:!bg-black-b transition-colors", prev: "dark:bg-black-b transition-colors", next: "dark:bg-black-b transition-colors" }}
+            />
         </div >
     );
-};
+})
 
 export default CommentList;

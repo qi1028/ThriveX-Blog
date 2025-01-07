@@ -17,14 +17,18 @@ import { LuTimer } from "react-icons/lu";
 
 import dayjs from 'dayjs';
 import { Article } from '@/types/app/article';
+import Encrypt from '@/components/Encrypt';
 
 interface Props {
     params: { id: number };
+    searchParams: { password: string }
 };
 
-export default async ({ params }: Props) => {
+export default async ({ params, searchParams }: Props) => {
     const id = params.id
-    const { data } = await getArticleDataAPI(id) || { data: {} as Article }
+    const password = searchParams.password
+
+    const { data } = password ? await getArticleDataAPI(id, password) || { data: {} as Article } : await getArticleDataAPI(id) || { data: {} as Article }
 
     // 记录文章访问量
     await recordViewAPI(id)
@@ -32,57 +36,61 @@ export default async ({ params }: Props) => {
     // 图标样式
     const iconSty = "flex justify-center items-center w-5 h-5 rounded-full text-xs mr-1"
 
-    return (
-        <>
-            <title>{data.title}</title>
-            <meta name="description" content={data.description} />
+    if ((data && data.isEncrypt !== 1) || password && data.isEncrypt === 1) {
+        return (
+            <>
+                <title>{data.title}</title>
+                <meta name="description" content={data.description} />
 
-            <div className="ArticlePage">
-                <Swiper>
-                    {/* 星空背景组件 */}
-                    <Starry />
+                <div className="ArticlePage">
+                    <Swiper>
+                        {/* 星空背景组件 */}
+                        <Starry />
 
-                    <div className="absolute w-[80%] sm:w-[70%] lg:w-[60%] xl:w-[50%] top-[60%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-[65%] text-white custom_text_shadow">
-                        <div className="text-xl mb-5 sm:text-2xl lg:text-3xl xl:text-4xl text-center sm:mb-7 md:mb-10">{data?.title}</div>
+                        <div className="absolute w-[80%] sm:w-[70%] lg:w-[60%] xl:w-[50%] top-[60%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-[65%] text-white custom_text_shadow">
+                            <div className="text-xl mb-5 sm:text-2xl lg:text-3xl xl:text-4xl text-center sm:mb-7 md:mb-10">{data?.title}</div>
 
-                        <div className="flex flex-wrap justify-between text-xs sm:text-sm">
-                            <div className="flex mb-2">
-                                <span className={`${iconSty} bg-[#A543E6]`}><IoMdPricetags /></span>
-                                <span>所属分类：{data?.cateList[0]?.name}</span>
-                            </div>
+                            <div className="flex flex-wrap justify-between text-xs sm:text-sm">
+                                <div className="flex mb-2">
+                                    <span className={`${iconSty} bg-[#A543E6]`}><IoMdPricetags /></span>
+                                    <span>所属分类：{data?.cateList[0]?.name}</span>
+                                </div>
 
-                            <div className="flex mb-2">
-                                <span className={`${iconSty} bg-[#EA3B24]`}><FaHotjar /></span>
-                                <span>阅读量：{data?.view}</span>
-                            </div>
+                                <div className="flex mb-2">
+                                    <span className={`${iconSty} bg-[#EA3B24]`}><FaHotjar /></span>
+                                    <span>阅读量：{data?.view}</span>
+                                </div>
 
-                            <div className="flex mb-2">
-                                <span className={`${iconSty} bg-[#4FA759]`}><AiOutlineComment /></span>
-                                <span>评论数量：{data?.comment}</span>
-                            </div>
+                                <div className="flex mb-2">
+                                    <span className={`${iconSty} bg-[#4FA759]`}><AiOutlineComment /></span>
+                                    <span>评论数量：{data?.comment}</span>
+                                </div>
 
-                            <div className="flex mb-2">
-                                <span className={`${iconSty} bg-[#5A9CF8]`}><LuTimer /></span>
-                                <span>发布时间：{dayjs(+data?.createTime!).format('YYYY-MM-DD HH:mm')}</span>
+                                <div className="flex mb-2">
+                                    <span className={`${iconSty} bg-[#5A9CF8]`}><LuTimer /></span>
+                                    <span>发布时间：{dayjs(+data?.createTime!).format('YYYY-MM-DD HH:mm')}</span>
+                                </div>
                             </div>
                         </div>
+                    </Swiper>
+
+                    <div className="w-[90%] xl:w-6/12 mx-auto mt-12 relative">
+                        <MD data={data?.content} />
+
+                        <div className="w-full">
+                            <Tag data={data?.tagList} />
+
+                            <Copyright />
+                            <UpAndDown id={id} prev={data?.prev} next={data?.next} />
+                            <Comment articleId={id} articleTitle={data.title} />
+                        </div>
                     </div>
-                </Swiper>
 
-                <div className="w-[90%] xl:w-6/12 mx-auto mt-12 relative">
-                    <MD data={data?.content} />
-
-                    <div className="w-full">
-                        <Tag data={data?.tagList} />
-
-                        <Copyright />
-                        <UpAndDown id={id} prev={data?.prev} next={data?.next} />
-                        <Comment articleId={id} articleTitle={data.title} />
-                    </div>
+                    <Nav />
                 </div>
-
-                <Nav />
-            </div>
-        </>
-    )
+            </>
+        )
+    } else {
+        return !password && <Encrypt id={id} />
+    }
 }

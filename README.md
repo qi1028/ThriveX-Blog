@@ -116,10 +116,9 @@ lyy:
 
 ## 项目部署
 
-前端：[https://liuyuyang.net/article/2206](https://liuyuyang.net/article/2206)
-
-后端：[https://liuyuyang.net/article/2207](https://liuyuyang.net/article/2207)
-
+前端：[https://docs.liuyuyang.net/docs/项目部署/前端.html](https://docs.liuyuyang.net/docs/项目部署/前端.html)
+控制端：[https://docs.liuyuyang.net/docs/项目部署/控制端.html](https://docs.liuyuyang.net/docs/项目部署/控制端.html)
+后端：[https://docs.liuyuyang.net/docs/项目部署/后端.html](https://docs.liuyuyang.net/docs/项目部署/后端.html)
 
 
 

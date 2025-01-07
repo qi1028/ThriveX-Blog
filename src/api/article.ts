@@ -2,8 +2,8 @@ import Request from "@/utils/request";
 import { Article } from "@/types/app/article";
 
 // 获取指定文章数据
-export const getArticleDataAPI = async (id: number) => {
-    return await Request<Article>("GET", `/article/${id}`);
+export const getArticleDataAPI = async (id: number, password?: string) => {
+    return await Request<Article>("GET", `/article${!password ? `/${id}` : `/${id}?password=${password}`}`);
 }
 
 // 获取文章列表
@@ -13,7 +13,7 @@ export const getArticleListAPI = async () => {
 
 // 分页获取文章数据
 export const getArticlePagingAPI = async (data: QueryData) => {
-    return await Request<Paginate<Article[]>>("POST", `/article/paging?page=${data.pagination?.page}&&size=${data.pagination?.size ? data.pagination?.size : 8}`, data.query);
+    return await Request<Paginate<Article[]>>("POST", `/article/paging?page=${data.pagination?.page}&size=${data.pagination?.size ? data.pagination?.size : 8}`, data.query);
 }
 
 // 获取随机文章列表

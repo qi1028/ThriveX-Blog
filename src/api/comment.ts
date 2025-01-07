@@ -17,6 +17,6 @@ export const getCommentPagingAPI = async () => {
 }
 
 // 获取当前文章中所有评论
-export const getArticleCommentListAPI = async (articleId: number) => {
-    return await Request<Paginate<Comment[]>>("POST", `/comment/article/${articleId}`);
+export const getArticleCommentListAPI = async (articleId: number, paginate: Page) => {
+    return await Request<Paginate<Comment[]>>("POST", `/comment/article/${articleId}?page=${paginate.page}&pageSize=${paginate.size}`);
 }

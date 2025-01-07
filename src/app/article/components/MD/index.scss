@@ -6,7 +6,7 @@
     // 自定义文章内容样式
     .markdown-body {
         // 继承父级字体：font-family: inherit;
-        @apply font-[inherit] dark:bg-transparent dark:text-[#8c9ab1] !transition-colors;
+        @apply font-[inherit] dark:bg-transparent dark:text-gray-400 !transition-colors;
 
         pre {
             margin: 15px 0;
@@ -19,41 +19,50 @@
             }
         }
 
+        img {
+            // 图片模糊
+            @apply blur-[20px] rounded-xl cursor-pointer transition-all;
+        }
+
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
+            font-weight: bold;
             scroll-margin-top: 100px !important;
             @apply dark:text-white dark:border-black-b transition-colors;
         }
 
         h1 {
-            @apply text-2xl my-6 pb-3 border-b;
+            @apply text-2xl mt-10 pb-3 border-b;
 
-            &::before {
-                content: "✨️";
-                @apply pr-3;
+            // &::before {
+            //     content: "✨️";
+            //     @apply pr-3;
+            // }
+            &:first-child {
+                @apply my-6;
             }
         }
 
         h2 {
-            @apply relative text-lg my-8 pl-5;
+            @apply relative text-xl my-6;
 
-            &::before {
-                content: "";
-                @apply absolute left-0 top-[50%] -translate-y-1/2 w-2 h-full bg-primary;
-            }
+            // &::before {
+            //     content: "";
+            //     @apply absolute left-0 top-[50%] -translate-y-1/2 w-2 h-full bg-primary;
+            // }
         }
 
         h3 {
-            @apply relative text-lg my-5 pl-5;
+            @apply relative text-lg my-5;
 
-            &::before {
-                content: "#";
-                @apply absolute left-0 top-[50%] -translate-y-1/2 text-primary;
-            }
+            // &::before {
+            //     content: "#";
+            //     @apply absolute left-0 top-[50%] -translate-y-1/2 text-primary;
+            // }
         }
 
         h4,
@@ -66,13 +75,96 @@
             @apply my-5 border dark:border-[#4e5969] transition-colors;
         }
 
+        // 引用
+        blockquote {
+            @apply p-3 space-y-2 border-l-[3px] !border-primary !bg-[#ecf7fe] rounded-md text-sm text-black-b;
+
+            p {
+                margin: 0 !important;
+            }
+        }
+
+        // 行内代码
         p code,
-        ul code {
+        ul code,
+        ol code {
             @apply bg-[rgba(13,110,253,0.1)] dark:bg-[#334052] text-[#0d6efd] rounded-md py-1 px-2 text-sm transition-colors;
         }
 
-        li {
-            @apply my-2.5 list-decimal ml-14;
+        // 任务列表
+        li.task-list-item {
+            @apply my-2.5;
+        }
+
+        li:not(.task-list-item) {
+            @apply my-2.5 ml-6;
+        }
+
+        // 无序列表
+        ul:not(.contains-task-list) {
+            @apply list-disc;
+        }
+
+        // 有序列表
+        ol:not([start]) {
+            counter-reset: counter;
+        }
+
+        ol>li:not([id^="user-content-fn-"]) {
+
+            &::before {
+                @apply absolute w-4 h-4 mt-1 leading-none left-0 rounded-full text-center text-sm border border-[#11181C] dark:border-gray-400;
+
+                counter-increment: counter;
+                content: counter(counter);
+            }
+
+            & ol>li::before {
+                @apply absolute left-7 border-0 text-base mt-0 leading-normal;
+
+                content: counter(counter) ".";
+            }
+        }
+
+        // 引用
+        blockquote {
+            @apply my-5 pl-4 bg-[rgba(246,248,250)] border-l-[4px] border-[#11181C] dark:border-gray-500 dark:bg-[rgba(246,248,250,0.1)];
+        }
+
+        // 脚注
+        .footnotes {
+            @apply mt-10 before:content-[''];
+
+            &>h2 {
+                @apply text-yellow-500;
+            }
+
+            &::before {
+                @apply block w-full h-[1px] bg-gray-300;
+            }
+
+            & ol {
+                @apply list-decimal;
+            }
+        }
+
+        // 高亮标记
+        mark {
+            @apply bg-[#dbfdad] dark:bg-[#9db47e];
+        }
+
+        // 提示块
+        .callout-content {
+            @apply pt-1;
+
+            &>p {
+                @apply mb-0;
+            }
+        }
+
+        // 数学公式
+        .katex {
+            @apply text-base;
         }
 
         a {
@@ -81,11 +173,6 @@
 
         p {
             @apply leading-9 mb-2;
-
-            img {
-                // 图片模糊
-                @apply blur-[20px] rounded-xl cursor-pointer transition-all;
-            }
         }
 
         strong {
@@ -96,7 +183,7 @@
             @apply w-full;
 
             th {
-                @apply font-sans bg-[#f1f7fd];
+                @apply font-sans bg-[#f1f7fd] dark:bg-[#334052];
             }
 
             tr,

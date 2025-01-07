@@ -1,9 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, UseDisclosureProps, Input } from "@nextui-org/react"
+import { useState } from "react"
+import { Modal, ModalContent, ModalHeader, ModalBody, UseDisclosureProps, Input } from "@nextui-org/react"
 import { getArticlePagingAPI } from '@/api/article'
 import { Article } from "@/types/app/article"
 import Empty from "../Empty"

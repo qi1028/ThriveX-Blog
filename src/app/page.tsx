@@ -7,6 +7,7 @@ import Sidebar from "@/components/Sidebar";
 
 import { getConfigDataAPI } from '@/api/project'
 import { Theme } from "@/types/app/project";
+import Lantern from "@/components/Lantern";
 
 interface Props {
   searchParams: { page: number };
@@ -18,6 +19,8 @@ export default async ({ searchParams }: Props) => {
 
   return (
     <>
+      <Lantern data={['新', '年', '快', '乐']} />
+
       <Swiper src={data?.swiper_image}>
         {/* 星空背景组件 */}
         <Starry />

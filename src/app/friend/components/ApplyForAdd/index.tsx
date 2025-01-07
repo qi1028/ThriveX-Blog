@@ -28,7 +28,6 @@ export default () => {
   const [typeList, setTypeList] = useState<WebType[]>([])
   const getWebTypeList = async () => {
     const { data } = await getWebTypeListAPI() || { data: [] as WebType[] }
-
     setTypeList(data.filter(item => !item.isAdmin))
   }
 
