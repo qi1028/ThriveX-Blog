@@ -1,4 +1,3 @@
- script
 #!/usr/bin/env bash
 set -e
 # 打包vue 项目
