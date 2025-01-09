@@ -7,9 +7,6 @@ WORKDIR /thrive
 # 配置 npm 镜像源
 RUN npm config set registry https://registry.npmmirror.com
 
-# 复制package.json和package-lock.json
-COPY package*.json .
-
 # 安装依赖
 RUN npm install
 
