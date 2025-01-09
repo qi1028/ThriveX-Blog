@@ -2,6 +2,7 @@
 FROM node:20-alpine
 LABEL authors="坐公交也用券"
 LABEL HOME="https://gitee.com/liumou_site"
+LABEL PROJECT="https://github.com/LiuYuYang01/ThriveX-Blog"
 ENV TZ=Asia/Shanghai
 ARG HTML_VERSION=2.1.5
 ENV HTML_VERSION=${HTML_VERSION}
@@ -16,7 +17,8 @@ RUN npm config set registry https://registry.npmmirror.com
 
 # 复制package.json和package-lock.json
 COPY ../package*.json .
-COPY run.sh /thrive/run.sh
+# 复制run.sh
+COPY ./run.sh /thrive/run.sh
 
 # 安装依赖
 RUN npm install
