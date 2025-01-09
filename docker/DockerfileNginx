@@ -3,6 +3,7 @@ FROM node:20-alpine
 LABEL authors="坐公交也用券"
 LABEL HOME="https://gitee.com/liumou_site"
 LABEL PROJECT="https://github.com/LiuYuYang01/ThriveX-Blog"
+LABEL BUILD_DATE="2025-01-09"
 ENV TZ=Asia/Shanghai
 ARG HTML_VERSION=2.1.5
 ENV HTML_VERSION=${HTML_VERSION}
@@ -17,12 +18,9 @@ RUN npm config set registry https://registry.npmmirror.com
 
 # 复制package.json和package-lock.json
 COPY ../package*.json .
-# 复制run.sh
-COPY ./run.sh /thrive/run.sh
 
 # 安装依赖
 RUN npm install
-RUN chmod +x /thrive/run.sh
 
 # 复制所有文件到工作目录
 COPY ../ .
@@ -30,12 +28,17 @@ COPY ../ .
 # 构建Next.js应用
 RUN npm run dev
 
-# 第二阶段：部署 Node.js 应用并集成 Nginx
-FROM nginx:alpine
+# 安装nginx
+RUN apk update && apk add nginx
+RUN mkdir -p /var/cache/nginx
+RUN mkdir -p /var/log/nginx
+RUN mkdir -p /var/run/nginx
 
 #COPY --from=builder /thrive/build /usr/share/nginx/html
 COPY ./thrive.conf /etc/nginx/conf.d/thrive.conf
-
+# 复制run.sh
+COPY ./run.sh /thrive/run.sh
+RUN chmod 777 /thrive/run.sh
 
 # 暴露应用运行的端口
 EXPOSE 80
