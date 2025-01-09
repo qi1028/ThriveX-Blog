@@ -8,26 +8,22 @@ ENV TZ=Asia/Shanghai
 ARG HTML_VERSION=2.1.5
 ENV HTML_VERSION=${HTML_VERSION}
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-
-# # 设置工作目录
+# 设置工作目录
 WORKDIR /thrive
 
-# 复制package.json和package-lock.json
-COPY ../package*.json .
-
-
 # 复制所有文件到工作目录
-COPY public /thrive/public
-COPY src /thrive/src
-
-# 安装nodejs
-RUN apt update && apt install -y nodejs npm && npm install -g npm
-# 安装依赖
-RUN npm install
-
+COPY ../package*.json .
 COPY docker/thrive.conf /etc/nginx/conf.d/thrive.conf
 COPY docker/run.sh /thrive/run.sh
+COPY src /thrive/src
+COPY public /thrive/public
+COPY *s /thrive/
+COPY p* /thrive/
+# 安装nodejs
+RUN apt update && apt install -y -qq nodejs npm && npm install -g npm
+# 安装依赖
+RUN npm install
+# 修改权限
 RUN chmod 777 /thrive/run.sh
 
 # 暴露应用运行的端口
