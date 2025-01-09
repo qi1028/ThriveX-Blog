@@ -13,8 +13,8 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # # 设置工作目录
 WORKDIR /thrive
 
-# 配置 npm 镜像源
-RUN npm config set registry https://registry.npmmirror.com
+## 配置 npm 镜像源
+#RUN npm config set registry https://registry.npmmirror.com
 
 # 复制package.json和package-lock.json
 COPY ../package*.json .
