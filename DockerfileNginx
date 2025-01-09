@@ -25,9 +25,6 @@ RUN npm install
 # 复制所有文件到工作目录
 COPY ../ .
 
-# 构建Next.js应用
-RUN npm run dev
-
 # 安装nginx
 RUN apk update && apk add nginx
 RUN mkdir -p /var/cache/nginx
