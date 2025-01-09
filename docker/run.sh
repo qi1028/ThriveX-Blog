@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -x
 if [[ -n "${BACKEND_PORT}" ]];then
     export PORT=${BACKEND_PORT}
