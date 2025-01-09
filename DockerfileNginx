@@ -35,9 +35,9 @@ RUN mkdir -p /var/log/nginx
 RUN mkdir -p /var/run/nginx
 
 #COPY --from=builder /thrive/build /usr/share/nginx/html
-COPY ./thrive.conf /etc/nginx/conf.d/thrive.conf
+COPY docker/thrive.conf /etc/nginx/conf.d/thrive.conf
 # 复制run.sh
-COPY ./run.sh /thrive/run.sh
+COPY docker/run.sh /thrive/run.sh
 RUN chmod 777 /thrive/run.sh
 
 # 暴露应用运行的端口
