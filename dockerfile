@@ -19,8 +19,13 @@ COPY . .
 # 构建Next.js应用
 RUN npm run build
 
-# 暴露应用运行的端口
-EXPOSE 9001
+# 第二阶段：部署 Node.js 应用并集成 Nginx
+FROM nginx:alpine
 
-# 启动Next.js应用
-CMD ["npm", "start"]
+COPY --from=builder /thrive/build /usr/share/nginx/html
+
+
+# 暴露应用运行的端口
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
