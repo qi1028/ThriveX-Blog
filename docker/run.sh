@@ -2,7 +2,7 @@
 set -x
 cd /thrive
 if [[ -e /thrive/package.json ]];then
-  npm dev run &
+  npm run dev&
 else
   echo "No package.json found, running default command"
 fi
