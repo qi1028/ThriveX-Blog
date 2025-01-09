@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -x
 pushd /thrive
 if [[ -e package.json ]];then
