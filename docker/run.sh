@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -x
-pushd /thrive
-if [[ -e package.json ]];then
+cd /thrive
+if [[ -e /thrive/package.json ]];then
   npm dev run &
 else
   echo "No package.json found, running default command"
