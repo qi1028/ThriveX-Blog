@@ -23,12 +23,7 @@ RUN npm install
 COPY ../ .
 
 # 安装nginx
-RUN apk update && \
-    apk add --no-cache nginx && \
-    mkdir -p /var/cache/nginx && \
-    mkdir -p /var/log/nginx && \
-    mkdir -p /var/run/nginx && \
-    apk del --no-cache .build-deps
+RUN apk update &&apk add nginx
 
 COPY docker/thrive.conf /etc/nginx/conf.d/thrive.conf
 # 复制run.sh
