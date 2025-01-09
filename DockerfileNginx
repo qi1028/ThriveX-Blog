@@ -13,9 +13,6 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # # 设置工作目录
 WORKDIR /thrive
 
-## 配置 npm 镜像源
-#RUN npm config set registry https://registry.npmmirror.com
-
 # 复制package.json和package-lock.json
 COPY ../package*.json .
 
@@ -26,12 +23,13 @@ RUN npm install
 COPY ../ .
 
 # 安装nginx
-RUN apk update && apk add nginx
-RUN mkdir -p /var/cache/nginx
-RUN mkdir -p /var/log/nginx
-RUN mkdir -p /var/run/nginx
+RUN apk update && \
+    apk add --no-cache nginx && \
+    mkdir -p /var/cache/nginx && \
+    mkdir -p /var/log/nginx && \
+    mkdir -p /var/run/nginx && \
+    apk del --no-cache .build-deps
 
-#COPY --from=builder /thrive/build /usr/share/nginx/html
 COPY docker/thrive.conf /etc/nginx/conf.d/thrive.conf
 # 复制run.sh
 COPY docker/run.sh /thrive/run.sh
