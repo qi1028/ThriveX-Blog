@@ -1,10 +1,21 @@
 #!/usr/bin/env sh
 set -x
-cd /thrive
-if [[ -e /thrive/package.json ]];then
-  npm run dev&
-else
-  echo "No package.json found, running default command"
+if [[ -n "${BACKEND_PORT}" ]];then
+    export PORT=${BACKEND_PORT}
 fi
+if [[ -n "${BACKEND_HOST}" ]];then
+    export HOST=${BACKEND_HOST}
+else
+    echo "HOST is not set, use default value: 9003"
+fi
+if [[ -n "${BACKEND_HOST}" ]];then
+  grep "${BACKEND_HOST}" /etc/hosts >/dev/null 2>&1 || echo "${BACKEND_HOST} $(hostname)" >> /etc/hosts
+  echo "HOST is set to ${BACKEND_HOST}"
+else
+  echo "Please set BACKEND_HOST, Use -e BACKEND_HOST=xxxx"
+  exit 1
+fi
+cd /thrive
+npm run dev&
 # 启动Nginx
 nginx -g "daemon off;"

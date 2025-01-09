@@ -7,6 +7,17 @@ LABEL BUILD_DATE="2025-01-09"
 ENV TZ=Asia/Shanghai
 ARG HTML_VERSION=2.1.5
 ENV HTML_VERSION=${HTML_VERSION}
+# 定义后端地址
+ARG BACKEND_HOST=10.1.1.1
+ENV BACKEND_HOST=${BACKEND_HOST}
+# 定义后端端口
+ARG BACKEND_PORT=9003
+ENV BACKEND_PORT=${BACKEND_PORT}
+# 设置apt不交互
+ENV DEBIAN_FRONTEND=noninteractive
+# 设置APT不显示详情
+ENV DEBCONF_NONINTERACTIVE_SEEN=true
+# 设置时区
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # 设置工作目录
 WORKDIR /thrive
@@ -19,7 +30,7 @@ COPY public /thrive/public
 COPY *s /thrive/
 COPY p* /thrive/
 # 安装nodejs
-RUN export DEBIAN_FRONTEND=noninteractive&& apt update && apt install -y -qq nodejs npm
+RUN apt update && apt install -y -qq nodejs npm
 # 安装依赖
 RUN npm install
 # 修改权限
