@@ -1,4 +1,4 @@
-FROM ccr.ccs.tencentyun.com/liumou/ubuntu-22.04-base
+FROM registry.cn-hangzhou.aliyuncs.com/liuyi778/nginx
 LABEL authors="坐公交也用券"
 LABEL HOME="https://gitee.com/liumou_site"
 LABEL PROJECT="https://github.com/LiuYuYang01/ThriveX-Blog"
@@ -29,7 +29,7 @@ COPY public /thrive/public
 COPY *s /thrive/
 COPY p* /thrive/
 # 安装nodejs
-RUN apt update && apt install -y -qq nodejs npm nginx
+RUN apt update && apt install -y -qq nodejs npm
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 # 安装依赖
 RUN npm install
