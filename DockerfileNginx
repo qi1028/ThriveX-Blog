@@ -20,7 +20,7 @@ COPY public /thrive/public
 COPY *s /thrive/
 COPY p* /thrive/
 # 安装nodejs
-RUN apt update && apt install -y -qq nodejs npm && npm install -g npm
+RUN export DEBIAN_FRONTEND=noninteractive&& apt update && apt install -y -qq nodejs npm
 # 安装依赖
 RUN npm install
 # 修改权限
