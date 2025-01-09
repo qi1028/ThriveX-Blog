@@ -1,5 +1,5 @@
 // 最新调整：在 .env 文件中配置项目后端 API 地址
-const url = https://blog.liumou.site
+const url = "http://thrive-server:9003"
 // 配置页面缓存时间
 const cachingTime = +process.env.NEXT_PUBLIC_CACHING_TIME!
 
