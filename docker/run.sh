@@ -21,7 +21,18 @@ else
   exit 1
 fi
 # 修改后端地址
-sed -i "s@thrive.Server.demo:9003@${BACKEND_HOST}:${BACKEND_HOST}@" /etc/nginx/conf.d/default.conf
+sed -i "s@thrive.Server.demo:9003@${BACKEND_HOST}:${BACKEND_PORT}@" /etc/nginx/conf.d/*.conf
+if [[ -e /thrive/src/utils/request.ts ]];then
+  sed -i "s@thrive.Server.demo:9003@${BACKEND_HOST}:${BACKEND_PORT}@" /thrive/src/utils/request.ts
+else
+    echo "/thrive/src/utils/request.ts not found"
+    exit 1
+fi
+ping -c 3 ${BACKEND_HOST} >/dev/null 2>&1
+if [ $? -ne 0 ];then
+    echo "ping ${BACKEND_HOST} failed"
+#    exit 1
+fi
 cd /thrive
 npm run dev&
 # 启动Nginx
