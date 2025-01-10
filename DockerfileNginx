@@ -4,7 +4,7 @@ LABEL HOME="https://gitee.com/liumou_site"
 LABEL PROJECT="https://github.com/LiuYuYang01/ThriveX-Blog"
 LABEL BUILD_DATE="2025-01-09"
 ENV TZ=Asia/Shanghai
-ENV PATH=/usr/local/nodejs/bin:$PATH
+ENV PATH=/usr/node-v22.13.0-linux-x64/bin:$PATH
 ARG HTML_VERSION=2.1.5
 ENV HTML_VERSION=${HTML_VERSION}
 # 定义后端地址
@@ -30,10 +30,7 @@ COPY public /thrive/public
 COPY *s /thrive/
 COPY p* /thrive/
 # 安装nodejs
-RUN apt update && apt install -y -qq wget
-RUN wget https://nodejs.org/dist/v22.13.0/node-v22.13.0-linux-x64.tar.xz
-RUN tar -xf node-v22.13.0-linux-x64.tar.xz && rm -f node-v22.13.0-linux-x64.tar.xz
-RUN mv node-v22.13.0-linux-x64 /usr/local/nodejs
+ADD docker/node-v22.13.0-linux-x64.tar.xz /usr/
 # 安装依赖
 RUN npm install
 # 修改权限
