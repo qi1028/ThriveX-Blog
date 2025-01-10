@@ -20,7 +20,7 @@ if [[ -n "${BACKEND_HOST}" ]];then
   grep "${BACKEND_HOST}" /etc/hosts >/dev/null 2>&1 || echo "${BACKEND_HOST} $(hostname)" >> /etc/hosts
   echo "HOST is set to ${BACKEND_HOST}"
 else
-  echo "Please set BACKEND_HOST, Use -e BACKEND_HOST=xxxx"
+  echo "Please set BACKEND_HOST, Use -e BACKEND_HOST=x.x.x.x"
   exit 1
 fi
 
