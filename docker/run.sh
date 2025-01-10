@@ -1,4 +1,3 @@
- script
 #!/usr/bin/env bash
 # 启用调试模式
 set -x
