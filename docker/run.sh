@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # 启用调试模式
 set -x
-
 # 如果BACKEND_PORT环境变量已设置，则将其值赋给PORT变量
 if [[ -n "${BACKEND_PORT}" ]];then
     export PORT=${BACKEND_PORT}
@@ -25,11 +24,11 @@ else
 fi
 
 # 修改后端地址
-sed -i "s@thrive.Server.demo:9003@${BACKEND_HOST}:${BACKEND_PORT}@" /etc/nginx/conf.d/*.conf
+sed -i "s@thrive.Server.demo:9004@${BACKEND_HOST}:${BACKEND_PORT}@" /etc/nginx/conf.d/*.conf
 
 # 更新前端请求的后端地址
 if [[ -e /thrive/src/utils/request.ts ]];then
-  sed -i "s@thrive.Server.demo:9003@${BACKEND_HOST}:${BACKEND_PORT}@" /thrive/src/utils/request.ts
+  sed -i "s@thrive.Server.demo:9004@${BACKEND_HOST}:${BACKEND_PORT}@" /thrive/src/utils/request.ts
 else
     echo "/thrive/src/utils/request.ts not found"
     exit 1
