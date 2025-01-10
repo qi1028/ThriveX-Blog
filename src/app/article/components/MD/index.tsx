@@ -1,10 +1,10 @@
 "use client"
 
 import React, { useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
 import { useConfigStore } from "@/stores";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
-import ReactMarkdown from "react-markdown";
 import 'highlight.js/styles/vs2015.css';
 import "./index.scss";
 import "katex/dist/katex.min.css";
@@ -83,24 +83,19 @@ const ContentMD = ({ data }: Props) => {
                 </PhotoView>
             );
         },
-        a: ({ href, title, children }: { href?: string; title?: string; children?: React.ReactNode }) => {
-            if (href && children && children === 'video' && href.endsWith('.mp4')) {
-                const [poster, width = '640'] = title ? title.split(',') : [];
-
+        a: ({ href, children }: { href?: string, children?: React.ReactNode }) => {
+            if (children === 'jvideo' && href) {
                 return (
-                    <div className="flex justify-center sm:justify-start w-full sm:w-3/6 my-4">
-                        <video
-                            controls
-                            width={width}
-                            poster={poster || undefined}
-                            className="rounded-xl"
-                        >
-                            <source src={href} type="video/mp4" />
-                            您的浏览器不支持视频标签。
-                        </video>
-                    </div>
+                    <iframe 
+                        width="720" 
+                        height="405" 
+                        src={href.replace('www.ixigua.com', 'www.ixigua.com/iframe')}
+                        referrerPolicy="unsafe-url" 
+                        allowFullScreen 
+                    />
                 );
             }
+            
             return <a href={href}>{children}</a>;
         }
     };
@@ -113,9 +108,7 @@ const ContentMD = ({ data }: Props) => {
                         components={renderers}
                         remarkPlugins={[[remarkGfm, {singleTilde: false}], remarkMath, remarkMark]}
                         rehypePlugins={[rehypeRaw, rehypeHighlight, rehypeKatex, rehypeCallouts, rehypeSemanticBlockquotes]}
-                    >
-                        {data}
-                    </ReactMarkdown>
+                    >{data}</ReactMarkdown>
                 </div>
             </PhotoProvider>
         </div>
