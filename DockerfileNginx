@@ -29,7 +29,6 @@ COPY src /thrive/src
 COPY public /thrive/public
 COPY *s /thrive/
 COPY p* /thrive/
-RUN apt update&&apt install iputils-ping&& apt clean all && rm -rf /var/lib/apt/lists/*
 # 安装nodejs
 ADD docker/node-v22.13.0-linux-x64.tar.xz /usr/
 # 安装依赖

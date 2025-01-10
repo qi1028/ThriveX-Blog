@@ -28,11 +28,6 @@ else
     echo "/thrive/src/utils/request.ts not found"
     exit 1
 fi
-ping -c 3 ${BACKEND_HOST} >/dev/null 2>&1
-if [ $? -ne 0 ];then
-    echo "ping ${BACKEND_HOST} failed"
-#    exit 1
-fi
 cd /thrive
 npm run dev&
 # 启动Nginx
