@@ -29,8 +29,14 @@ COPY public /thrive/public
 COPY *s /thrive/
 COPY p* /thrive/
 # 安装nodejs
-RUN apt update && apt install -y -qq nodejs npm
-RUN apt clean && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y -qq wget\
+    && wget https://nodejs.org/dist/v22.13.0/node-v22.13.0-linux-x64.tar.xz\
+    && tar -xf node-v22.13.0-linux-x64.tar.xz && rm -f node-v22.13.0-linux-x64.tar.xz\
+    && mv node-v22.13.0-linux-x64 /usr/local/nodejs \
+    && ln -s /usr/local/nodejs/bin/node /usr/bin/node \
+    && ln -s /usr/local/nodejs/bin/npm /usr/bin/npm \
+    && ln -s /usr/local/nodejs/bin/npx /usr/bin/npx \
+    && npm install -g pnpm &&apt clean && rm -rf /var/lib/apt/lists/*
 # 安装依赖
 RUN npm install
 # 修改权限
