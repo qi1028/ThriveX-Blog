@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useConfigStore } from "@/stores";
 import { PhotoProvider, PhotoView } from "react-photo-view";
@@ -17,6 +17,7 @@ import rehypeSemanticBlockquotes from "rehype-semantic-blockquotes";
 import rehypeCallouts from "rehype-callouts";
 import 'rehype-callouts/theme/obsidian';
 import rehypeRaw from 'rehype-raw';
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
     data: string;
@@ -24,26 +25,64 @@ interface Props {
 
 const ContentMD = ({ data }: Props) => {
     const { isDark } = useConfigStore();
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
+        setIsClient(true);
+
         document.body.style.backgroundColor = '#fff';
         let color = isDark ? "36, 41, 48" : "255, 255, 255";
 
         const waves = document.querySelectorAll<SVGUseElement>(".waves use");
-        waves[0].style.fill = `rgba(${color}, 0.7)`;
-        waves[1].style.fill = `rgba(${color}, 0.5)`;
-        waves[2].style.fill = `rgba(${color}, 0.3)`;
-        waves[3].style.fill = `rgba(${color})`;
+        if (waves) {
+            waves[0].style.fill = `rgba(${color}, 0.7)`;
+            waves[1].style.fill = `rgba(${color}, 0.5)`;
+            waves[2].style.fill = `rgba(${color}, 0.3)`;
+            waves[3].style.fill = `rgba(${color})`;
+        }
 
         return () => {
             document.body.style.backgroundColor = '#f9f9f9';
-
-            waves[0].style.fill = "rgba(249, 249, 249, 0.7)";
-            waves[1].style.fill = "rgba(249, 249, 249, 0.5)";
-            waves[2].style.fill = "rgba(249, 249, 249, 0.3)";
-            waves[3].style.fill = "rgba(249, 249, 249)";
+            
+            if (waves) {
+                waves[0].style.fill = "rgba(249, 249, 249, 0.7)";
+                waves[1].style.fill = "rgba(249, 249, 249, 0.5)";
+                waves[2].style.fill = "rgba(249, 249, 249, 0.3)";
+                waves[3].style.fill = "rgba(249, 249, 249)";
+            }
         };
     }, [isDark]);
+
+    if (!isClient) {
+        return (
+            <div className="ContentMdComponent">
+                <div className="content markdown-body space-y-6 p-4">
+                    {/* 标题骨架屏 */}
+                    <Skeleton className="h-10 w-3/4" />
+                    
+                    {/* 段落骨架屏 */}
+                    <div className="space-y-2">
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-11/12" />
+                        <Skeleton className="h-4 w-4/5" />
+                    </div>
+                    
+                    {/* 图片骨架屏 */}
+                    <Skeleton className="h-[200px] w-3/6 my-4" />
+                    
+                    {/* 更多段落骨架屏 */}
+                    <div className="space-y-2">
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-10/12" />
+                        <Skeleton className="h-4 w-9/12" />
+                    </div>
+                    
+                    {/* 代码块骨架屏 */}
+                    <Skeleton className="h-[120px] w-full" />
+                </div>
+            </div>
+        );
+    }
 
     const renderers = {
         img: ({ alt, src }: { alt?: string; src?: string }) => {
