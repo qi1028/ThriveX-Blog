@@ -17,7 +17,7 @@ import rehypeSemanticBlockquotes from "rehype-semantic-blockquotes";
 import rehypeCallouts from "rehype-callouts";
 import 'rehype-callouts/theme/obsidian';
 import rehypeRaw from 'rehype-raw';
-import { Skeleton } from "@/components/ui/skeleton";
+import Skeleton from "@/components/Skeleton";
 
 interface Props {
     data: string;
@@ -138,6 +138,7 @@ const ContentMD = ({ data }: Props) => {
                     </div>
                 );
             }
+            
             return <a href={href}>{children}</a>;
         }
     };

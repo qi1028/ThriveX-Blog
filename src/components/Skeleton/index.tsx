@@ -1,10 +1,11 @@
 import { cn } from "@/lib/utils";
+import "./index.scss";
 
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     return (
         <div
             className={cn(
-                "animate-pulse rounded-md bg-gray-200 dark:bg-gray-800",
+                "skeleton rounded-md bg-gray-200 dark:bg-gray-800",
                 className
             )}
             {...props}
@@ -12,4 +13,4 @@ function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>)
     );
 }
 
-export { Skeleton }; 
+export default Skeleton;
