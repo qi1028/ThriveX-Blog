@@ -84,18 +84,21 @@ const ContentMD = ({ data }: Props) => {
             );
         },
         a: ({ href, children }: { href?: string, children?: React.ReactNode }) => {
-            if (children === 'jvideo' && href) {
+            if (children === 'douyin-video' && href) {
+                // 从URL中提取视频ID
+                const videoId = href.split('/').pop();
+
                 return (
-                    <iframe 
-                        width="720" 
-                        height="405" 
-                        src={href.replace('www.ixigua.com', 'www.ixigua.com/iframe')}
-                        referrerPolicy="unsafe-url" 
-                        allowFullScreen 
-                    />
+                    <div className="flex justify-center">
+                        <iframe
+                            src={`https://open.douyin.com/player/video?vid=${videoId}&autoplay=0`}
+                            referrerPolicy="unsafe-url"
+                            allowFullScreen
+                            className="douyin"
+                        />
+                    </div>
                 );
             }
-            
             return <a href={href}>{children}</a>;
         }
     };
@@ -106,7 +109,7 @@ const ContentMD = ({ data }: Props) => {
                 <div className="content markdown-body">
                     <ReactMarkdown
                         components={renderers}
-                        remarkPlugins={[[remarkGfm, {singleTilde: false}], remarkMath, remarkMark]}
+                        remarkPlugins={[[remarkGfm, { singleTilde: false }], remarkMath, remarkMark]}
                         rehypePlugins={[rehypeRaw, rehypeHighlight, rehypeKatex, rehypeCallouts, rehypeSemanticBlockquotes]}
                     >{data}</ReactMarkdown>
                 </div>

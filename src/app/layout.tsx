@@ -53,7 +53,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
       <body className={`dark:!bg-black-a transition-colors`}>
         {/* 🎉 礼花效果 */}
-        <Confetti />
+        {/* <Confetti /> */}
 
         {/* 进度条组件 */}
         <NProgress />
