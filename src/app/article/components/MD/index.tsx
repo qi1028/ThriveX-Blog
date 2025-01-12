@@ -116,8 +116,8 @@ const ContentMD = ({ data }: Props) => {
 
             return (
                 <PhotoView src={src || ''}>
-                    <span className="flex justify-center sm:justify-start w-full sm:w-3/6 my-4">
-                        <img ref={imgRef} alt={alt} src={src} />
+                    <span className="flex justify-center my-4 dark:brightness-90">
+                        <img ref={imgRef} alt={alt} src={src} className="max-h-[650px]" />
                     </span>
                 </PhotoView>
             );

@@ -75,15 +75,6 @@
             @apply my-5 border dark:border-[#4e5969] transition-colors;
         }
 
-        // 引用
-        blockquote {
-            @apply p-3 space-y-2 border-l-[3px] !border-primary !bg-[#ecf7fe] rounded-md text-sm text-black-b;
-
-            p {
-                margin: 0 !important;
-            }
-        }
-
         // 行内代码
         p code,
         ul code,
@@ -176,14 +167,14 @@
         }
 
         strong {
-            @apply font-sans text-[15px];
+            @apply text-[15px];
         }
 
         table {
             @apply w-full;
 
             th {
-                @apply font-sans bg-[#f1f7fd] dark:bg-[#334052];
+                @apply bg-[#f1f7fd] dark:bg-[#334052];
             }
 
             tr,
