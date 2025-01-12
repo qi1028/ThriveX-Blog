@@ -18,6 +18,7 @@ import { LuTimer } from "react-icons/lu";
 import dayjs from 'dayjs';
 import { Article } from '@/types/app/article';
 import Encrypt from '@/components/Encrypt';
+import NotFound from '@/app/not-found';
 
 interface Props {
     params: { id: number };
@@ -28,7 +29,13 @@ export default async ({ params, searchParams }: Props) => {
     const id = params.id
     const password = searchParams.password
 
-    const { data } = password ? await getArticleDataAPI(id, password) || { data: {} as Article } : await getArticleDataAPI(id) || { data: {} as Article }
+    const { code, data } = password ? await getArticleDataAPI(id, password) || { data: {} as Article } : await getArticleDataAPI(id) || { data: {} as Article }
+
+    const errorCodes = [400, 404, 611]
+
+    if (errorCodes.includes(code ?? 200)) {
+        return <NotFound />
+    }
 
     // 记录文章访问量
     await recordViewAPI(id)
