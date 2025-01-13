@@ -24,11 +24,11 @@ else
 fi
 
 # 修改后端地址
-sed -i "s@thrive.Server.demo:9004@${BACKEND_HOST}:${BACKEND_PORT}@" /etc/nginx/conf.d/*.conf
+sed -i "s@http://.*:.*;@${BACKEND_HOST}:${BACKEND_PORT}@" /etc/nginx/conf.d/*.conf
 
 # 更新前端请求的后端地址
 if [[ -e /thrive/src/utils/request.ts ]];then
-  sed -i "s@thrive.Server.demo:9004@${BACKEND_HOST}:${BACKEND_PORT}@" /thrive/src/utils/request.ts
+  sed -i "s@http://.*:.*;@${BACKEND_HOST}:${BACKEND_PORT}@" /thrive/src/utils/request.ts
 else
     echo "/thrive/src/utils/request.ts not found"
     exit 1
