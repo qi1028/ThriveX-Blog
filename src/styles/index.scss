@@ -1,11 +1,17 @@
 @import "./fun.scss";
 
 body {
-    // height: 3000px;
     background-color: #f9f9f9;
 
-    font-family: "LXGW WenKai";
-    font-weight: bold;
+    // 霞鹜文楷
+    // font-family: "LXGW WenKai";
+
+    // 原俠正楷
+    // font-family:'GuanKiapTsingKhai';
+
+    // 悠哉
+    font-family:'Yozai Medium';
+    font-weight: normal;
 }
 
 /* 为整个页面设置滚动条样式 */
@@ -20,8 +26,6 @@ body {
 // }
 
 /* 滚动条滑块 */
-/* The scrollbar slider code is contributed by UopyTechSpeak. */
-/* https://github.com/UopyTechSpeak/ */
 ::-webkit-scrollbar-thumb{
     background: linear-gradient(to bottom, #539dfd, #86b5f2); 
     height:50px;

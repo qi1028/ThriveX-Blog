@@ -33,7 +33,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <link rel="icon" href={data?.favicon} />
 
         {/* 字体 */}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/style.css" />
+        {/* 霞鹜文楷 */}
+        {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/style.css" /> */}
+        {/* 原俠正楷 */}
+        {/* <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/GuanKiapTsingKhai/dist/GuanKiapTsingKhai/result.css" /> */}
+        {/* 悠哉 */}
+        <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/yozai/dist/Yozai-Medium/result.css" />
 
         {/* 百度统计 */}
         <script dangerouslySetInnerHTML={{
@@ -53,7 +58,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
       <body className={`dark:!bg-black-a transition-colors`}>
         {/* 🎉 礼花效果 */}
-        <Confetti />
+        {/* <Confetti /> */}
 
         {/* 进度条组件 */}
         <NProgress />
