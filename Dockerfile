@@ -2,7 +2,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/liuyi778/nginx
 LABEL authors="坐公交也用券"
 LABEL HOME="https://gitee.com/liumou_site"
 LABEL PROJECT="https://github.com/LiuYuYang01/ThriveX-Blog"
-LABEL BUILD_DATE="2025-01-11"
+LABEL BUILD_DATE="2025-01-14"
 ENV TZ=Asia/Shanghai
 ENV PATH=/usr/node-v22.13.0-linux-x64/bin:$PATH
 ARG HTML_VERSION=2.1.5
