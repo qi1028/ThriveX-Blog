@@ -7,6 +7,7 @@ import { Button } from '@nextui-org/react'
 
 export default function NotFound() {
   const router = useRouter()
+  
   return (
     <>
       <div className='absolute w-screen h-screen bg-white dark:bg-black-b z-[999]'>
