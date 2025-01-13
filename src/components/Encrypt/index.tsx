@@ -2,7 +2,7 @@
 
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Button, Input } from "@nextui-org/react";
 import { MdEnhancedEncryption } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation"
 import { getArticleDataAPI } from "@/api/article";
 import { toast, ToastContainer } from "react-toastify";
@@ -19,10 +19,15 @@ export default function Encrypt({ id }: Props) {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  // 在组件挂载时自动打开模态框
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // 在模态框打开后自动聚焦到 Input 组件
   useEffect(() => {
     onOpen();
-  }, []);
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
 
   // 验证访问密码
   const handleVerifyPassword = async () => {
@@ -49,13 +54,19 @@ export default function Encrypt({ id }: Props) {
 
               <ModalBody>
                 <Input
+                  ref={inputRef}
+                  classNames={{ inputWrapper }}
                   endContent={<MdEnhancedEncryption className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />}
                   label="访问密码"
                   placeholder="文章受保护，请输入密码"
                   variant="bordered"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  classNames={{ inputWrapper }}
+                  onKeyDown={(e) => {
+                    if(e.key === "Enter" || e.code === "Enter") {
+                      handleVerifyPassword()
+                    }
+                  }}
                 />
               </ModalBody>
 
