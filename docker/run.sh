@@ -34,6 +34,22 @@ else
     exit 1
 fi
 
+# 检查后台网页源码是否存在
+if [[ -e /thrive/admin ]];then
+  echo "thrive admin page exists"
+else
+    echo "Please set up data volume mapping, for example: -v /data/ThriveX-Admin/dist:/thrive/admin "
+    exit 1
+fi
+# 检查 index.html是否存在
+if [[ -e /thrive/admin/index.html ]];then
+    echo "index.html detection successful"
+else
+    echo "index.html detection failed"
+    echo "Please set up data volume mapping, for example: -v /data/ThriveX-Admin/dist:/thrive/admin "
+    exit 1
+fi
+
 # 检查nginx配置文件的正确性
 nginx -t
 if [ $? -ne 0 ];then
