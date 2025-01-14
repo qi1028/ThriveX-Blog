@@ -24,7 +24,8 @@ else
 fi
 
 # 修改后端地址
-sed -i "s@http://.*:.*;@${BACKEND_HOST}:${BACKEND_PORT}@" /etc/nginx/conf.d/*.conf
+sed -i "s@thrive.Server.demo;@${BACKEND_HOST}:${BACKEND_PORT};@" /etc/nginx/conf.d/*.conf
+sed -i "s@thrive.admin.demo@${ADMIN_HOST}@" /etc/nginx/conf.d/*.conf
 
 # 更新前端请求的后端地址
 if [[ -e /thrive/src/utils/request.ts ]];then
