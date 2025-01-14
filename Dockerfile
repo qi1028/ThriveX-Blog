@@ -1,10 +1,9 @@
-FROM registry.cn-hangzhou.aliyuncs.com/liuyi778/nginx
+FROM registry.cn-hangzhou.aliyuncs.com/liuyi778/nginx-npm
 LABEL authors="坐公交也用券"
 LABEL HOME="https://gitee.com/liumou_site"
 LABEL PROJECT="https://github.com/LiuYuYang01/ThriveX-Blog"
 LABEL BUILD_DATE="2025-01-14"
 ENV TZ=Asia/Shanghai
-ENV PATH=/usr/node-v22.13.0-linux-x64/bin:$PATH
 ARG HTML_VERSION=2.1.5
 ENV HTML_VERSION=${HTML_VERSION}
 # 定义后端地址
@@ -29,8 +28,6 @@ COPY src /thrive/src
 COPY public /thrive/public
 COPY *s /thrive/
 COPY p* /thrive/
-# 安装nodejs
-ADD docker/node-v22.13.0-linux-x64.tar.xz /usr/
 # 安装依赖
 RUN npm install
 # 修改权限
