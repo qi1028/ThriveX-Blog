@@ -3,8 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useConfigStore } from "@/stores";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { ToastContainer, toast } from 'react-toastify'
 import "react-photo-view/dist/react-photo-view.css";
+import 'react-toastify/dist/ReactToastify.css';
 import 'highlight.js/styles/vs2015.css';
 import "./index.scss";
 import "katex/dist/katex.min.css";
@@ -18,6 +21,7 @@ import rehypeCallouts from "rehype-callouts";
 import 'rehype-callouts/theme/obsidian';
 import rehypeRaw from 'rehype-raw';
 import Skeleton from "@/components/Skeleton";
+import { BiCopy } from "react-icons/bi";
 
 interface Props {
     data: string;
@@ -84,6 +88,17 @@ const ContentMD = ({ data }: Props) => {
         );
     }
 
+    const getTextFromChildren = (children: React.ReactNode): string => {
+        return React.Children.toArray(children).map(child => {
+            if (typeof child === 'string') {
+                return child;
+            } else if (React.isValidElement(child)) {
+                return getTextFromChildren(child.props.children);
+            }
+            return '';
+        }).join('').trim();
+    };
+
     const renderers = {
         img: ({ alt, src }: { alt?: string; src?: string }) => {
             const imgRef = useRef<HTMLImageElement>(null);
@@ -140,11 +155,36 @@ const ContentMD = ({ data }: Props) => {
             }
             
             return <a href={href}>{children}</a>;
+        },
+        code: ({ node, inline, className, children, ...props }: any) => {
+            const match = /language-(\w+)/.exec(className || '');
+            const text = getTextFromChildren(children);
+
+            return !inline && match ? (
+                <>
+                    <CopyToClipboard text={text} onCopy={() => toast.success('代码已复制')}>
+                        <button className="absolute top-2 right-2 bg-gray-300 text-gray-700 rounded p-1 lg:opacity-0 hover:opacity-100 transition-opacity">
+                            <BiCopy />
+                        </button>
+                    </CopyToClipboard>
+                    <code className={className} {...props}>
+                        {children}
+                    </code>
+                </>
+            ) : (
+                <code className={className} {...props}>
+                    {children}
+                </code>
+            );
         }
     };
 
     return (
         <div className="ContentMdComponent">
+            <ToastContainer
+                theme={isDark ? "dark" : "light"}
+                autoClose={1000}
+                hideProgressBar />
             <PhotoProvider>
                 <div className="content markdown-body">
                     <ReactMarkdown
