@@ -9,7 +9,6 @@ import { ToastContainer, toast } from 'react-toastify'
 import "react-photo-view/dist/react-photo-view.css";
 import 'react-toastify/dist/ReactToastify.css';
 import 'highlight.js/styles/vs2015.css';
-import "./index.scss";
 import "katex/dist/katex.min.css";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -22,6 +21,7 @@ import 'rehype-callouts/theme/obsidian';
 import rehypeRaw from 'rehype-raw';
 import Skeleton from "@/components/Skeleton";
 import { BiCopy } from "react-icons/bi";
+import "./index.scss";
 
 interface Props {
     data: string;

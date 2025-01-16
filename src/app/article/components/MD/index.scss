@@ -9,6 +9,7 @@
         @apply font-[inherit] dark:bg-transparent dark:text-gray-400 !transition-colors;
 
         pre {
+            position: relative;
             margin: 15px 0;
 
             code.hljs {
