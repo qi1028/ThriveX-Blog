@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import { useConfigStore } from "@/stores";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -88,17 +88,6 @@ const ContentMD = ({ data }: Props) => {
         );
     }
 
-    const getTextFromChildren = (children: React.ReactNode): string => {
-        return React.Children.toArray(children).map(child => {
-            if (typeof child === 'string') {
-                return child;
-            } else if (React.isValidElement(child)) {
-                return getTextFromChildren(child.props.children);
-            }
-            return '';
-        }).join('').trim();
-    };
-
     const renderers = {
         img: ({ alt, src }: { alt?: string; src?: string }) => {
             const imgRef = useRef<HTMLImageElement>(null);
@@ -158,25 +147,37 @@ const ContentMD = ({ data }: Props) => {
         },
         code: ({ node, inline, className, children, ...props }: any) => {
             const match = /language-(\w+)/.exec(className || '');
-            const text = getTextFromChildren(children);
 
-            return !inline && match ? (
+            const text = useMemo(() => {
+                const getTextFromChildren = (children: React.ReactNode): string => {
+                    return React.Children.toArray(children).map(child => {
+                        if (typeof child === 'string') {
+                            return child;
+                        } else if (React.isValidElement(child)) {
+                            return getTextFromChildren(child.props.children);
+                        }
+                        return '';
+                    }).join('').trim();
+                };
+                return getTextFromChildren(children);
+            }, [children]);
+
+            return (
                 <>
-                    <CopyToClipboard text={text} onCopy={() => toast.success('代码已复制')}>
-                        <button className="absolute top-2 right-2 bg-gray-300 text-gray-700 rounded p-1 lg:opacity-0 hover:opacity-100 transition-opacity">
-                            <BiCopy />
-                        </button>
-                    </CopyToClipboard>
+                    {(!inline && match) && (
+                        <CopyToClipboard text={text} onCopy={() => toast.success('代码已复制')}>
+                            <button className="absolute top-3 right-3 bg-gray-300 text-gray-700 rounded p-1.5 lg:opacity-0 hover:opacity-100 transition-opacity">
+                                <BiCopy />
+                            </button>
+                        </CopyToClipboard>
+                    )}
                     <code className={className} {...props}>
                         {children}
                     </code>
                 </>
-            ) : (
-                <code className={className} {...props}>
-                    {children}
-                </code>
             );
         }
+
     };
 
     return (
