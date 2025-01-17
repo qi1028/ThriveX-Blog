@@ -35,6 +35,12 @@
 
 
 
+## 官方交流群
+
+![image](https://github.com/user-attachments/assets/f6256565-872c-4ea4-bc85-d6d29c636a99)
+
+
+
 ## 项目演示
 
 ### 前端
