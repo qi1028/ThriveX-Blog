@@ -22,7 +22,7 @@
 
         img {
             // 图片模糊
-            @apply blur-[20px] rounded-xl cursor-pointer transition-all;
+            @apply blur-[20px] rounded-xl hover:scale-105 cursor-pointer transition-all;
         }
 
         h1,
