@@ -273,3 +273,10 @@ lyy:
 ## 项目后续的开发计划
 
 ![PixPin_2024-11-11_18-03-02.png](https://bu.dusays.com/2024/11/11/6731d7056b4ee.png)
+
+
+
+## 官方交流群
+
+![image](https://github.com/user-attachments/assets/f6256565-872c-4ea4-bc85-d6d29c636a99)
+
