@@ -26,7 +26,7 @@ interface YearData {
 const Title = ({ data }: { data: YearData }) => {
     return (
         <div>
-            <div className="text-xl font-sans inline-block textMarkSty">{data.year} 年 {(data.wordCount / 1000) > 50 && '🔥'}</div>
+            <div className="text-xl font-sans inline-block text_markSty">{data.year} 年 {(data.wordCount / 1000) > 50 && '🔥'}</div>
             <div className="dark:text-[#86909c]">总共发布了：<span className="text-primary">{data.total}</span> 篇文章</div>
             <div className="dark:text-[#86909c]">总字数约：<span className="text-primary">{(data.wordCount / 1000).toFixed(2)}</span> K</div>
         </div>

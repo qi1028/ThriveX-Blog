@@ -30,7 +30,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <title>{`${data?.title} - ${data?.subhead}`}</title>
         <meta name="description" content={data?.description} />
         <meta name="keywords" content={data?.keyword} />
-        <link rel="icon" href={data?.favicon} />
+        {/* <link rel="icon" href={data?.favicon} /> */}
+        <link rel="icon" href="/favicon.ico" />
 
         {/* 字体 */}
         {/* 霞鹜文楷 */}
