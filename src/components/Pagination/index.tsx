@@ -16,6 +16,11 @@ export default ({ total, page, path, className }: Props) => {
 
     const onChange = (page: number) => {
         router.push(path ? `${path}&page=${page}` : `?page=${page}`)
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     return (
