@@ -1,5 +1,4 @@
 import bg from '@/assets/image/bg.png'
-import avatar from '@/assets/image/avatar.jpg'
 import { MyData } from '@/types/app/my'
 
 import Goals from './component/Goals'
@@ -10,14 +9,29 @@ import Project from './component/Project'
 import CurriculumVitae from './component/CurriculumVitae'
 import Info from "./component/Info";
 import Calendar from "./component/Calendar"
+import InfoTwo from './component/InfoTwo'
 
 export default () => {
   const data: MyData = {
     info: {
       name: "Liu YuYang",
-      avatar,
+      avatar: 'https://q.qlogo.cn/g?b=qq&nk=3311118881&s=640',
       profession: "一名Web全栈开发工程师",
       introduction: "我从小就对计算机编程技术有着无穷的兴趣，所以我的梦想是做一名技术顶尖的 架构师，因此我一直在朝着这个方向去努力、去坚持 直到梦想成真！",
+    },
+    infoTwo: {
+      author: '宇阳',
+      avatar_url: 'https://q.qlogo.cn/g?b=qq&nk=3311118881&s=640',
+      left_tags: [
+        '🤖️ 数码科技爱好者',
+        '🔍 分享与热心帮助',
+        '💻 全栈开发工程师'
+      ],
+      right_tags: [
+        '源于热爱而发电 ✨',
+        '开源项目作者 🥳',
+        '热爱漫无边际 🎉'
+      ]
     },
     character: [
       {
@@ -175,7 +189,8 @@ export default () => {
       <div className="bg-white dark:bg-black-a pt-20 bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${bg.src})` }}>
         <div className="w-[90%] lg:w-[950px] mx-auto">
-          <Info data={data?.info} />
+          {/* <Info data={data?.info} /> */}
+          <InfoTwo data={data?.infoTwo} />
         </div>
 
         <div className='flex justify-center mt-24 px-10'>
