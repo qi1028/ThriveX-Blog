@@ -25,7 +25,7 @@ export default ({ data }: { data: InfoTwo }) => {
                     </div>
 
                     <div className="avatar">
-                        <img src={data.avatar_url} alt={data.author} className="avatar-img" />
+                        <img src={data.avatar_url} alt={data.author} className="avatar-img dark:!border-[rgba(56,64,76)]" />
                     </div>
 
                     <div className="info-right">
@@ -36,11 +36,11 @@ export default ({ data }: { data: InfoTwo }) => {
                 </div>
 
                 <div className="about-me-2">
-                    <button className="trigger">Find Me 😶‍🌫️</button>
+                    <button className="trigger">{data.author}</button>
 
-                    {ss.map((s, index) => (
+                    {/* {ss.map((s, index) => (
                         <button key={index} className="trigger">{s}</button>
-                    ))}
+                    ))} */}
                 </div>
             </section>
         </>
