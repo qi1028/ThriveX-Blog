@@ -47,7 +47,7 @@ const ContentMD = ({ data }: Props) => {
 
         return () => {
             document.body.style.backgroundColor = '#f9f9f9';
-            
+
             if (waves) {
                 waves[0].style.fill = "rgba(249, 249, 249, 0.7)";
                 waves[1].style.fill = "rgba(249, 249, 249, 0.5)";
@@ -63,24 +63,24 @@ const ContentMD = ({ data }: Props) => {
                 <div className="content markdown-body space-y-6 p-4">
                     {/* 标题骨架屏 */}
                     <Skeleton className="h-10 w-3/4" />
-                    
+
                     {/* 段落骨架屏 */}
                     <div className="space-y-2">
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-11/12" />
                         <Skeleton className="h-4 w-4/5" />
                     </div>
-                    
+
                     {/* 图片骨架屏 */}
                     <Skeleton className="h-[200px] w-3/6 my-4" />
-                    
+
                     {/* 更多段落骨架屏 */}
                     <div className="space-y-2">
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-10/12" />
                         <Skeleton className="h-4 w-9/12" />
                     </div>
-                    
+
                     {/* 代码块骨架屏 */}
                     <Skeleton className="h-[120px] w-full" />
                 </div>
@@ -142,7 +142,7 @@ const ContentMD = ({ data }: Props) => {
                     </div>
                 );
             }
-            
+
             return <a href={href}>{children}</a>;
         },
         code: ({ node, inline, className, children, ...props }: any) => {
@@ -154,7 +154,7 @@ const ContentMD = ({ data }: Props) => {
                         if (typeof child === 'string') {
                             return child;
                         } else if (React.isValidElement(child)) {
-                            return getTextFromChildren(child.props.children);
+                            return getTextFromChildren(((child.props as { children: React.ReactNode })).children);
                         }
                         return '';
                     }).join('').trim();
