@@ -72,45 +72,29 @@ export default () => {
     ],
     goals: [
       {
-        status: 2,
-        value: "1、拿到月薪过万的 Offer~"
-      },
-      {
-        status: 3,
-        value: "2、学习 uniapp 小兔鲜项目"
-      },
-      {
-        status: 3,
-        value: "3、学习 Spring Boot 苍穹外卖项目"
-      },
-      {
-        status: 3,
-        value: "4、学习 React 达到找工作水平"
-      },
-      {
-        status: 3,
-        value: "5、学习 TailwindCSS 达到找工作水平"
-      },
-      {
-        status: 3,
-        value: "6、学习 Nextjs 达到找工作水平"
-      },
-      {
-        status: 3,
-        value: "7、入手 MacBook 生产力神器"
-      },
-      {
-        status: 3,
-        value: "8、完成 ThriveX 项目重构"
-      },
-      {
-        status: 3,
-        value: "9、ThriveX 博客管理系统 Star 破百"
+        status: 1,
+        value: "1、涨薪2k！！！"
       },
       {
         status: 1,
-        value: "10、刷 100 道面试题"
+        value: "2、提高前端技术栈深度"
       },
+      {
+        status: 1,
+        value: "3、提高后端技术栈深度与广度，往后端迁移"
+      },
+      {
+        status: 1,
+        value: "4、ThriveX 博客管理系统 ⭐️ 破千"
+      },
+      {
+        status: 1,
+        value: "5、ThriveX 最低要求保持周更"
+      },
+      {
+        status: 1,
+        value: "6、输出 30 篇高质量技术博客"
+      }
     ],
     project: [
       {
@@ -121,9 +105,9 @@ export default () => {
           "https://bu.dusays.com/2024/09/17/66e97035726ae.png",
           "https://bu.dusays.com/2024/09/17/66e97031cd456.png"
         ],
-        description: "🎉 ThriveX 相比 Thrive 的核心区别是采用了 Nextjs 服务端渲染技术进行重构，对SEO方面有了显著的提高。并且还新增了很多额外的功能...",
+        description: "🎉 ThriveX 相比旧版 Thrive 的核心改变是从 Vue 全面迁移到了 React 技术栈并采用了 Nextjs 服务端渲染技术进行全方面重构，对SEO方面有了显著的提高。并且还新增了很多额外的功能...",
         front: {
-          technology: "Nextjs、TypeScript、Zustand、TailwindCSS、Scss、Echarts",
+          technology: "NextJS、TypeScript、Zustand、TailwindCSS、Scss、Echarts",
           url: "https://github.com/LiuYuYang01/ThriveX-Blog"
         },
         control: {
@@ -132,7 +116,7 @@ export default () => {
         },
         backend: {
           technology: "Spring Boot、Mybatis Plus、MySQL、Redis、Qiniu、Socket.io、Swagger",
-          url: "https://github.com/LiuYuYang01/ThriveX-Service"
+          url: "https://github.com/LiuYuYang01/ThriveX-Server"
         },
       },
       {
