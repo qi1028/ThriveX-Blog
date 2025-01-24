@@ -14,8 +14,10 @@ export default async () => {
 
   return (
     <>
-      <div className='relative top-[25px] flex justify-center lg:w-[950px] xl:w-[1200px] mx-auto'>
-        <Image src={animals} alt="动物" width={660.34} height={79.99} className='hidden md:block' />
+      <div className='sticky bottom-0 z-30 translate-y-[25px] flex justify-center w-full bg-cover bg-center after:content-[""] after:w-full after:h-[60%] after:absolute after:bottom-[25px] after:left-0 after:bg-[linear-gradient(to_top,#fff,transparent)] dark:after:bg-[linear-gradient(to_top,#2c333e,transparent)]'>
+        <div className='flex justify-center lg:w-[950px] xl:w-[1200px] mx-auto'>
+          <Image src={animals} alt="动物" width={660.34} height={79.99} className='relative z-40 hidden md:block' />
+        </div>
       </div>
 
       <div className='bg-white dark:bg-black-b border-t dark:border-black-b px-10 transition-colors'>
