@@ -160,9 +160,13 @@ const ContentMD = ({ data }: Props) => {
                         return '';
                     }).join('').trim();
                 };
-                
+
                 return getTextFromChildren(children);
             }, [children]);
+
+            const lineNumbers = useMemo(() => {
+                return text.split('\n').map((_, index) => index + 1);
+            }, [text]);
 
             return (
                 <>
@@ -173,6 +177,12 @@ const ContentMD = ({ data }: Props) => {
                             </button>
                         </CopyToClipboard>
                     )}
+
+                    <ul className="lineNumber hidden">
+                        {lineNumbers.map((lineNumber) => (
+                            <li key={lineNumber} className="text-[#bfbfbf] !m-0 list-none">{lineNumber}</li>
+                        ))}
+                    </ul>
 
                     <code className={className} {...props}>
                         {children}
