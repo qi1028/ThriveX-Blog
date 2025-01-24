@@ -26,7 +26,7 @@ export default ({ data }: Props) => {
                 <div className="flex flex-col space-y-2">
                     {data?.map((item, index) => (
                         <div key={index} className="flex flex-wrap justify-between items-center">
-                            <Checkbox key={index} defaultSelected={item.status === 3}>{item.value}</Checkbox>
+                            <Checkbox key={index} defaultSelected={item.status === 3} className="[&>input]:hidden space-x-2">{item.value}</Checkbox>
 
                             {item.status === 1 && <span className="hidden xs:block text-xs text-yellow-400">待完成</span>}
                             {item.status === 2 && <span className="hidden xs:block text-xs text-red-500">未完成</span>}

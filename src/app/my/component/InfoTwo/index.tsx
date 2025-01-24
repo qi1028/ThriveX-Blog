@@ -25,7 +25,7 @@ export default ({ data }: { data: InfoTwo }) => {
                     </div>
 
                     <div className="avatar">
-                        <img src={data.avatar_url} alt={data.author} className="avatar-img dark:!border-[rgba(56,64,76)] transition-colors" />
+                        <img src={data.avatar_url} alt={data.author} className="avatar-img dark:!border-[rgba(56,64,76)]" />
                     </div>
 
                     <div className="info-right">
