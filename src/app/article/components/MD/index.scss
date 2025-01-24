@@ -9,6 +9,7 @@
         @apply font-[inherit] dark:bg-transparent dark:text-gray-400 !transition-colors;
 
         pre {
+            display: flex;
             position: relative;
             margin: 15px 0;
 
@@ -16,7 +17,13 @@
                 @apply opacity-100;
             }
 
+            ul.lineNumber {
+                @apply absolute left-[16px] top-[16px] mt-[1.5px] text-base block;
+            }
+
             code.hljs {
+                width: 100%;
+                padding-left: 50px;
                 border-radius: 10px;
                 font-weight: 400;
 
