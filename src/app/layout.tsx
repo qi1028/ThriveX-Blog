@@ -69,7 +69,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
         {/* 主体内容 */}
         <NextUIProvider>
-          {children}
+          <div className='min-h-[calc(100vh-300px)]'>
+            {children}
+          </div>
         </NextUIProvider>
 
         {/* 底部组件 */}
