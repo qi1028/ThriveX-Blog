@@ -21,6 +21,7 @@ import 'rehype-callouts/theme/obsidian';
 import rehypeRaw from 'rehype-raw';
 import Skeleton from "@/components/Skeleton";
 import { BiCopy } from "react-icons/bi";
+
 import "./index.scss";
 
 interface Props {
@@ -159,6 +160,7 @@ const ContentMD = ({ data }: Props) => {
                         return '';
                     }).join('').trim();
                 };
+                
                 return getTextFromChildren(children);
             }, [children]);
 
@@ -166,11 +168,12 @@ const ContentMD = ({ data }: Props) => {
                 <>
                     {(!inline && match) && (
                         <CopyToClipboard text={text} onCopy={() => toast.success('代码已复制')}>
-                            <button className="absolute top-3 right-3 bg-gray-300 text-gray-700 rounded p-1.5 lg:opacity-0 hover:opacity-100 transition-opacity">
+                            <button className="absolute top-3 right-3 bg-gray-300 text-gray-700 rounded p-1.5 lg:opacity-0 transition-opacity">
                                 <BiCopy />
                             </button>
                         </CopyToClipboard>
                     )}
+
                     <code className={className} {...props}>
                         {children}
                     </code>

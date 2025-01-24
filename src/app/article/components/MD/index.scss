@@ -12,6 +12,10 @@
             position: relative;
             margin: 15px 0;
 
+            &:hover button {
+                @apply opacity-100;
+            }
+
             code.hljs {
                 border-radius: 10px;
                 font-weight: 400;
@@ -39,10 +43,6 @@
         h1 {
             @apply text-2xl mt-10 pb-3 border-b;
 
-            // &::before {
-            //     content: "✨️";
-            //     @apply pr-3;
-            // }
             &:first-child {
                 @apply my-6;
             }
@@ -50,20 +50,10 @@
 
         h2 {
             @apply relative text-xl my-6;
-
-            // &::before {
-            //     content: "";
-            //     @apply absolute left-0 top-[50%] -translate-y-1/2 w-2 h-full bg-primary;
-            // }
         }
 
         h3 {
             @apply relative text-lg my-5;
-
-            // &::before {
-            //     content: "#";
-            //     @apply absolute left-0 top-[50%] -translate-y-1/2 text-primary;
-            // }
         }
 
         h4,
