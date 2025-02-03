@@ -14,7 +14,6 @@ import Tools from '@/components/Tools';
 import NProgress from '@/components/NProgress';
 import Confetti from '@/components/Confetti';
 import { Web } from '@/types/app/project';
-import Favicon from '@/components/Favicon';
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const { data } = await getConfigDataAPI<Web>("web") || { data: {} as Web };
@@ -31,8 +30,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <title>{`${data?.title} - ${data?.subhead}`}</title>
         <meta name="description" content={data?.description} />
         <meta name="keywords" content={data?.keyword} />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
-        <Favicon url={data?.favicon} />
+        <link rel="icon" href={data?.favicon || '/favicon.ico'} />
 
         {/* 字体 */}
         {/* 霞鹜文楷 */}
