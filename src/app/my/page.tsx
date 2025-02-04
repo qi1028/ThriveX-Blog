@@ -31,7 +31,8 @@ export default () => {
         '源于热爱而发电 ✨',
         '开源项目作者 🥳',
         '热爱漫无边际 🎉'
-      ]
+      ],
+      know_me: "https://liuyuyang.net/article/2227"
     },
     character: [
       {

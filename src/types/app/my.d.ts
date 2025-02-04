@@ -10,6 +10,7 @@ export interface InfoTwo {
     avatar_url: string;
     left_tags: string[];
     right_tags: string[];
+    know_me: string;
 };
 
 export interface Character {

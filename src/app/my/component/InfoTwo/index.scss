@@ -78,11 +78,10 @@
 }
 
 .about-me-2 {
+    display: flex;
     width: fit-content;
     margin: 0 auto;
-    height: 3em;
     position: relative;
-    display: none;
     justify-content: center;
     align-items: center;
     user-select: none;
@@ -90,8 +89,7 @@
 
 .trigger {
     width: max-content;
-    height: 3em;
-    padding: 0.5em 1em;
+    padding: 0.2em 1em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +101,7 @@
     color: rgba(81, 87, 90, 1);
     transition: 0.3s;
     overflow: hidden;
-    position: absolute;
+    // position: absolute;
 }
 
 .trigger,
@@ -122,9 +120,5 @@
     .info-left,
     .info-right {
         display: none;
-    }
-
-    .about-me-2 {
-        display: flex;
     }
 }
