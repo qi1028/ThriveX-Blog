@@ -5,6 +5,14 @@ export interface Info {
     introduction: string;
 }
 
+export interface InfoTwo {
+    author: string;
+    avatar_url: string;
+    left_tags: string[];
+    right_tags: string[];
+    know_me: string;
+};
+
 export interface Character {
     value: number;
     text1: string;
@@ -38,6 +46,7 @@ export interface Project {
 
 export interface MyData {
     info: Info,
+    infoTwo: InfoTwo,
     character: Character[],
     goals: Goal[],
     project: Project[]

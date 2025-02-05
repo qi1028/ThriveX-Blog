@@ -16,19 +16,22 @@ export default ({ total, page, path, className }: Props) => {
 
     const onChange = (page: number) => {
         router.push(path ? `${path}&page=${page}` : `?page=${page}`)
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     return (
-        <>
-            <div className={className}>
-                <Pagination
-                    showControls
-                    total={total}
-                    page={+page}
-                    onChange={onChange}
-                    classNames={{ item: "shadow-none bg-transparent dark:hover:!bg-black-b transition-colors", prev: "dark:bg-black-b transition-colors", next: "dark:bg-black-b transition-colors" }}
-                />
-            </div>
-        </>
+        <div className={className}>
+            <Pagination
+                showControls
+                total={total}
+                page={+page}
+                onChange={onChange}
+                classNames={{ item: "shadow-none bg-transparent dark:hover:!bg-black-b transition-colors", prev: "dark:bg-black-b transition-colors", next: "dark:bg-black-b transition-colors" }}
+            />
+        </div>
     )
 }

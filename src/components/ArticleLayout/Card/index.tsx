@@ -12,11 +12,11 @@ import Show from '@/components/Show';
 import { getConfigDataAPI } from '@/api/project'
 import { Theme } from '@/types/app/project';
 
-interface ClassicsProps {
+interface CardProps {
     data: Paginate<Article[]>;
 }
 
-const Classics = async ({ data }: ClassicsProps) => {
+const Card = async ({ data }: CardProps) => {
     const { data: theme } = await getConfigDataAPI<Theme>("layout") || { data: {} as Theme }
 
     const covers = JSON.parse(theme.covers || '[]')
@@ -34,23 +34,12 @@ const Classics = async ({ data }: ClassicsProps) => {
         <div className="space-y-4">
             {data?.result?.map((item, index) => (
                 <div key={item.id} className="relative overflow-hidden flex h-[190px] md:h-60 lg:h-52 xl:h-60 bg-black-b tw_container">
-                    {index % 2 === 0 && (
-                        <div
-                            className="hidden sm:block relative min-w-[45%] bg-cover bg-no-repeat bg-center scale-100 hover:scale-125 z-10 transition-all"
-                            style={{
-                                clipPath: 'polygon(0 0, 100% 0, 90% 100%, 0 100%)',
-                                backgroundImage: `url(${item.cover || covers[getRandom(0, covers.length - 1)]})`,
-                            }}
-                        />
-                    )}
-
-                    <div className="relative w-full sm:w-[65%] py-5 px-5 sm:px-10 lg:px-5 xl:px-10 z-20">
+                    <div className="relative w-full py-5 px-5 sm:px-10 lg:px-5 xl:px-10 z-20">
                         <Link href={`/article/${item.id}`} className='flex flex-col justify-between h-full text-center sm:text-start'>
-                            <h3 className='overflow-hidden relative w-full my-2.5 text-white hover:text-primary text-lg md:text-xl lg:text-[22px] xl:text-2xl transition-colors line-clamp-1'>{item.title}</h3>
-                            {/* <p className='text-[#cecece] text-sm sm:text-[15px] leading-7 sm:indent-8 line-clamp-2 xl:line-clamp-3'>{item.description}</p> */}
-                            <p className='text-[#cecece] text-sm sm:text-[15px] leading-7 sm:indent-8 line-clamp-2 xl:line-clamp-3'>{genArticleInfo(item)}</p>
+                            <h3 className='overflow-hidden relative w-full my-2.5 text_shadow text-white hover:text-primary text-center text-lg md:text-xl lg:text-[22px] xl:text-2xl transition-colors line-clamp-1'>{item.title}</h3>
+                            <p className='text-center text-[#cecece] text-sm sm:text-[15px] leading-7 sm:indent-8 line-clamp-2 xl:line-clamp-3'>{genArticleInfo(item)}</p>
 
-                            <div className={`flex ${index % 2 === 0 ? 'sm:justify-start' : 'sm:justify-end'} justify-center pt-5 text-end space-x-4 sm:space-x-8`}>
+                            <div className={`flex justify-center pt-5 text-end space-x-4 sm:space-x-8`}>
                                 <div className='flex items-center text-xs text-white'>
                                     <span className='pr-1'><IoTimeOutline className='p-1 mt-[-2px] mr-[3px] text-[23px] text-white rounded-full align-middle bg-[#539dfd]' /></span>
                                     <span>{dayjs(+item.createTime!).format('YYYY-MM-DD')}</span>
@@ -72,20 +61,10 @@ const Classics = async ({ data }: ClassicsProps) => {
                     <div
                         className="absolute w-full h-60 bg-cover bg-center"
                         style={{
-                            filter: 'blur(2.5rem) brightness(0.6)',
+                            filter: 'blur(1.8rem) brightness(0.9)',
                             backgroundImage: `url(${item.cover || covers[getRandom(0, covers.length - 1)]})`
                         }}
                     />
-
-                    {index % 2 !== 0 && (
-                        <div
-                            className="relative min-w-[45%] bg-cover bg-no-repeat bg-center scale-100 z-10 transition-all hover:scale-125 hidden sm:block"
-                            style={{
-                                clipPath: 'polygon(10% 0, 100% 0, 100% 100%, 0 100%)',
-                                backgroundImage: `url(${item.cover || covers[getRandom(0, covers.length - 1)]})`,
-                            }}
-                        />
-                    )}
                 </div>
             ))}
 
@@ -94,4 +73,4 @@ const Classics = async ({ data }: ClassicsProps) => {
     );
 };
 
-export default Classics;
+export default Card;

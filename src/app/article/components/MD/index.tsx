@@ -1,12 +1,14 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import { useConfigStore } from "@/stores";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { ToastContainer, toast } from 'react-toastify'
 import "react-photo-view/dist/react-photo-view.css";
+import 'react-toastify/dist/ReactToastify.css';
 import 'highlight.js/styles/vs2015.css';
-import "./index.scss";
 import "katex/dist/katex.min.css";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -18,6 +20,9 @@ import rehypeCallouts from "rehype-callouts";
 import 'rehype-callouts/theme/obsidian';
 import rehypeRaw from 'rehype-raw';
 import Skeleton from "@/components/Skeleton";
+import { BiCopy } from "react-icons/bi";
+
+import "./index.scss";
 
 interface Props {
     data: string;
@@ -43,7 +48,7 @@ const ContentMD = ({ data }: Props) => {
 
         return () => {
             document.body.style.backgroundColor = '#f9f9f9';
-            
+
             if (waves) {
                 waves[0].style.fill = "rgba(249, 249, 249, 0.7)";
                 waves[1].style.fill = "rgba(249, 249, 249, 0.5)";
@@ -59,24 +64,24 @@ const ContentMD = ({ data }: Props) => {
                 <div className="content markdown-body space-y-6 p-4">
                     {/* 标题骨架屏 */}
                     <Skeleton className="h-10 w-3/4" />
-                    
+
                     {/* 段落骨架屏 */}
                     <div className="space-y-2">
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-11/12" />
                         <Skeleton className="h-4 w-4/5" />
                     </div>
-                    
+
                     {/* 图片骨架屏 */}
                     <Skeleton className="h-[200px] w-3/6 my-4" />
-                    
+
                     {/* 更多段落骨架屏 */}
                     <div className="space-y-2">
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-10/12" />
                         <Skeleton className="h-4 w-9/12" />
                     </div>
-                    
+
                     {/* 代码块骨架屏 */}
                     <Skeleton className="h-[120px] w-full" />
                 </div>
@@ -138,13 +143,62 @@ const ContentMD = ({ data }: Props) => {
                     </div>
                 );
             }
-            
+
             return <a href={href}>{children}</a>;
+        },
+        code: ({ node, inline, className, children, ...props }: any) => {
+            const match = /language-(\w+)/.exec(className || '');
+
+            const text = useMemo(() => {
+                const getTextFromChildren = (children: React.ReactNode): string => {
+                    return React.Children.toArray(children).map(child => {
+                        if (typeof child === 'string') {
+                            return child;
+                        } else if (React.isValidElement(child)) {
+                            return getTextFromChildren(((child.props as { children: React.ReactNode })).children);
+                        }
+                        return '';
+                    }).join('').trim();
+                };
+
+                return getTextFromChildren(children);
+            }, [children]);
+
+            const lineNumbers = useMemo(() => {
+                return text.split('\n').map((_, index) => index + 1);
+            }, [text]);
+
+            return (
+                <>
+                    {(!inline && match) && (
+                        <CopyToClipboard text={text} onCopy={() => toast.success('代码已复制')}>
+                            <button className="absolute top-3 right-3 bg-gray-300 text-gray-700 rounded p-1.5 lg:opacity-0 transition-opacity">
+                                <BiCopy />
+                            </button>
+                        </CopyToClipboard>
+                    )}
+
+                    <ul className="lineNumber hidden">
+                        {lineNumbers.map((lineNumber) => (
+                            <li key={lineNumber} className="text-[#bfbfbf] !m-0 list-none">{lineNumber}</li>
+                        ))}
+                    </ul>
+
+                    <code className={className} {...props}>
+                        {children}
+                    </code>
+                </>
+            );
         }
+
     };
 
     return (
         <div className="ContentMdComponent">
+            <ToastContainer
+                theme={isDark ? "dark" : "light"}
+                autoClose={1000}
+                hideProgressBar />
             <PhotoProvider>
                 <div className="content markdown-body">
                     <ReactMarkdown

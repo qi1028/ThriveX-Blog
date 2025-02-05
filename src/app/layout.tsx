@@ -30,15 +30,16 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <title>{`${data?.title} - ${data?.subhead}`}</title>
         <meta name="description" content={data?.description} />
         <meta name="keywords" content={data?.keyword} />
-        <link rel="icon" href={data?.favicon} />
+        <link rel="icon" href={data?.favicon || '/favicon.ico'} />
 
         {/* 字体 */}
         {/* 霞鹜文楷 */}
         {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/style.css" /> */}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/lxgwwenkai-regular/result.css" />
         {/* 原俠正楷 */}
         {/* <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/GuanKiapTsingKhai/dist/GuanKiapTsingKhai/result.css" /> */}
         {/* 悠哉 */}
-        <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/yozai/dist/Yozai-Medium/result.css" />
+        {/* <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/yozai/dist/Yozai-Medium/result.css" /> */}
 
         {/* 百度统计 */}
         <script dangerouslySetInnerHTML={{
@@ -67,7 +68,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
         {/* 主体内容 */}
         <NextUIProvider>
-          {children}
+          <div className='min-h-[calc(100vh-300px)]'>
+            {children}
+          </div>
         </NextUIProvider>
 
         {/* 底部组件 */}

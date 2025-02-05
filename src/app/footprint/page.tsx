@@ -51,7 +51,7 @@ export default function MapContainer() {
                 .then((AMap) => {
                     map = new AMap.Map("container", {
                         // 地图样式
-                        // mapStyle: "amap://styles/grey",
+                        mapStyle: "amap://styles/grey",
                         viewMode: "3D", // 是否为3D地图模式
                         zoom: 4.8,
                         center: [105.625368, 37.746599], // 初始化地图中心点位置
