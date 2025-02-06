@@ -1,6 +1,5 @@
 "use client"
 
-import Image from 'next/image';
 import { useEffect } from 'react';
 
 import AOS from 'aos';
@@ -23,7 +22,7 @@ export default ({ data }: { data: Info }) => {
                     </div>
 
                     <div className="overflow-hidden w-[40%] h-[40%] rounded-full shadow-lg">
-                        <Image src={data?.avatar} alt={data?.name} className="w-full h-full" />
+                        <img src={data?.avatar} alt={data?.name} className="w-full h-full" />
                     </div>
                 </div>
             </div>

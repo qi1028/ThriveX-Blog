@@ -20,7 +20,7 @@ const config: Config = {
       },
       transitionDuration: {
         'DEFAULT': '300ms', // 添加默认过渡时间为0.3秒
-      },
+      }
     },
   },
   darkMode: "class",

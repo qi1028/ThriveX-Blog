@@ -2,16 +2,16 @@
 
 body {
     background-color: #f9f9f9;
+    font-weight: normal;
 
     // 霞鹜文楷
-    // font-family: "LXGW WenKai";
+    font-family: "LXGW WenKai";
 
     // 原俠正楷
     // font-family:'GuanKiapTsingKhai';
 
     // 悠哉
-    font-family:'Yozai Medium';
-    font-weight: normal;
+    // font-family:'Yozai Medium';
 }
 
 /* 为整个页面设置滚动条样式 */
@@ -50,7 +50,7 @@ body {
 }
 
 // 文本标记样式
-.textMarkSty {
+.text_markSty {
     position: relative;
 
     &::after {
@@ -62,6 +62,10 @@ body {
         height: 10px;
         background-color: #539dfd80;
     }
+}
+
+.text_shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes miniShape {
