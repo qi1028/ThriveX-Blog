@@ -1,5 +1,5 @@
 // 最新调整：在 .env 文件中配置项目后端 API 地址
-const url = "http://thrive.Server.demo:9004"
+const url = "https://api.liuyuyang.net/api"
 // 配置页面缓存时间
 const cachingTime = +process.env.NEXT_PUBLIC_CACHING_TIME!
 
