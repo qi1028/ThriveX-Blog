@@ -17,6 +17,7 @@ export default async ({ searchParams }: Props) => {
   const page = searchParams.page || 1;
   const { data } = await getConfigDataAPI<Theme>("layout") || { data: {} as Theme }
 
+
   return (
     <>
       <Lantern data={['新', '年', '快', '乐']} />
