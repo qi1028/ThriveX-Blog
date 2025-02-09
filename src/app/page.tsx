@@ -17,10 +17,9 @@ export default async ({ searchParams }: Props) => {
   const page = searchParams.page || 1;
   const { data } = await getConfigDataAPI<Theme>("layout") || { data: {} as Theme }
 
-
   return (
     <>
-      <Lantern data={['新', '年', '快', '乐']} />
+      <Lantern data={['新', '春', '快', '乐']} />
 
       <Swiper src={data?.swiper_image}>
         {/* 星空背景组件 */}
