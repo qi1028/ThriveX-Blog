@@ -19,7 +19,7 @@ export default async ({ searchParams }: Props) => {
 
   return (
     <>
-      <Lantern data={['新', '年', '快', '乐']} />
+      <Lantern data={['新', '春', '快', '乐']} />
 
       <Swiper src={data?.swiper_image}>
         {/* 星空背景组件 */}
