@@ -1,4 +1,5 @@
-import { HeroUIProvider } from "@heroui/react";
+// import { HeroUIProvider } from "@heroui/react";
+import HeroUIProvider from "@/components/HeroUIProvider";
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
