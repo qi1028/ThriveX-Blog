@@ -6,16 +6,18 @@ import Pagination from "@/components/Pagination";
 import { Article } from "@/types/app/article";
 
 interface Props {
-  params: { id: number };
-  searchParams: { page: number; name: string };
+  params: Promise<{ id: number }>;
+  searchParams: Promise<{ page: number; name: string }>;
 };
 
-export default async ({ params, searchParams }: Props) => {
+export default async (props: Props) => {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const id = params.id;
   const page = searchParams.page || 1;
   const name = searchParams.name;
 
-  const { data } = await getCateArticleListAPI(id, page) || { data: {} as Paginate<Article[]> }
+  const { data } = (await getCateArticleListAPI(id, page)) || { data: {} as Paginate<Article[]> }
 
   return (
     <>
@@ -41,4 +43,4 @@ export default async ({ params, searchParams }: Props) => {
       </div>
     </>
   )
-}
+};

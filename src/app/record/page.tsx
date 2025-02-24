@@ -12,15 +12,16 @@ import { getConfigDataAPI } from "@/api/project";
 import { Theme } from "@/types/app/project";
 
 interface Props {
-  searchParams: { page: number };
+  searchParams: Promise<{ page: number }>;
 };
 
-export default async ({ searchParams }: Props) => {
+export default async (props: Props) => {
+  const searchParams = await props.searchParams;
   const page = searchParams.page || 1;
 
-  const { data: user } = await getUserDataAPI() || { data: {} as User }
-  const { data: record } = await getRecordPagingAPI({ pagination: { page, size: 8 } }) || { data: {} as Paginate<Record[]> }
-  const { data: theme } = await getConfigDataAPI<Theme>("layout") || { data: {} as Theme }
+  const { data: user } = (await getUserDataAPI()) || { data: {} as User }
+  const { data: record } = (await getRecordPagingAPI({ pagination: { page, size: 8 } })) || { data: {} as Paginate<Record[]> }
+  const { data: theme } = (await getConfigDataAPI<Theme>("layout")) || { data: {} as Theme }
 
   return (
     <>
@@ -72,4 +73,4 @@ export default async ({ searchParams }: Props) => {
       </div>
     </>
   )
-}
+};

@@ -10,16 +10,17 @@ import { Theme } from "@/types/app/project";
 import Lantern from "@/components/Lantern";
 
 interface Props {
-  searchParams: { page: number };
+  searchParams: Promise<{ page: number }>;
 };
 
-export default async ({ searchParams }: Props) => {
+export default async (props: Props) => {
+  const searchParams = await props.searchParams;
   const page = searchParams.page || 1;
-  const { data } = await getConfigDataAPI<Theme>("layout") || { data: {} as Theme }
+  const { data } = (await getConfigDataAPI<Theme>("layout")) || { data: {} as Theme }
 
   return (
     <>
-      <Lantern data={['新', '春', '快', '乐']} />
+      {/* <Lantern data={['新', '春', '快', '乐']} /> */}
 
       <Swiper src={data?.swiper_image}>
         {/* 星空背景组件 */}
@@ -36,4 +37,4 @@ export default async ({ searchParams }: Props) => {
       </Container>
     </>
   );
-}
+};
