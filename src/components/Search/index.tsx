@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { Modal, ModalContent, ModalHeader, ModalBody, UseDisclosureProps, Input } from "@nextui-org/react"
+import { Modal, ModalContent, ModalHeader, ModalBody, UseDisclosureProps, Input } from "@heroui/react"
 import { getArticlePagingAPI } from '@/api/article'
 import { Article } from "@/types/app/article"
 import Empty from "../Empty"
@@ -24,10 +24,10 @@ export default ({ disclosure }: Props) => {
             return
         }
 
-        const { data } = await getArticlePagingAPI({
+        const { data } = (await getArticlePagingAPI({
             query: { key },
             pagination: { page: 1 }
-        }) || { data: {} as Paginate<Article[]> }
+        })) || { data: {} as Paginate<Article[]> }
 
         setData(data)
     }

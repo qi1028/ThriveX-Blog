@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { addCommentDataAPI } from '@/api/comment';
 import { ToastContainer, toast } from 'react-toastify';
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from "@heroui/react";
 import List from './components/List';
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss"
@@ -54,7 +54,7 @@ const CommentForm = ({ articleId }: Props) => {
             if (!isNaN(+qq)) data.avatar = `https://q1.qlogo.cn/g?b=qq&nk=${qq}&s=640`
         };
 
-        const { code, message } = await addCommentDataAPI({ ...data, articleId, commentId: commentId === articleId ? 0 : commentId, createTime: Date.now().toString() }) || { code: 0, message: "" }
+        const { code, message } = (await addCommentDataAPI({ ...data, articleId, commentId: commentId === articleId ? 0 : commentId, createTime: Date.now().toString() })) || { code: 0, message: "" }
         if (code !== 200) return alert("发布评论失败：" + message);
 
         toast("🎉 提交成功, 请等待审核!")
@@ -78,7 +78,7 @@ const CommentForm = ({ articleId }: Props) => {
     }
 
     return (
-        <div className='CommentComponent'>
+        (<div className='CommentComponent'>
             <div className="mt-[70px]">
                 <div className="title relative top-0 left-0 w-full h-[1px] mb-10 bg-[#f7f7f7] dark:bg-black-b transition-colors"></div>
 
@@ -121,9 +121,8 @@ const CommentForm = ({ articleId }: Props) => {
 
                 <List ref={commentRef} id={articleId} reply={replyComment} />
             </div>
-
             <ToastContainer />
-        </div>
+        </div>)
     );
 };
 

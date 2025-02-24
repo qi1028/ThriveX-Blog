@@ -1,6 +1,6 @@
 "use client"
 
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Button, Input } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Button, Input } from "@heroui/react";
 import { MdEnhancedEncryption } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation"

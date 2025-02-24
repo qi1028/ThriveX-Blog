@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 import { Article } from "@/types/app/article"
 
-import { Accordion, AccordionItem, Spinner } from "@nextui-org/react";
+import { Accordion, AccordionItem, Spinner } from "@heroui/react";
 
 import archiving from './svg/archiving.svg'
 import { AiOutlineEye } from "react-icons/ai";

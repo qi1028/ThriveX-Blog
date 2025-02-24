@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
-import { Switch } from '@nextui-org/react';
+import { Switch } from "@heroui/react";
 import Show from '@/components/Show'
 import SidebarNav from './component/SidebarNav';
 
@@ -25,10 +25,10 @@ const Header = () => {
 
     // 获取项目配置
     const getConfigData = async () => {
-        const { data: web } = await getConfigDataAPI<Web>("web") || { data: {} as Web };
+        const { data: web } = (await getConfigDataAPI<Web>("web")) || { data: {} as Web };
         setWeb(web)
 
-        const { data: theme } = await getConfigDataAPI<Theme>("layout") || { data: {} as Theme };
+        const { data: theme } = (await getConfigDataAPI<Theme>("layout")) || { data: {} as Theme };
         setTheme(theme)
     }
 
@@ -41,7 +41,7 @@ const Header = () => {
     // 获取分类列表
     const [cateList, setCateList] = useState<Cate[]>([])
     const getCateList = async () => {
-        const { data } = await getCateListAPI() || { data: [] as Cate[] }
+        const { data } = (await getCateListAPI()) || { data: [] as Cate[] }
         setCateList(data)
     }
 

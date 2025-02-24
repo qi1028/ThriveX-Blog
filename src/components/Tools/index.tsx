@@ -6,7 +6,7 @@ import moon from './image/moon.svg'
 import search from './image/search.svg'
 import returnTop from './image/returnTop.svg'
 import { useConfigStore } from '@/stores'
-import { useDisclosure } from '@nextui-org/react'
+import { useDisclosure } from "@heroui/react"
 import Search from '../Search'
 
 const itemSty = "p-2 hover:bg-[#edf5ff] dark:hover:bg-[#4e5969] cursor-pointer transition-colors"

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Progress, Tooltip } from "@nextui-org/react";
+import { Progress, Tooltip } from "@heroui/react";
 import INFJ from '@/assets/image/INFJ.png'
 import { BiQuestionMark } from "react-icons/bi";
 
