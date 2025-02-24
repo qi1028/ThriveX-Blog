@@ -21,15 +21,17 @@ import Encrypt from '@/components/Encrypt';
 import NotFound from '@/app/not-found';
 
 interface Props {
-    params: { id: number };
-    searchParams: { password: string }
+    params: Promise<{ id: number }>;
+    searchParams: Promise<{ password: string }>
 };
 
-export default async ({ params, searchParams }: Props) => {
+export default async (props: Props) => {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
     const id = params.id
     const password = searchParams.password
 
-    const { code, data } = password ? await getArticleDataAPI(id, password) || { data: {} as Article } : await getArticleDataAPI(id) || { data: {} as Article }
+    const { code, data } = password ? (await getArticleDataAPI(id, password)) || { data: {} as Article } : (await getArticleDataAPI(id)) || { data: {} as Article }
 
     const errorCodes = [400, 404, 611]
 
@@ -100,4 +102,4 @@ export default async ({ params, searchParams }: Props) => {
     } else {
         return !password && <Encrypt id={id} />
     }
-}
+};
