@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Select, SelectItem, Textarea, RadioGroup, Radio } from "@nextui-org/react";
+import { Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Select, SelectItem, Textarea, RadioGroup, Radio } from "@heroui/react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Wall, Cate } from "@/types/app/wall";
 import { addWallDataAPI, getCateListAPI } from '@/api/wall'
@@ -27,7 +27,7 @@ export default () => {
   // 获取留言分类列表
   const [cateList, setCateList] = useState<Cate[]>([])
   const getCateList = async () => {
-    const { data } = await getCateListAPI() || { data: [] as Cate[] }
+    const { data } = (await getCateListAPI()) || { data: [] as Cate[] }
     setCateList(data?.filter(item => item.id !== 1))
   }
   useEffect(() => {
@@ -45,7 +45,7 @@ export default () => {
   const { handleSubmit, control, formState: { errors }, trigger } = useForm<Wall>({ defaultValues });
   const onSubmit: SubmitHandler<Wall> = async (data, event) => {
     event?.preventDefault();
-    const { code, message } = await addWallDataAPI({ ...data, createTime: Date.now().toString() }) || { code: 0, message: "" }
+    const { code, message } = (await addWallDataAPI({ ...data, createTime: Date.now().toString() })) || { code: 0, message: "" }
 
     if (code !== 200) return toast.error(message, toastConfig);
 

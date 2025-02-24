@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { Project } from "@/types/app/my"
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react"
+import { Tabs, Tab, Card, CardBody } from "@heroui/react"
 import { PhotoProvider, PhotoView } from "react-photo-view"
 import "react-photo-view/dist/react-photo-view.css";
 

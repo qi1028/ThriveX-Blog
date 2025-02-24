@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
-import { Checkbox } from "@nextui-org/react"
+import { Checkbox } from "@heroui/react"
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';

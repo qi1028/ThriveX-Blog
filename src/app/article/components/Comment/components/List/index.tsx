@@ -7,7 +7,7 @@ import { Comment } from '@/types/app/comment'
 import { RiMessage3Line } from "react-icons/ri";
 import dayjs from 'dayjs';
 import { getArticleCommentListAPI } from '@/api/comment';
-import { Pagination } from '@nextui-org/react';
+import { Pagination } from "@heroui/react";
 import "./index.scss"
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
 const CommentList = forwardRef(({ id, reply }: Props, ref) => {
     const [data, setData] = useState<Paginate<Comment[]>>({} as Paginate<Comment[]>)
     const getCommentList = async (page: number = 1) => {
-        const { data } = await getArticleCommentListAPI(+id!, { page, size: 8 }) || { data: {} as Paginate<Comment[]> }
+        const { data } = (await getArticleCommentListAPI(+id!, { page, size: 8 })) || { data: {} as Paginate<Comment[]> }
         setData(data)
     }
 

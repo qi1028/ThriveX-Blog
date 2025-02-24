@@ -1,4 +1,4 @@
-import { NextUIProvider } from '@nextui-org/react';
+import { HeroUIProvider } from "@heroui/react";
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -16,7 +16,7 @@ import Confetti from '@/components/Confetti';
 import { Web } from '@/types/app/project';
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const { data } = await getConfigDataAPI<Web>("web") || { data: {} as Web };
+  const { data } = (await getConfigDataAPI<Web>("web")) || { data: {} as Web };
 
   // 尊重开源，禁止删除此版权信息！！！
   console.log("🚀 欢迎使用 ThriveX 现代化博客管理系统")
@@ -67,11 +67,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <Header />
 
         {/* 主体内容 */}
-        <NextUIProvider>
+        <HeroUIProvider>
           <div className='min-h-[calc(100vh-300px)]'>
             {children}
           </div>
-        </NextUIProvider>
+        </HeroUIProvider>
 
         {/* 底部组件 */}
         <Footer />

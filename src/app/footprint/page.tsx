@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@heroui/react";
 import { getFootprintListAPI } from "@/api/footprint";
 import { Footprint } from "@/types/app/footprint";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
@@ -22,7 +22,7 @@ export default function MapContainer() {
     const [list, setList] = useState<Footprint[]>([])
 
     const getFootprintList = async () => {
-        const { data } = await getFootprintListAPI() || { data: [] as Footprint[] }
+        const { data } = (await getFootprintListAPI()) || { data: [] as Footprint[] }
         setList(data)
     }
 
