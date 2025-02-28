@@ -1,12 +1,12 @@
 "use client"
 
-import Link from "next/link"
 import { useState } from "react"
+import Link from "next/link"
 import { Modal, ModalContent, ModalHeader, ModalBody, UseDisclosureProps, Input } from "@heroui/react"
 import { getArticlePagingAPI } from '@/api/article'
 import { Article } from "@/types/app/article"
+import useDebounce from "@/hooks/useDebounce"
 import Empty from "../Empty"
-import { useDebounceFn } from 'ahooks'
 
 interface Props {
     disclosure: UseDisclosureProps & { onOpenChange: () => void }
@@ -32,19 +32,14 @@ export default ({ disclosure }: Props) => {
         setData(data)
     }
 
-    // 使用 useDebounceFn 创建防抖函数
-    const { run: debouncedFetchArticles } = useDebounceFn(getArticleList, { wait: 300 })
+    // 使用自定义防抖函数
+    const debouncedFetchArticles = useDebounce(getArticleList, 300);
 
     // 根据关键词搜索文章
     const onSearchArticle = (e: React.ChangeEvent<HTMLInputElement>) => {
         let key = e.target.value
         debouncedFetchArticles(key)
     }
-
-    // const patchname = usePathname()
-    // useEffect(() => {
-    //     onClose()
-    // }, [patchname])
 
     return (
         <>
