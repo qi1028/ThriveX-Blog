@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import { useConfigStore } from "@/stores";
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { ToastContainer, toast } from 'react-toastify'
 import "react-photo-view/dist/react-photo-view.css";
@@ -164,25 +163,21 @@ const ContentMD = ({ data }: Props) => {
                 return getTextFromChildren(children);
             }, [children]);
 
-            const lineNumbers = useMemo(() => {
-                return text.split('\n').map((_, index) => index + 1);
-            }, [text]);
+            const handleCopy = () => {
+                navigator.clipboard.writeText(text).then(() => {
+                    toast.success('代码已复制 🎉');
+                }).catch(err => {
+                    toast.error('复制失败 😖');
+                });
+            };
 
             return (
                 <>
                     {(!inline && match) && (
-                        <CopyToClipboard text={text} onCopy={() => toast.success('代码已复制')}>
-                            <button className="absolute top-3 right-3 bg-gray-300 text-gray-700 rounded p-1.5 lg:opacity-0 transition-opacity">
-                                <BiCopy />
-                            </button>
-                        </CopyToClipboard>
+                        <button onClick={handleCopy} className="absolute top-3 right-3 bg-gray-300 text-gray-700 rounded p-1.5 lg:opacity-0 transition-opacity">
+                            <BiCopy />
+                        </button>
                     )}
-
-                    <ul className="lineNumber hidden">
-                        {lineNumbers.map((lineNumber) => (
-                            <li key={lineNumber} className="text-[#bfbfbf] !m-0 list-none">{lineNumber}</li>
-                        ))}
-                    </ul>
 
                     <code className={className} {...props}>
                         {children}

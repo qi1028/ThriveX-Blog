@@ -1,4 +1,3 @@
-import Image from "next/image"
 import ImageList from "./components/ImageList"
 import { getRecordPagingAPI } from '@/api/record'
 import { getUserDataAPI } from '@/api/user';

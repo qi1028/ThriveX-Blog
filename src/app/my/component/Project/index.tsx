@@ -21,7 +21,7 @@ export default ({ data }: { data: Project[] }) => {
               
                 <div className="w-[80%] xl:w-[1200px] mx-auto">
                     <div className="flex w-full flex-col">
-                        <Tabs aria-label="Options" placement="top" classNames={{ tabList: "dark:bg-black-b", wrapper: "flex flex-col", base: "justify-center", tab: "[&>span]:dark:bg-[#3a4250]" }}>
+                        <Tabs aria-label="Options" placement="top" classNames={{ tabList: "dark:bg-black-b", tabWrapper: "flex flex-col", base: "justify-center", tab: "[&>span]:dark:bg-[#3a4250]" }}>
                             {
                                 data?.map((item, index) => (
                                     <Tab key={index} title={item.name}>
