@@ -1,19 +1,24 @@
-import HeroUIProvider from "@/components/HeroUIProvider";
+import localFont from 'next/font/local'
 
+import HeroUIProvider from "@/components/HeroUIProvider";
+import NProgress from '@/components/NProgress';
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Tools from '@/components/Tools';
+import Confetti from '@/components/Confetti';
 import RouteChangeHandler from '@/components/RouteChangeHandler'
+
+import { getConfigDataAPI } from '@/api/project'
+import { Web } from '@/types/app/project';
 
 // 加载样式文件
 import "@/styles/index.scss";
 import "@/styles/tailwind.scss";
 
-import { getConfigDataAPI } from '@/api/project'
-
-import Tools from '@/components/Tools';
-import NProgress from '@/components/NProgress';
-import Confetti from '@/components/Confetti';
-import { Web } from '@/types/app/project';
+const LXGWWenKai = localFont({
+  src: '../assets/font/LXGWWenKai-Regular.ttf',
+  display: 'swap'
+})
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const { data } = (await getConfigDataAPI<Web>("web")) || { data: {} as Web };
@@ -25,7 +30,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   console.log("🌟 觉得好用的话记得点个 Star 哦 🙏")
 
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" className={LXGWWenKai.className}>
       <head>
         <title>{`${data?.title} - ${data?.subhead}`}</title>
         <meta name="description" content={data?.description} />
@@ -35,7 +40,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         {/* 字体 */}
         {/* 霞鹜文楷 */}
         {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/style.css" /> */}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/lxgwwenkai-regular/result.css" />
+        {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@callmebill/lxgw-wenkai-web@latest/lxgwwenkai-regular/result.css" /> */}
         {/* 原俠正楷 */}
         {/* <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/GuanKiapTsingKhai/dist/GuanKiapTsingKhai/result.css" /> */}
         {/* 悠哉 */}
