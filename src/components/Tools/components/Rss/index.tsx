@@ -1,26 +1,16 @@
 "use client"
 
-import { getConfigDataAPI } from "@/api/project";
 import { Web } from "@/types/app/project";
 import { Modal, ModalContent, ModalHeader, ModalBody, UseDisclosureProps, Snippet } from "@heroui/react"
-import { useEffect, useState } from "react";
 
 interface Props {
-    disclosure: UseDisclosureProps & { onOpenChange: () => void }
+    disclosure: UseDisclosureProps & { onOpenChange: () => void },
+    data: Web
 }
 
-export default ({ disclosure }: Props) => {
-    const [data, setData] = useState<Web>()
+export default ({ disclosure, data }: Props) => {
     const { isOpen, onClose, onOpenChange } = disclosure;
 
-    const getConfigData = async () => {
-        const { data } = await getConfigDataAPI<Web>("web") || { data: {} as Web }
-        setData(data)
-    }
-
-    useEffect(() => {
-        getConfigData()
-    }, [])
 
     return (
         <>

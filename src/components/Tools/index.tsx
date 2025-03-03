@@ -14,7 +14,7 @@ import Rss from './components/Rss'
 const itemSty = "p-2 hover:bg-[#edf5ff] dark:hover:bg-[#4e5969] cursor-pointer transition-colors"
 
 export default () => {
-    const { isDark, setIsDark } = useConfigStore()
+    const { isDark, setIsDark, web } = useConfigStore()
     const { isOpen: isSwiper, onClose: onSwiperClose, onOpenChange: onSwiperOpenChange } = useDisclosure();
     const { isOpen: isRssOpen, onClose: onRssClose, onOpenChange: onRssOpenChange } = useDisclosure();
     const onReturnTop = () => {
@@ -38,7 +38,7 @@ export default () => {
             <Search disclosure={{ isOpen: isSwiper, onClose: onSwiperClose, onOpenChange: onSwiperOpenChange }} />
 
             {/* 查看Rss地址 */}
-            <Rss disclosure={{ isOpen: isRssOpen, onClose: onRssClose, onOpenChange: onRssOpenChange }} />
+            <Rss data={web} disclosure={{ isOpen: isRssOpen, onClose: onRssClose, onOpenChange: onRssOpenChange }} />
         </>
     )
 }
