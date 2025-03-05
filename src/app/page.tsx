@@ -1,4 +1,4 @@
-import Swiper from "@/components/Swiper";
+import Slide from "@/components/Slide";
 import Typed from "@/components/Typed";
 import Starry from "@/components/Starry"
 import Container from "@/components/Container";
@@ -22,12 +22,12 @@ export default async (props: Props) => {
     <>
       {/* <Lantern data={['新', '春', '快', '乐']} /> */}
 
-      <Swiper src={data?.swiper_image}>
+      <Slide src={data?.swiper_image}>
         {/* 星空背景组件 */}
         <Starry />
         {/* 打字机组件 */}
         <Typed className="absolute top-[45%] sm:top-[40%] left-[50%] transform -translate-x-1/2 w-[80%] text-center text-white xs:text-xl sm:text-[30px] leading-7 sm:leading-[40px] md:leading-[50px] custom_text_shadow"></Typed>
-      </Swiper>
+      </Slide>
 
       <Container>
         {/* 文章列表 */}
