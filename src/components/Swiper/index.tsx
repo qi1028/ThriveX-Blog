@@ -47,7 +47,7 @@ export default ({ data, className }: { data: SwiperType[], className?: string })
     return (
         <>
             <div
-                className={`group relative w-full h-[350px] rounded-2xl overflow-hidden after:content-[''] after:w-full after:h-[60%] after:absolute after:bottom-0 after:left-0 after:bg-[linear-gradient(to_top,#2c333e,transparent)] ${className}`}
+                className={`group relative w-full h-[200px] sm:h-[270px] lg:h-[350px] rounded-2xl overflow-hidden after:content-[''] after:w-full after:h-[60%] after:absolute after:bottom-0 after:left-0 after:bg-[linear-gradient(to_top,#2c333e,transparent)] ${className}`}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
@@ -63,7 +63,7 @@ export default ({ data, className }: { data: SwiperType[], className?: string })
                         <img key={index} src={item.image} alt={item.title} className="w-full h-full object-cover" />
 
                         <div className="flex flex-col absolute bottom-7 left-5 z-50 gap-2 animation_bottom">
-                            <h2 className="text-white text-2xl font-bold text_shadow">{item.title}</h2>
+                            <h2 className="text-white text-xl lg:text-2xl font-bold text_shadow">{item.title}</h2>
                             <Button color="primary" variant="shadow" endContent={<BiChevronRight className="text-2xl" />} className="!w-28 mt-2 hover:translate-x-2 transition-transform" onPress={() => window.open(item.url, "_blank")}>立刻围观</Button>
                         </div>
                     </div>
