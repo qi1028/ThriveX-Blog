@@ -5,7 +5,7 @@ import { getConfigDataAPI } from "@/api/project";
 import { getWebListAPI, getWebTypeListAPI } from '@/api/web'
 import { Web as WebLink, WebType } from "@/types/app/web";
 
-import Swiper from "@/components/Swiper";
+import Slide from "@/components/Slide";
 import Starry from "@/components/Starry";
 import ApplyForAdd from "./components/ApplyForAdd";
 
@@ -47,7 +47,7 @@ export default async () => {
 
     return (
         <>
-            <Swiper isRipple={false}>
+            <Slide isRipple={false}>
                 {/* 星空背景组件 */}
                 <Starry />
 
@@ -57,7 +57,7 @@ export default async () => {
                         <ApplyForAdd />
                     </div>
                 </div>
-            </Swiper>
+            </Slide>
 
             <div className="bg-[linear-gradient(180deg,#edf6ff_0%,#ffffff_100%)] dark:bg-[linear-gradient(to_right,#232931_0%,#232931_100%)]">
                 <div className="relative -top-20 xs:-top-20 sm:-top-32 md:-top-36 w-[90%] xl:w-[1200px] p-10 pt-2 mx-auto bg-white dark:bg-black-b border dark:border-black-b rounded-2xl space-y-8 transition-colors">

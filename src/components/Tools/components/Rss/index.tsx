@@ -16,7 +16,7 @@ export default ({ disclosure, data }: Props) => {
         <>
             <Modal
                 size="lg"
-                backdrop="opaque"
+                backdrop="opaque" 
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
                 classNames={{

@@ -7,7 +7,7 @@ import dynamic from '../../svg/dynamic.svg'
 import { getRecordPagingAPI } from "@/api/record"
 import { Record } from "@/types/app/record"
 
-export default function Dynamic() {
+export default function Dynamic({ className }: { className?: string }) {
     const [list, setList] = useState<Record[]>([])
 
     const getRecordList = async () => {
@@ -38,7 +38,7 @@ export default function Dynamic() {
     }, [list]);
 
     return (
-        <div className='flex justify-between items-center w-full px-4 py-3 border dark:border-none rounded-lg bg-white dark:bg-black-b mb-2 transition-all'>
+        <div className={`flex justify-between items-center w-full px-4 py-3 border dark:border-none rounded-lg bg-white dark:bg-black-b mb-2 transition-all ${className}`}>
             <div className="flex items-center">
                 <Image src={dynamic} alt='动态' width={25} height={25} className='mr-2' />
                 <span>最新动态：</span>

@@ -1,7 +1,7 @@
 import { getArticleDataAPI, recordViewAPI } from '@/api/article'
 
 import Starry from "@/components/Starry"
-import Swiper from "@/components/Swiper"
+import Slide from "@/components/Slide"
 
 import Tag from "../components/Tag";
 import Copyright from "../components/Copyright";
@@ -52,7 +52,7 @@ export default async (props: Props) => {
                 <meta name="description" content={data.description} />
 
                 <div className="ArticlePage">
-                    <Swiper>
+                    <Slide>
                         {/* 星空背景组件 */}
                         <Starry />
 
@@ -81,7 +81,7 @@ export default async (props: Props) => {
                                 </div>
                             </div>
                         </div>
-                    </Swiper>
+                    </Slide>
 
                     <div className="w-[90%] xl:w-6/12 mx-auto mt-12 relative">
                         <MD data={data?.content} />

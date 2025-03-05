@@ -1,6 +1,6 @@
 import { getCateArticleListAPI } from "@/api/cate";
 import Starry from "@/components/Starry"
-import Swiper from "@/components/Swiper"
+import Slide from "@/components/Slide"
 import Classics from "@/components/ArticleLayout/Classics";
 import Pagination from "@/components/Pagination";
 import { Article } from "@/types/app/article";
@@ -25,7 +25,7 @@ export default async (props: Props) => {
       <meta name="description" content={name} />
 
       <div>
-        <Swiper isRipple={false}>
+        <Slide isRipple={false}>
           {/* 星空背景组件 */}
           <Starry />
 
@@ -33,7 +33,7 @@ export default async (props: Props) => {
           <div className="absolute top-[40%] left-[50%] transform -translate-x-1/2 w-[80%] text-center text-white text-[20px] xs:text-[25px] sm:text-[30px] custom_text_shadow">
             <span>{name} ~ 共计{data?.total}篇文章</span>
           </div>
-        </Swiper>
+        </Slide>
 
         <div className="md:w-full lg:w-[900px] lg:mx-auto px-4 lg:p-0 my-5">
           <Classics data={data} />

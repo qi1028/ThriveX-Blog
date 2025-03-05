@@ -7,8 +7,8 @@ import { Footprint } from "@/types/app/footprint";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import dayjs from 'dayjs'
-import "./page.scss";
 import Masonry from "react-masonry-css";
+import "./page.scss";
 
 const breakpointColumnsObj = {
     default: 4,
@@ -20,7 +20,7 @@ export default function MapContainer() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [isDismissable, setIsDismissable] = useState(true); // 默认允许关闭
     const [list, setList] = useState<Footprint[]>([])
-
+    
     const getFootprintList = async () => {
         const { data } = (await getFootprintListAPI()) || { data: [] as Footprint[] }
         setList(data)
