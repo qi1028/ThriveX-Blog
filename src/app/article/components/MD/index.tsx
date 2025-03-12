@@ -38,7 +38,7 @@ const ContentMD = ({ data }: Props) => {
         let color = isDark ? "36, 41, 48" : "255, 255, 255";
 
         const waves = document.querySelectorAll<SVGUseElement>(".waves use");
-        if (waves) {
+        if (waves.length) {
             waves[0].style.fill = `rgba(${color}, 0.7)`;
             waves[1].style.fill = `rgba(${color}, 0.5)`;
             waves[2].style.fill = `rgba(${color}, 0.3)`;
