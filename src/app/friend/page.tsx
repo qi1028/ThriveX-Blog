@@ -81,14 +81,16 @@ export default async () => {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                                     {
                                         type === "全站置顶" &&
-                                        <div className="flex items-center p-3 border group-hover:border-2 dark:border-[#3d4653] group-hover:!border-primary group-hover:shadow-[0_10px_20px_1px_rgb(83,157,253,.1)] rounded-md transition-colors">
-                                            <img src="https://q1.qlogo.cn/g?b=qq&nk=3311118881&s=640" alt="项目作者" className="w-14 h-14 mr-4 rounded-full" />
+                                        <Link href="https://liuyuyang.net" target="_blank" className="group">
+                                            <div className="flex items-center p-3 border group-hover:border-2 dark:border-[#3d4653] group-hover:!border-primary group-hover:shadow-[0_10px_20px_1px_rgb(83,157,253,.1)] rounded-md transition-colors">
+                                                <img src="https://q1.qlogo.cn/g?b=qq&nk=3311118881&s=640" alt="项目作者" className="w-14 h-14 mr-4 rounded-full" />
 
-                                            <div className="flex flex-col space-y-2">
-                                                <h4 className="text-sm text-gray-700 dark:text-white group-hover:text-primary">宇阳</h4>
-                                                <p className="text-xs text-[#8c9ab1] line-clamp-2">再渺小的星光，也有属于它的光芒！</p>
+                                                <div className="flex flex-col space-y-2">
+                                                    <h4 className="text-sm text-gray-700 dark:text-white group-hover:text-primary">宇阳</h4>
+                                                    <p className="text-xs text-[#8c9ab1] line-clamp-2">ThriveX 博客管理系统作者</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     }
 
                                     {
