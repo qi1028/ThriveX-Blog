@@ -3,7 +3,7 @@ import { Wall, Cate } from "@/types/app/wall";
 
 // 新增留言
 export const addWallDataAPI = async (data: Wall) => {
-    return await Request<string>("POST", `/wall`, data);
+    return await Request("POST", `/wall`, data);
 }
 
 // 获取留言列表

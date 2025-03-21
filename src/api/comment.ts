@@ -3,7 +3,7 @@ import { Comment } from "@/types/app/comment";
 
 // 新增评论
 export const addCommentDataAPI = async (data: Comment) => {
-    return await Request<string>("POST", `/comment`, data);
+    return await Request("POST", `/comment`, data);
 }
 
 // 获取评论列表

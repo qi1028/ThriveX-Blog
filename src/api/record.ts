@@ -2,7 +2,7 @@ import Request from '@/utils/request'
 import { Record } from '@/types/app/record'
 
 // 新增说说
-export const addRecordDataAPI = (data: Record) => Request<Record>("POST", "/record", { data })
+export const addRecordDataAPI = (data: Record) => Request("POST", "/record", { data })
 
 // 删除说说
 export const delRecordDataAPI = (id: number) => Request<Record>("DELETE", `/record/${id}`)
