@@ -26,6 +26,10 @@
                 // padding-left: 50px;
                 border-radius: 10px;
                 font-weight: 400;
+                padding: 1rem !important;
+
+                background: #1e1e1e !important;
+                color: #dcdcdc !important;
 
                 @include scrollbar-style(rgba(255, 255, 255, 0.3));
             }
