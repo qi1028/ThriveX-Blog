@@ -8,6 +8,7 @@ import directory from '@/assets/svg/other/directory.svg';
 import "./index.scss";
 
 interface NavItem {
+    name: string;
     href: string;
     start: number;
     end?: number;
@@ -26,8 +27,8 @@ const ContentNav = () => {
         setTimeout(() => {
             const list = document.querySelectorAll(".content h1, .content h2, .content h3");
 
-            list?.forEach((nav) => {
-                nav.setAttribute("id", nav.textContent!);
+            list?.forEach((nav,index) => {
+                nav.setAttribute("id", nav.textContent! + index);
 
                 switch (nav.tagName) {
                     case "H1":
@@ -50,17 +51,21 @@ const ContentNav = () => {
 
             // 设置起始距离和结束距离
             const titlesList: NavItem[] = titles?.map((title, index) => ({
-                href: title.href,
+                name: title.href,
+                href: title.href + index,
                 start: title.top,
                 end: index < titles.length - 1 ? titles[index + 1].top : Infinity,
                 className: title.className
             }));
+
+            console.log(titlesList, 333);
 
             setNavs(titlesList);
 
             // 页面滚动到指定位置高亮导航项
             const handleScroll = () => {
                 const scrollPosition = window.scrollY;
+                console.log(scrollPosition, 666);
                 const activeIndex = titlesList.findIndex(
                     (item) => scrollPosition >= item.start && scrollPosition < item.end!
                 );
@@ -106,7 +111,7 @@ const ContentNav = () => {
                             href={`#${item.href}`}
                             className={`nav_item overflow-hidden relative block p-1 pl-5 mb-[5px] hover:text-primary transition-all duration-700 ${active === index ? 'text-primary pl-[30px] rounded-[10px] text-[15px] dark:bg-[#313d4e99] before:!left-4' : ''} ${item.className}`}
                         >
-                            {item.href}
+                            {item.name}
                         </a>
                     ))}
                 </div>
