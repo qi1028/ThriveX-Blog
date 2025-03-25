@@ -90,7 +90,7 @@ const ContentNav = () => {
             const elementPosition = element.getBoundingClientRect().top + window.scrollY - OFFSET;
             window.scrollTo({
                 top: elementPosition,
-                behavior: 'smooth'
+                behavior: 'instant'  // 改为instant实现直接跳转，不使用平滑效果
             });
             setActive(index);
         }
