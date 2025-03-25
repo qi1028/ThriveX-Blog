@@ -15,66 +15,67 @@ interface NavItem {
 }
 
 // 定义距离视口顶部多少像素时高亮导航项
-const OFFSET = 100;
+// const OFFSET = 100;
 
 const ContentNav = () => {
     const [open, setOpen] = useState(false);
     const [navs, setNavs] = useState<NavItem[]>([]);
     const [active, setActive] = useState(0);
 
-    useEffect(() => {        
-        // 获取当前容器中所有的标题
-        const list = document.querySelectorAll(".content h1, .content h2, .content h3");
+    useEffect(() => {
+        setTimeout(() => {
+            const list = document.querySelectorAll(".content h1, .content h2, .content h3");
 
-        list?.forEach((nav) => {
-            nav.setAttribute("id", nav.textContent!);
+            list?.forEach((nav) => {
+                nav.setAttribute("id", nav.textContent!);
 
-            switch (nav.tagName) {
-                case "H1":
-                    nav.setAttribute("class", "h1");
-                    break;
-                case "H2":
-                    nav.setAttribute("class", "h2");
-                    break;
-                case "H3":
-                    nav.setAttribute("class", "h3");
-                    break;
-            }
-        });
+                switch (nav.tagName) {
+                    case "H1":
+                        nav.setAttribute("class", "h1");
+                        break;
+                    case "H2":
+                        nav.setAttribute("class", "h2");
+                        break;
+                    case "H3":
+                        nav.setAttribute("class", "h3");
+                        break;
+                }
+            });
 
-        // 给每个标题设置一个视口顶部的距离
-        const titles = Array.from(list)?.map(t => {
-            const top = t.getBoundingClientRect().top + window.scrollY;
-            return { href: t.textContent!, top, className: t.className };
-        });
+            // 给每个标题设置一个视口顶部的距离
+            const titles = Array.from(list)?.map(t => {
+                const top = t.getBoundingClientRect().top + window.scrollY;
+                return { href: t.textContent!, top, className: t.className };
+            });
 
-        // 设置起始距离和结束距离
-        const titlesList: NavItem[] = titles?.map((title, index) => ({
-            href: title.href,
-            start: title.top,
-            end: index < titles.length - 1 ? titles[index + 1].top : Infinity,
-            className: title.className
-        }));
+            // 设置起始距离和结束距离
+            const titlesList: NavItem[] = titles?.map((title, index) => ({
+                href: title.href,
+                start: title.top,
+                end: index < titles.length - 1 ? titles[index + 1].top : Infinity,
+                className: title.className
+            }));
 
-        setNavs(titlesList);
+            setNavs(titlesList);
 
-        // 页面滚动到指定位置高亮导航项
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY + OFFSET;
-            const activeIndex = titlesList.findIndex(
-                (item) => scrollPosition >= item.start && scrollPosition < item.end!
-            );
+            // 页面滚动到指定位置高亮导航项
+            const handleScroll = () => {
+                const scrollPosition = window.scrollY;
+                const activeIndex = titlesList.findIndex(
+                    (item) => scrollPosition >= item.start && scrollPosition < item.end!
+                );
 
-            if (activeIndex !== -1) {
-                setActive(activeIndex);
-            }
-        };
+                if (activeIndex !== -1) {
+                    setActive(activeIndex);
+                }
+            };
 
-        window.addEventListener("scroll", handleScroll);
+            window.addEventListener("scroll", handleScroll);
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
+            return () => {
+                window.removeEventListener("scroll", handleScroll);
+            };
+        }, 0);
     }, []);
 
     return (
