@@ -16,7 +16,7 @@ interface NavItem {
 }
 
 // 定义距离视口顶部多少像素时高亮导航项
-// const OFFSET = 100;
+const OFFSET = 85;
 
 const ContentNav = () => {
     const [open, setOpen] = useState(false);
@@ -53,19 +53,16 @@ const ContentNav = () => {
             const titlesList: NavItem[] = titles?.map((title, index) => ({
                 name: title.href,
                 href: title.href + index,
-                start: title.top,
-                end: index < titles.length - 1 ? titles[index + 1].top : Infinity,
+                start: title.top - OFFSET, // 减去偏移量
+                end: index < titles.length - 1 ? titles[index + 1].top - OFFSET : Infinity,
                 className: title.className
             }));
-
-            console.log(titlesList, 333);
 
             setNavs(titlesList);
 
             // 页面滚动到指定位置高亮导航项
-            const handleScroll = () => {
+            const onHandleScroll = () => {
                 const scrollPosition = window.scrollY;
-                console.log(scrollPosition, 666);
                 const activeIndex = titlesList.findIndex(
                     (item) => scrollPosition >= item.start && scrollPosition < item.end!
                 );
@@ -75,13 +72,29 @@ const ContentNav = () => {
                 }
             };
 
-            window.addEventListener("scroll", handleScroll);
+            // 初始化时执行一次，设置初始高亮状态
+            onHandleScroll();
+
+            window.addEventListener("scroll", onHandleScroll);
 
             return () => {
-                window.removeEventListener("scroll", handleScroll);
+                window.removeEventListener("scroll", onHandleScroll);
             };
         }, 0);
     }, []);
+
+    // 添加点击处理函数
+    const onHandleToNavItem = (index: number, href: string) => {
+        const element = document.getElementById(href);
+        if (element) {
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY - OFFSET;
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+            setActive(index);
+        }
+    };
 
     return (
         <>
@@ -109,6 +122,10 @@ const ContentNav = () => {
                         <a
                             key={index}
                             href={`#${item.href}`}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onHandleToNavItem(index, item.href);
+                            }}
                             className={`nav_item overflow-hidden relative block p-1 pl-5 mb-[5px] hover:text-primary transition-all duration-700 ${active === index ? 'text-primary pl-[30px] rounded-[10px] text-[15px] dark:bg-[#313d4e99] before:!left-4' : ''} ${item.className}`}
                         >
                             {item.name}
