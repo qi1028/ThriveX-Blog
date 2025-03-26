@@ -157,7 +157,7 @@ const list = [
 export default () => {
     return (
         <>
-            <title>工欲善其事必先利其器</title>
+            <title>我的设备 - 工欲善其事必先利其器</title>
             <meta name="description" content="分享我的生产力工具" />
 
             <div className="pt-20 pb-10">
@@ -169,15 +169,15 @@ export default () => {
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 {group.items.map((item, idx) => (
-                                    <div key={idx} className="overflow-hidden border rounded-lg bg-white dark:bg-black-a">
+                                    <div key={idx} className="group overflow-hidden border rounded-lg bg-white dark:bg-black-a transform transition-transform hover:scale-105 cursor-pointer">
                                         <div className="flex justify-center h-40" style={{ backgroundColor: item.color }}>
                                             <img src={item.image} alt={item.name} className="h-full object-cover" />
                                         </div>
 
                                         <div className="p-4">
-                                            <h3>{item.name}</h3>
-                                            <p className="text-gray-500 text-sm pt-2 pb-4">{item.description}</p>
-                                            <span className="mt-2 py-1 px-1.5 rounded-md text-primary bg-gray-100">{item.price}</span>
+                                            <h3 className="group-hover:text-primary transition-colors">{item.name}</h3>
+                                            <p className="text-gray-500 text-sm pt-2 mb-4 line-clamp-2">{item.description}</p>
+                                            <span className="mt-2 py-1 px-1.5 rounded-md text-white bg-gray-300 group-hover:bg-primary transition-colors">￥{item.price}</span>
                                         </div>
                                     </div>
                                 ))}
