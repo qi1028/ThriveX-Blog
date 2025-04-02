@@ -21,7 +21,7 @@ import { Theme, Web } from '@/types/app/project';
 
 const Header = () => {
     // 是否暗黑模式
-    const { isDark, setIsDark, web, setWeb, theme, setTheme } = useConfigStore()
+    const { isDark, setIsDark, setWeb, theme, setTheme } = useConfigStore()
 
     // 获取项目配置
     const getConfigData = async () => {
