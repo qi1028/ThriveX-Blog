@@ -133,13 +133,12 @@ const Header = () => {
                             )
                         ))}
 
-                        {/* 扩展页面 */}
                         <li className="group/one relative">
                             <Link
                                 href=""
                                 className={`flex items-center p-5 text-[15px] group-hover/one:!text-primary transition-colors ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}
                             >
-                                🧩 扩展页面
+                                🧩 探索
                                 <Show is={true} children={(
                                     <IoIosArrowDown className="ml-2" />
                                 )} />
