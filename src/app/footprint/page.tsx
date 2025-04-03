@@ -75,9 +75,22 @@ export default function MapContainer() {
                             position: data?.position.split(","),
                             map: map,
                             content: `
-                            <div style="display: flex; justify-content: center; align-items: center; background-color: #fff; width: 30px; height: 30px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 30px 1px rgba(255, 255, 255, 0.7);">
+                            <div style="display: flex; justify-content: center; align-items: center; background-color: #fff; width: 30px; height: 30px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4); animation: pulse 2s infinite;">
                                 <img src="${data?.images[0]}" alt="" style="width: 90%; height: 90%; border-radius: 50%;">
                             </div>
+                            <style>
+                                @keyframes pulse {
+                                    0% {
+                                        box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
+                                    }
+                                    50% {
+                                        box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
+                                    }
+                                    100% {
+                                        box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
+                                    }
+                                }
+                            </style>
                             `
                         });
 
