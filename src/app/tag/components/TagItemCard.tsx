@@ -1,12 +1,13 @@
 'use client';
 
 import React from 'react';
-import { LiaTagsSolid } from "react-icons/lia";
 import Link from 'next/link';
+import { LiaTagsSolid } from "react-icons/lia";
+import { Tag } from '@/types/app/tag';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 
-const TagItemCard = ({ name, count, index }: { name: string, count: number, index: number }) => {
+const TagItemCard = ({ data, count, index }: { data: Tag, count: number, index: number }) => {
   const colors = ['bg-blue-400', 'bg-green-400', 'bg-yellow-400', 'bg-red-400', 'bg-indigo-400', 'bg-purple-400', 'bg-pink-400'];
   const color = colors[index % colors.length];
 
@@ -20,7 +21,7 @@ const TagItemCard = ({ name, count, index }: { name: string, count: number, inde
         transition: { duration: 0.2 },
       }}
     >
-      <Link href={`/tags/${name}`} className={clsx('flex h-10 bg-opacity-20 backdrop-blur', color)} style={{
+      <Link href={`/tags/${data?.id}`} className={clsx('flex h-10 bg-opacity-20 backdrop-blur', color)} style={{
         borderRadius: '0.5rem',
         backdropFilter: 'blur(10px)',
         margin: '0.5rem',
@@ -28,7 +29,7 @@ const TagItemCard = ({ name, count, index }: { name: string, count: number, inde
         alignItems: 'center',
       }}>
         <LiaTagsSolid className="h-4 w-4 text-gray-400" aria-hidden="true" />
-        <span className="ml-2">{name}</span>
+        <span className="ml-2">{data?.name}</span>
         <span className="ml-4 text-sm text-gray-400 dark:text-gray-500">{count}</span>
       </Link>
     </motion.div>

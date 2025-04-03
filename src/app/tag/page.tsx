@@ -12,7 +12,7 @@ export default async () => {
       
       <div className="relative z-20 flex flex-wrap justify-center w-11/12 mx-auto py-10 px-0 sm:px-10">
         {data.map((tag, index) => (
-          <TagItemCard name={tag.name} count={tag.count || 0} index={index} key={tag.id} />
+          <TagItemCard data={tag} count={tag.count || 0} index={index} key={tag.id} />
         ))}
       </div>
 
