@@ -97,7 +97,7 @@ export default function MapContainer() {
                         // 点击标记时，显示信息窗体并定位到该位置
                         marker.on("click", () => {
                             const content = `
-                                <div style="border-radius: 12px; overflow: hidden; width: 240px;">
+                                <div style="border-radius: 12px; overflow: hidden; width: 240px; margin-top: 25px; margin-left: 20px;">
                                     <div style="position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; border-radius: 12px;">
                                         <img src="${data?.images[0]}" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                                         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); padding: 20px; display: flex; flex-direction: column;">
