@@ -64,6 +64,11 @@ export default function MapContainer() {
                         isCustom: true, // 使用自定义窗体
                     });
 
+                    // 点击地图任意位置时关闭信息窗体
+                    map.on("click", () => {
+                        infoWindow.close();
+                    });
+
                     // 遍历 locations 数组，创建标记
                     list?.forEach((data) => {
                         const marker = new AMap.Marker({
@@ -76,19 +81,14 @@ export default function MapContainer() {
                             `
                         });
 
-                        // 点击标记时，显示信息窗体
+                        // 点击标记时，显示信息窗体并定位到该位置
                         marker.on("click", () => {
                             const content = `
-                                <div style="border-radius: 12px; overflow: hidden; width: 300px;">
+                                <div style="border-radius: 12px; overflow: hidden; width: 240px;">
                                     <div style="position: relative; width: 100%; padding-bottom: 100%; overflow: hidden; border-radius: 12px;">
                                         <img src="${data?.images[0]}" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                                         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); padding: 20px; display: flex; flex-direction: column;">
-                                            <div style="margin-bottom: 16px;">
-                                                <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                                                    <span style="background: rgba(255,255,255,0.2); color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 12px;">旅游</span>
-                                                </div>
-                                                <h2 style="color: white; margin: 0; font-size: 24px; font-weight: 600; margin-bottom: 12px;">${data?.title}</h2>
-                                            </div>
+                                            <h2 style="color: white; margin: 0; font-size: 24px; font-weight: 600; margin-bottom: 12px;">${data?.title}</h2>
 
                                             <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
                                                 <div style="display: flex; align-items: center; color: rgba(255,255,255,0.8); font-size: 13px;">
@@ -127,6 +127,9 @@ export default function MapContainer() {
                             infoWindow.setContent(content);
                             infoWindow.open(map, marker.getPosition());
                             setData(data);
+                            // 设置地图中心点和缩放级别
+                            map.setCenter(marker.getPosition());
+                            map.setZoom(15);
                         });
                     });
 
@@ -141,11 +144,6 @@ export default function MapContainer() {
                                 onOpen();
                             }
                         }
-                    });
-
-                    // 点击地图任意位置时关闭信息窗体
-                    map.on("click", () => {
-                        infoWindow.close();
                     });
                 })
                 .catch((e) => {
@@ -190,7 +188,7 @@ export default function MapContainer() {
                                             <p>地址：{data?.address}</p>
                                         </div>
                                     </div>
-                                    
+
                                     <div className={`overflow-auto flex justify-center w-full ${data?.images.length !== 1 ? 'max-h-96' : ''} mb-5 hide_sliding`}>
                                         <PhotoProvider
                                             speed={() => 800}
