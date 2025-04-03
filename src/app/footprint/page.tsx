@@ -20,7 +20,7 @@ export default function MapContainer() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [isDismissable, setIsDismissable] = useState(true); // 默认允许关闭
     const [list, setList] = useState<Footprint[]>([])
-    
+
     const getFootprintList = async () => {
         const { data } = (await getFootprintListAPI()) || { data: [] as Footprint[] }
         setList(data)
@@ -59,9 +59,16 @@ export default function MapContainer() {
 
                     // 遍历 locations 数组，创建标记
                     list?.forEach((data) => {
+                        console.log(data);
+
                         const marker = new AMap.Marker({
                             position: data?.position.split(","), // 标记位置
                             map: map, // 将标记添加到地图
+                            content: `
+                            <div style="display: flex; justify-content: center; align-items: center; background-color: #fff; width: 30px; height: 30px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 30px 1px rgba(255, 255, 255, 0.7);">
+                                <img src="${data?.images[0]}" alt="" style="width: 90%; height: 90%; border-radius: 50%;">
+                            </div>
+                            `
                         });
 
                         // 点击标记时，设置选中的位置，并打开 Modal
