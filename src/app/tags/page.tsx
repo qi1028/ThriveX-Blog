@@ -1,6 +1,6 @@
 import { getTagListWithArticleCountAPI } from "@/api/tag"
 import { Tag } from "@/types/app/tag"
-import TagCloudBackground from "@/app/tag/components/TagCloudBackground"
+import TagCloudBackground from "@/app/tags/components/TagCloudBackground"
 import TagItemCard from "./components/TagItemCard"
 
 export default async () => {
