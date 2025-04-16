@@ -6,6 +6,7 @@ import { BiChevronRight } from "react-icons/bi";
 import { BiChevronLeft } from "react-icons/bi";
 import { Swiper as SwiperType } from "@/types/app/swiper";
 import { getSwiperListAPI } from "@/api/swiper";
+
 export default ({ data, className }: { data: SwiperType[], className?: string }) => {
     const [current, setCurrent] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
