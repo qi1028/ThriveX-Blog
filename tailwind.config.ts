@@ -31,7 +31,7 @@ const config: Config = {
           background: "#232931",
         },
       },
-    },
+    }
   })]
 };
 export default config;

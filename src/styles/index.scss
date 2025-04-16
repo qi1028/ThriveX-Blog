@@ -132,10 +132,18 @@ body {
 //     background-image: linear-gradient(180deg, #edf6ff 0%, rgb(255, 255, 255) 100%);
 // }
 
-#root {
-    transition-duration: 0s !important;
+// #root {
+//     transition-duration: 0s !important;
 
-    * {
-        transition-duration: 0s !important;
-    }
-}
+//     * {
+//         transition-duration: 0s !important;
+//     }
+
+//     *::after {
+//         transition-duration: 0s !important;
+//     }
+
+//     *::before {
+//         transition-duration: 0s !important;
+//     }
+// }

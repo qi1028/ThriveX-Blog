@@ -60,7 +60,7 @@ export default ({ data, className }: { data: SwiperType[], className?: string })
                 </div>
 
                 {data?.map((item, index) => (
-                    <div key={index} className={`absolute top-0 left-0 w-full h-full ${index === current ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+                    <div key={index} className={`absolute top-0 left-0 w-full h-full ${index === current ? 'opacity-100' : 'opacity-0'} transition-opacity`}>
                         <img key={index} src={item.image} alt={item.title} className="w-full h-full object-cover" />
 
                         <div className="flex flex-col absolute bottom-7 left-5 z-10 gap-2 animation_bottom">
