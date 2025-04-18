@@ -173,7 +173,7 @@ export default () => {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth'
   }, [])
-
+  
   return (
     <>
       <title>刘宇阳 - 前端开发工程师</title>
