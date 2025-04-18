@@ -8,7 +8,6 @@ const nextConfig = {
             'res.liuyuyang.net',
             'q1.qlogo.cn',
             'bu.dusays.com',
-            'p3-flow-imagex-sign.byteimg.com'
         ],
     },
 };
