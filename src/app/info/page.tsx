@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub, FaPhone, FaEnvelope } from 'react-icons/fa'
+import { Metadata } from 'next'
 
 const personalInfo = {
   "personalInfo": {
@@ -165,7 +166,7 @@ const personalInfo = {
       "计算机软件著作权"
     ]
   }
-} 
+}
 
 export default () => {
   // 添加平滑滚动效果
@@ -174,260 +175,300 @@ export default () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 mt-[60px] px-4 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-8"
-      >
-        {/* 个人信息头部 */}
-        <div className="flex items-center space-x-8 mb-8">
+    <>
+      <title>刘宇阳 - 前端开发工程师</title>
+      <meta name="description" content="刘宇阳 - 前端开发工程师" />
+
+      <div className="min-h-screen py-12 mt-[60px] px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-10"
+        >
+          {/* 个人信息头部 */}
+          <div className="flex items-center space-x-8 mb-12">
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative w-48 h-48 rounded-full overflow-hidden group"
+            >
+              <img
+                src={personalInfo.personalInfo.avatar}
+                alt={personalInfo.personalInfo.name}
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+            </motion.div>
+
+            <div>
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">{personalInfo.personalInfo.name}</h1>
+              <h2 className="text-xl font-semibold text-gray-700 mb-6">{personalInfo.personalInfo.title} | {personalInfo.personalInfo.age} | {personalInfo.personalInfo.location}</h2>
+              <div className="flex flex-wrap gap-6 text-gray-600">
+                <a href={`tel:${personalInfo.personalInfo.contact.phone}`} className="flex items-center hover:text-blue-600 transition-colors font-medium">
+                  <FaPhone className="mr-2 text-blue-500" /> {personalInfo.personalInfo.contact.phone}
+                </a>
+                <a href={`mailto:${personalInfo.personalInfo.contact.email}`} className="flex items-center hover:text-blue-600 transition-colors font-medium">
+                  <FaEnvelope className="mr-2 text-blue-500" /> {personalInfo.personalInfo.contact.email}
+                </a>
+                <a href={personalInfo.personalInfo.contact.github} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-blue-600 transition-colors font-medium">
+                  <FaGithub className="mr-2 text-blue-500" /> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* 自我介绍 */}
           <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="relative w-48 h-48 rounded-full overflow-hidden group"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="mb-12"
           >
-            <img
-              src={personalInfo.personalInfo.avatar}
-              alt={personalInfo.personalInfo.name}
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-            />
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <span className="w-1 h-8 bg-blue-600 mr-3 rounded-full"></span>
+              个人优势
+            </h3>
+
+            <div className="flex">
+              <div className="text-gray-700 leading-relaxed space-y-3">
+                {personalInfo.advantages.map((advantage, index) => (
+                  <p key={index} className="text-base font-medium flex items-center">
+                    <span className="text-blue-500 text-3xl mr-2">•</span>
+                    <span>{advantage}</span>
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-3">
+              <p className="flex items-center">
+                <span className="text-gray-800 font-semibold mr-3">GitHub 社区地址：</span>
+                <a href={personalInfo.links.github} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium">
+                  {personalInfo.links.github}
+                </a>
+              </p>
+
+              <p className="flex items-center">
+                <span className="text-gray-800 font-semibold mr-3">CSDN 技术博客：</span>
+                <a href={personalInfo.links.csdn} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium">
+                  {personalInfo.links.csdn}
+                </a>
+              </p>
+
+              <p className="flex items-center">
+                <span className="text-gray-800 font-semibold mr-3">开源项目作品：</span>
+                <a href={personalInfo.links.project} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium">
+                  {personalInfo.links.project}
+                </a>
+              </p>
+            </div>
           </motion.div>
-          
-          <div>
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">{personalInfo.personalInfo.name}</h1>
-            <h2 className="text-xl text-gray-600 mb-4">{personalInfo.personalInfo.title} | {personalInfo.personalInfo.age} | {personalInfo.personalInfo.location}</h2>
-            <div className="flex flex-wrap gap-4 text-gray-600">
-              <a href={`tel:${personalInfo.personalInfo.contact.phone}`} className="flex items-center hover:text-blue-600 transition-colors">
-                <FaPhone className="mr-2" /> {personalInfo.personalInfo.contact.phone}
-              </a>
-              <a href={`mailto:${personalInfo.personalInfo.contact.email}`} className="flex items-center hover:text-blue-600 transition-colors">
-                <FaEnvelope className="mr-2" /> {personalInfo.personalInfo.contact.email}
-              </a>
-              <a href={personalInfo.personalInfo.contact.github} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-blue-600 transition-colors">
-                <FaGithub className="mr-2" /> GitHub
-              </a>
+
+          {/* 专业技能 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mb-12"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <span className="w-1 h-8 bg-blue-600 mr-3 rounded-full"></span>
+              专业技能
+            </h3>
+
+            <div className="space-y-4 text-gray-600">
+              <div className="flex flex-col space-y-2">
+                {personalInfo.skills.map((skill, index) => (
+                  <p key={index} className="text-base font-medium flex items-center">
+                    <span className="text-blue-500 text-3xl mr-2">•</span>
+                    <span>{skill}</span>
+                  </p>
+                ))}
+              </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
 
-        {/* 自我介绍 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="mb-12"
-        >
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4 mt-10">个人优势</h3>
-          <div className="flex">
-            <div className="w-1 bg-blue-500 mr-4"></div>
-            <div className="text-gray-600 leading-relaxed space-y-2">
-              {personalInfo.advantages.map((advantage, index) => (
-                <p key={index}>{advantage}</p>
-              ))}
-            </div>
-          </div>
+          {/* 工作经历 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mb-12"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <span className="w-1 h-8 bg-blue-600 mr-3 rounded-full"></span>
+              工作经历
+            </h3>
 
-          <p className="flex items-center mb-1 !mt-6">
-            <span className="text-gray-700 mr-2">GitHub 社区地址：</span>
-            <a href={personalInfo.links.github} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-              {personalInfo.links.github}
-            </a>
-          </p>
-
-          <p className="flex items-center mb-1">
-            <span className="text-gray-700 mr-2">CSDN 技术博客：</span>
-            <a href={personalInfo.links.csdn} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-              {personalInfo.links.csdn}
-            </a>
-          </p>
-
-          <p className="flex items-center mb-1">
-            <span className="text-gray-700 mr-2">开源项目作品：</span>
-            <a href={personalInfo.links.project} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-              {personalInfo.links.project}
-            </a>
-          </p>
-        </motion.div>
-
-        {/* 专业技能 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mb-12"
-        >
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4">专业技能</h3>
-          <div className="space-y-4 text-gray-600">
-            <div className="flex flex-col space-y-2">
-              {personalInfo.skills.map((skill, index) => (
-                <p key={index}>• {skill}</p>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 工作经历 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mb-12"
-        >
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4">工作经历</h3>
-          <div className="space-y-6">
-            {personalInfo.workExperience.map((job, index) => (
-              <div key={index}>
-                <div className='flex justify-between'>
-                  <h4 className="text-lg font-medium text-gray-700">{job.company}</h4>
-                  <p className="text-gray-600 text-sm">{job.period}</p>
+            <div className="space-y-4">
+              {personalInfo.workExperience.map((job, index) => (
+                <div key={index} className="group bg-gray-50 p-6 rounded-xl">
+                  <div className='flex justify-between items-center mb-3'>
+                    <h4 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{job.company}</h4>
+                    <p className="text-gray-600 font-medium">{job.period}</p>
+                  </div>
+                  <p className="text-gray-700 font-semibold mb-4">{job.position}</p>
+                  <ul className="list-disc list-inside text-gray-600 space-y-2">
+                    {job.responsibilities.map((responsibility, i) => (
+                      <li key={i} className="text-base">{responsibility}</li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="text-gray-600 text-sm">{job.position}</p>
-                <ul className="list-disc list-inside text-gray-500 mt-2">
-                  {job.responsibilities.map((responsibility, i) => (
-                    <li key={i}>{responsibility}</li>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* 项目经历 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="mb-12"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <span className="w-1 h-8 bg-blue-600 mr-3 rounded-full"></span>
+              项目经历
+            </h3>
+
+            <div className="space-y-8">
+              {personalInfo.projects.map((project, index) => (
+                <div key={index} className="group bg-gray-50 p-6 rounded-xl">
+                  <div className='flex justify-between items-center mb-3'>
+                    <h4 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{project.name}</h4>
+                    <p className="text-gray-600 font-medium">{project.period}</p>
+                  </div>
+                  <p className="text-gray-700 font-semibold mb-4">{project.role}</p>
+
+                  <div className="space-y-6">
+                    <div>
+                      <h5 className="font-bold text-gray-800 mb-3 text-base">项目描述：</h5>
+                      <div className="text-gray-600 text-base">
+                        {Array.isArray(project.description) ? project.description.map((desc, i) => (
+                          <div key={i} className="mb-2">{desc}</div>
+                        )) : project.description}
+                      </div>
+                    </div>
+
+                    {project.techStack && (
+                      <div>
+                        <h5 className="font-bold text-gray-800 mb-3 text-base">技术栈：</h5>
+                        <div className="text-gray-600 text-base">
+                          {typeof project.techStack === 'string' ? project.techStack : (
+                            <>
+                              <div className="mb-2">• 前端技术栈：{project.techStack.frontend}</div>
+                              <div className="mb-2">• 后端技术栈：{project.techStack.backend}</div>
+                              <div>• 项目部署：{project.techStack.deployment}</div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {project.highlights && (
+                      <div>
+                        <h5 className="font-bold text-gray-800 mb-3 text-base">项目亮点：</h5>
+                        <div className="space-y-2 text-gray-600 text-base">
+                          {project.highlights.map((highlight, i) => (
+                            <div key={i}>• {highlight}</div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {project.links && (
+                      <div>
+                        <h5 className="font-bold text-gray-800 mb-3 text-base">项目地址：</h5>
+                        <div className="space-y-2 text-gray-600 text-base">
+                          {Object.entries(project.links).map(([key, value]) => (
+                            <div key={key}>• {key === 'preview' ? '项目预览' : key === 'website' ? '项目官网' : key === 'docs' ? '项目文档' : key === 'api' ? '项目接口' : key === 'dashboard' ? '项目后台' : key}：
+                              <a href={value} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium ml-2">
+                                {value}
+                              </a>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {project.repositories && (
+                      <div>
+                        <h5 className="font-bold text-gray-800 mb-3 text-base">项目仓库：</h5>
+                        <div className="space-y-2 text-gray-600 text-base">
+                          {Object.entries(project.repositories).map(([key, value]) => (
+                            <div key={key}>• {key === 'frontend' ? '前端' : key === 'admin' ? '控制端' : '后端'}：
+                              <a href={value} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 font-medium ml-2">
+                                {value}
+                              </a>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {project.achievements && (
+                      <div>
+                        <h5 className="font-bold text-gray-800 mb-3 text-base">业绩：</h5>
+                        <div className="space-y-2 text-gray-600 text-base">
+                          {Array.isArray(project.achievements) ? project.achievements.map((achievement, i) => (
+                            <div key={i}>• {achievement}</div>
+                          )) : <div>• {project.achievements}</div>}
+                        </div>
+                      </div>
+                    )}
+
+                    {project.challenges && (
+                      <div>
+                        <h5 className="font-bold text-gray-800 mb-3 text-base">项目难点：</h5>
+                        <div className="text-gray-600 text-base">{project.challenges}</div>
+                      </div>
+                    )}
+
+                    {project.responsibilities && (
+                      <div>
+                        <h5 className="font-bold text-gray-800 mb-3 text-base">主要工作：</h5>
+                        <div className="space-y-2 text-gray-600 text-base">
+                          {project.responsibilities.map((responsibility, i) => (
+                            <div key={i}>• {responsibility}</div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* 教育背景 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="mb-12"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+              <span className="w-1 h-8 bg-blue-600 mr-3 rounded-full"></span>
+              教育背景
+            </h3>
+
+            <div className="group bg-gray-50 p-6 rounded-xl">
+              <div>
+                <div className='flex justify-between items-center mb-3'>
+                  <h4 className="text-lg font-bold text-gray-800 group-hover:!text-blue-600 transition-colors">{personalInfo.education.school}</h4>
+                  <p className="text-gray-600 font-medium">{personalInfo.education.major} | {personalInfo.education.degree} | {personalInfo.education.period}</p>
+                </div>
+
+                <ul className="list-disc list-inside text-gray-600 space-y-2 text-base">
+                  {personalInfo.education.achievements.map((achievement, index) => (
+                    <li key={index}>{achievement}</li>
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 项目经历 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="mb-12"
-        >
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4">项目经历</h3>
-          <div className="space-y-6">
-            {personalInfo.projects.map((project, index) => (
-              <div key={index}>
-                <div className='flex justify-between'>
-                  <h4 className="text-lg font-medium text-gray-700">{project.name}</h4>
-                  <p className="text-gray-600 text-sm">{project.period}</p>
-                </div>
-                <p className="text-gray-600 text-sm mb-2">{project.role}</p>
-                
-                <div className="space-y-4">
-                  <div>
-                    <h5 className="font-medium text-gray-700 mb-2">项目描述：</h5>
-                    <div className="text-gray-600">
-                      {Array.isArray(project.description) ? project.description.map((desc, i) => (
-                        <div key={i} className="mb-2">{desc}</div>
-                      )) : project.description}
-                    </div>
-                  </div>
-
-                  {project.techStack && (
-                    <div>
-                      <h5 className="font-medium text-gray-700 mb-2">技术栈：</h5>
-                      <div className="text-gray-600">
-                        {typeof project.techStack === 'string' ? project.techStack : (
-                          <>
-                            <div>• 前端技术栈：{project.techStack.frontend}</div>
-                            <div>• 后端技术栈：{project.techStack.backend}</div>
-                            <div>• 项目部署：{project.techStack.deployment}</div>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {project.highlights && (
-                    <div>
-                      <h5 className="font-medium text-gray-700 mb-2">项目亮点：</h5>
-                      <div className="space-y-2 text-gray-600">
-                        {project.highlights.map((highlight, i) => (
-                          <div key={i}>• {highlight}</div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {project.links && (
-                    <div>
-                      <h5 className="font-medium text-gray-700 mb-2">项目地址：</h5>
-                      <div className="space-y-1 text-gray-600">
-                        {Object.entries(project.links).map(([key, value]) => (
-                          <div key={key}>• {key === 'preview' ? '项目预览' : key === 'website' ? '项目官网' : key === 'docs' ? '项目文档' : key === 'api' ? '项目接口' : key === 'dashboard' ? '项目后台' : key}：<a href={value} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">{value}</a></div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {project.repositories && (
-                    <div>
-                      <h5 className="font-medium text-gray-700 mb-2">项目仓库：</h5>
-                      <div className="space-y-1 text-gray-600">
-                        {Object.entries(project.repositories).map(([key, value]) => (
-                          <div key={key}>• {key === 'frontend' ? '前端' : key === 'admin' ? '控制端' : '后端'}：<a href={value} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">{value}</a></div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {project.achievements && (
-                    <div>
-                      <h5 className="font-medium text-gray-700 mb-2">业绩：</h5>
-                      <div className="space-y-1 text-gray-600">
-                        {Array.isArray(project.achievements) ? project.achievements.map((achievement, i) => (
-                          <div key={i}>• {achievement}</div>
-                        )) : <div>• {project.achievements}</div>}
-                      </div>
-                    </div>
-                  )}
-
-                  {project.challenges && (
-                    <div>
-                      <h5 className="font-medium text-gray-700 mb-2">项目难点：</h5>
-                      <div className="text-gray-600">{project.challenges}</div>
-                    </div>
-                  )}
-
-                  {project.responsibilities && (
-                    <div>
-                      <h5 className="font-medium text-gray-700 mb-2">主要工作：</h5>
-                      <div className="space-y-2 text-gray-600">
-                        {project.responsibilities.map((responsibility, i) => (
-                          <div key={i}>• {responsibility}</div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 教育背景 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mb-12"
-        >
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4">教育背景</h3>
-          <div className="space-y-4">
-            <div>
-              <div className='flex justify-between'>
-                <h4 className="text-lg font-medium text-gray-700">{personalInfo.education.school}</h4>
-                <p className="text-gray-600 text-sm">{personalInfo.education.major} | {personalInfo.education.degree} | {personalInfo.education.period}</p>
-              </div>
-
-              <ul className="list-disc list-inside text-gray-500 mt-2">
-                {personalInfo.education.achievements.map((achievement, index) => (
-                  <li key={index}>{achievement}</li>
-                ))}
-              </ul>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </div>
+      </div>
+    </>
   )
 }
