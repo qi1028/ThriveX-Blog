@@ -7,7 +7,8 @@ const nextConfig = {
         domains: [
             'res.liuyuyang.net',
             'q1.qlogo.cn',
-            'bu.dusays.com'
+            'bu.dusays.com',
+            'p3-flow-imagex-sign.byteimg.com'
         ],
     },
 };
