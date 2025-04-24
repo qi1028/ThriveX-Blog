@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5'
 import { BsCalendar } from 'react-icons/bs'
@@ -24,18 +24,48 @@ export default function AlbumPage() {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState<number | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(false)
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  const getImagesByAlbumId = async () => {
+  const getImagesByAlbumId = async (page: number = 1, isLoadMore: boolean = false) => {
     try {
-      const response = await getImagesByAlbumIdAPI(+id!)
+      setLoading(true)
+      const response = await getImagesByAlbumIdAPI(+id!, page)
       if (!response) return
 
       const { data } = response
-      setList(data.result)
+      if (isLoadMore) {
+        setList(prev => [...prev, ...data.result])
+      } else {
+        setList(data.result)
+      }
+      
+      setHasMore(data.result.length === 10)
     } catch (error) {
       console.error('Failed to fetch images:', error)
+    } finally {
+      setLoading(false)
     }
   }
+
+  const handleScroll = useCallback(() => {
+    if (loading || !hasMore) return
+
+    const scrollHeight = document.documentElement.scrollHeight
+    const scrollTop = document.documentElement.scrollTop
+    const clientHeight = document.documentElement.clientHeight
+
+    if (scrollHeight - scrollTop - clientHeight < 300) {
+      setPage(prev => prev + 1)
+      getImagesByAlbumId(page + 1, true)
+    }
+  }, [loading, hasMore, page])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
 
   useEffect(() => {
     getImagesByAlbumId()
@@ -77,38 +107,48 @@ export default function AlbumPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 pt-[90px]">
-      {/* 瀑布流布局 */}
-      <div className="max-h-[calc(100vh-180px)]">
+      {/* 移除最大高度限制 */}
+      <div className="w-full">
         {list.length === 0 ? (
           <Empty info="暂无照片" />
         ) : (
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="masonry-grid mb-12"
-            columnClassName="masonry-grid_column"
-          >
-            {list?.map((photo, index) => (
-              <motion.div
-                key={photo.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative group overflow-hidden rounded-lg shadow-lg mb-6"
-                onClick={() => openPhoto(index)}
-              >
-                <div className="w-full cursor-pointer">
-                  <img
-                    src={photo.image || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=100"}
-                    alt={photo.name}
-                    className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                  <h3 className="text-white font-medium text-lg">{photo.name}</h3>
-                </div>
-              </motion.div>
-            ))}
-          </Masonry>
+          <>
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="masonry-grid"
+              columnClassName="masonry-grid_column"
+            >
+              {list?.map((photo, index) => (
+                <motion.div
+                  key={photo.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative group overflow-hidden rounded-lg shadow-lg mb-6"
+                  onClick={() => openPhoto(index)}
+                >
+                  <div className="w-full cursor-pointer">
+                    <img
+                      src={photo.image || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=100"}
+                      alt={photo.name}
+                      className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h3 className="text-white font-medium text-lg">{photo.name}</h3>
+                  </div>
+                </motion.div>
+              ))}
+            </Masonry>
+            {loading && (
+              <div className="flex justify-center items-center py-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
+              </div>
+            )}
+            {!hasMore && list.length > 0 && (
+              <div className="text-center text-gray-500 py-4">没有更多照片了</div>
+            )}
+          </>
         )}
       </div>
 
