@@ -10,6 +10,7 @@ import { getImagesByAlbumIdAPI } from '@/api/album'
 import Masonry from "react-masonry-css"
 import Empty from '@/components/Empty'
 import "./page.scss"
+import dayjs from 'dayjs'
 
 const breakpointColumnsObj = {
   default: 4,
@@ -223,12 +224,14 @@ export default function AlbumPage() {
                       <h3 className="text-white text-2xl font-medium mb-2">
                         {list[currentPhotoIndex].name}
                       </h3>
+
                       <p className="text-white/50 leading-relaxed mb-3">
                         {list[currentPhotoIndex].description}
                       </p>
+
                       <div className="flex items-center space-x-2 text-gray-400">
                         <BsCalendar className="w-4 h-4 text-gray-400" />
-                        <p className="text-sm">{new Date().toLocaleDateString('zh-CN')}</p>
+                        <p className="text-sm">{dayjs(+list[currentPhotoIndex].createTime).format('YYYY-MM-DD HH:mm')}</p>
                       </div>
                     </motion.div>
                   </div>
