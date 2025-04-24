@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5'
 import { BsCalendar } from 'react-icons/bs'
@@ -21,53 +21,25 @@ export default function AlbumPage() {
   const { id } = useParams()
 
   const [list, setList] = useState<Photo[]>([])
-  const [page, setPage] = useState(1)
-  const [hasMore, setHasMore] = useState(true)
-  const [loading, setLoading] = useState(false)
-  const loadingRef = useRef(false)
-
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState<number | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [isImageLoading, setIsImageLoading] = useState(false)
 
-  const getImagesByAlbumId = async (isLoadMore = false) => {
-    if (loadingRef.current) return
+  const getImagesByAlbumId = async () => {
     try {
-      loadingRef.current = true
-      setLoading(true)
-
-      const response = await getImagesByAlbumIdAPI(+id!, isLoadMore ? page + 1 : 1)
+      const response = await getImagesByAlbumIdAPI(+id!)
       if (!response) return
 
       const { data } = response
-
-      if (!isLoadMore) {
-        setList(data.result)
-        setPage(1)
-      } else {
-        setList(prev => [...prev, ...data.result])
-        setPage(prev => prev + 1)
-      }
-
-      setHasMore(data.result.length === 10)
-      setLoading(false)
-      loadingRef.current = false
+      setList(data.result)
     } catch (error) {
-      setLoading(false)
-      loadingRef.current = false
+      console.error('Failed to fetch images:', error)
     }
   }
 
   useEffect(() => {
     getImagesByAlbumId()
   }, [])
-
-  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget
-    if (scrollHeight - scrollTop - clientHeight < 50 && hasMore && !loading) {
-      getImagesByAlbumId(true)
-    }
-  }
 
   const openPhoto = async (index: number) => {
     setCurrentPhotoIndex(index)
@@ -106,11 +78,8 @@ export default function AlbumPage() {
   return (
     <div className="container mx-auto px-4 py-8 pt-[90px]">
       {/* 瀑布流布局 */}
-      <div
-        className="max-h-[calc(100vh-180px)]"
-        onScroll={handleScroll}
-      >
-        {list.length === 0 && !loading ? (
+      <div className="max-h-[calc(100vh-180px)]">
+        {list.length === 0 ? (
           <Empty info="暂无照片" />
         ) : (
           <Masonry
@@ -140,12 +109,6 @@ export default function AlbumPage() {
               </motion.div>
             ))}
           </Masonry>
-        )}
-
-        {loading && (
-          <div className="flex justify-center items-center py-4">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
-          </div>
         )}
       </div>
 
