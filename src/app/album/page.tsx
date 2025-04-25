@@ -28,8 +28,8 @@ export default function AlbumPage() {
     getAlbumCatePaging()
   }, [])
 
-  const handleClick = (id: number) => {
-    router.push(`/album/${id}`)
+  const handleClick = (data: Cate) => {
+    router.push(`/album/${data.id}?name=${data.name}`)
   }
 
   return (
@@ -53,7 +53,7 @@ export default function AlbumPage() {
             >
               <div
                 className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer"
-                onClick={() => handleClick(cate.id!)}
+                onClick={() => handleClick(cate)}
               >
                 {/* 图片容器 */}
                 <div className="aspect-w-1 aspect-h-1 w-full">

@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5'
 import { BsCalendar } from 'react-icons/bs'
 import { Photo } from '@/types/app/album'
-import { useParams } from 'next/navigation'
 import { getImagesByAlbumIdAPI } from '@/api/album'
 import Masonry from "react-masonry-css"
 import Empty from '@/components/Empty'
@@ -18,8 +17,16 @@ const breakpointColumnsObj = {
   700: 2
 };
 
-export default function AlbumPage() {
-  const { id } = useParams()
+interface Props {
+  params: Promise<{ id: number }>;
+  searchParams: Promise<{ page: number; name: string }>;
+};
+
+export default async (props: Props) => {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
+  const id = params.id;
+  const name = searchParams.name;
 
   const [list, setList] = useState<Photo[]>([])
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState<number | null>(null)
@@ -108,13 +115,13 @@ export default function AlbumPage() {
 
   return (
     <>
-      <title>📷 照片墙</title>
-      <meta name="description" content="📷 照片墙" />
+      <title>{`📷 ${name} - 照片墙`}</title>
+      <meta name="description" content={`📷 ${name} - 照片墙`} />
 
       <div className="container mx-auto px-4 py-8 pt-[90px]">
         {/* 移除最大高度限制 */}
         <div className="w-full">
-          {list.length === 0 ? (
+          {list?.length === 0 ? (
             <Empty info="暂无照片" />
           ) : (
             <>
