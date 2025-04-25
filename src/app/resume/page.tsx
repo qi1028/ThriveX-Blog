@@ -176,8 +176,8 @@ export default () => {
   
   return (
     <>
-      <title>刘宇阳 - 前端开发工程师</title>
-      <meta name="description" content="刘宇阳 - 前端开发工程师" />
+      <title>💪 刘宇阳 - 前端开发工程师</title>
+      <meta name="description" content="💪 刘宇阳 - 前端开发工程师" />
 
       <div className="min-h-screen py-12 mt-[60px] px-4 sm:px-6 lg:px-8">
         <motion.div

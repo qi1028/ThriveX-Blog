@@ -41,7 +41,7 @@ export default function AlbumPage() {
       } else {
         setList(data.result)
       }
-      
+
       setHasMore(data.result.length === 10)
     } catch (error) {
       console.error('Failed to fetch images:', error)
@@ -107,140 +107,145 @@ export default function AlbumPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-[90px]">
-      {/* 移除最大高度限制 */}
-      <div className="w-full">
-        {list.length === 0 ? (
-          <Empty info="暂无照片" />
-        ) : (
-          <>
-            <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className="masonry-grid"
-              columnClassName="masonry-grid_column"
-            >
-              {list?.map((photo, index) => (
-                <motion.div
-                  key={photo.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="relative group overflow-hidden rounded-lg shadow-lg mb-6"
-                  onClick={() => openPhoto(index)}
-                >
-                  <div className="w-full cursor-pointer">
-                    <img
-                      src={photo.image || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=100"}
-                      alt={photo.name}
-                      className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-110"
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h3 className="text-white font-medium text-lg">{photo.name}</h3>
-                  </div>
-                </motion.div>
-              ))}
-            </Masonry>
-            {loading && (
-              <div className="flex justify-center items-center py-4">
-                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
-              </div>
-            )}
-            {!hasMore && list.length > 0 && (
-              <div className="text-center text-gray-500 py-4">没有更多照片了</div>
-            )}
-          </>
-        )}
-      </div>
+    <>
+      <title>📷 照片墙</title>
+      <meta name="description" content="📷 照片墙" />
 
-      {/* 照片查看模态框 */}
-      <AnimatePresence>
-        {showModal && currentPhotoIndex !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 backdrop-blur-md bg-black/30 flex items-center justify-center z-50"
-            onClick={closeModal}
-          >
+      <div className="container mx-auto px-4 py-8 pt-[90px]">
+        {/* 移除最大高度限制 */}
+        <div className="w-full">
+          {list.length === 0 ? (
+            <Empty info="暂无照片" />
+          ) : (
+            <>
+              <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="masonry-grid"
+                columnClassName="masonry-grid_column"
+              >
+                {list?.map((photo, index) => (
+                  <motion.div
+                    key={photo.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="relative group overflow-hidden rounded-lg shadow-lg mb-6"
+                    onClick={() => openPhoto(index)}
+                  >
+                    <div className="w-full cursor-pointer">
+                      <img
+                        src={photo.image || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=100"}
+                        alt={photo.name}
+                        className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                      <h3 className="text-white font-medium text-lg">{photo.name}</h3>
+                    </div>
+                  </motion.div>
+                ))}
+              </Masonry>
+              {loading && (
+                <div className="flex justify-center items-center py-4">
+                  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
+                </div>
+              )}
+              {!hasMore && list.length > 0 && (
+                <div className="text-center text-gray-500 py-4">没有更多照片了</div>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* 照片查看模态框 */}
+        <AnimatePresence>
+          {showModal && currentPhotoIndex !== null && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="relative max-w-4xl w-full mx-4"
-              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 backdrop-blur-md bg-black/30 flex items-center justify-center z-50"
+              onClick={closeModal}
             >
-              <div className="relative rounded-2xl overflow-hidden">
-                {isImageLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
-                  </div>
-                )}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="relative max-w-4xl w-full mx-4"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative rounded-2xl overflow-hidden">
+                  {isImageLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+                    </div>
+                  )}
 
-                <motion.div
-                  key={currentPhotoIndex}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  className="relative"
-                >
-                  <img
-                    src={list[currentPhotoIndex].image}
-                    alt={list[currentPhotoIndex].name}
-                    className="w-full h-auto max-h-[80vh] rounded-2xl object-cover"
-                  />
-
-                  {/* 导航按钮 */}
-                  <button
-                    className="flex justify-center items-center absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#fff3] hover:bg-black/50 backdrop-blur-md transition-colors duration-200"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      prevPhoto()
-                    }}
+                  <motion.div
+                    key={currentPhotoIndex}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="relative"
                   >
-                    <IoChevronBack className="w-8 h-8 text-white" />
-                  </button>
+                    <img
+                      src={list[currentPhotoIndex].image}
+                      alt={list[currentPhotoIndex].name}
+                      className="w-full h-auto max-h-[80vh] rounded-2xl object-cover"
+                    />
 
-                  <button
-                    className="flex justify-center items-center absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#fff3] hover:bg-black/10 backdrop-blur-md transition-colors duration-200"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      nextPhoto()
-                    }}
-                  >
-                    <IoChevronForward className="w-8 h-8 text-white" />
-                  </button>
-
-                  {/* 照片信息 */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                    <motion.div
-                      key={currentPhotoIndex}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.2 }}
+                    {/* 导航按钮 */}
+                    <button
+                      className="flex justify-center items-center absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#fff3] hover:bg-black/50 backdrop-blur-md transition-colors duration-200"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        prevPhoto()
+                      }}
                     >
-                      <h3 className="text-white text-2xl font-medium mb-2">
-                        {list[currentPhotoIndex].name}
-                      </h3>
+                      <IoChevronBack className="w-8 h-8 text-white" />
+                    </button>
 
-                      <p className="text-white/50 leading-relaxed mb-3">
-                        {list[currentPhotoIndex].description}
-                      </p>
+                    <button
+                      className="flex justify-center items-center absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#fff3] hover:bg-black/10 backdrop-blur-md transition-colors duration-200"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        nextPhoto()
+                      }}
+                    >
+                      <IoChevronForward className="w-8 h-8 text-white" />
+                    </button>
 
-                      <div className="flex items-center space-x-2 text-gray-400">
-                        <BsCalendar className="w-4 h-4 text-gray-400" />
-                        <p className="text-sm">{dayjs(+list[currentPhotoIndex].createTime).format('YYYY-MM-DD HH:mm')}</p>
-                      </div>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </div>
+                    {/* 照片信息 */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <motion.div
+                        key={currentPhotoIndex}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: 0.2 }}
+                      >
+                        <h3 className="text-white text-2xl font-medium mb-2">
+                          {list[currentPhotoIndex].name}
+                        </h3>
+
+                        <p className="text-white/50 leading-relaxed mb-3">
+                          {list[currentPhotoIndex].description}
+                        </p>
+
+                        <div className="flex items-center space-x-2 text-gray-400">
+                          <BsCalendar className="w-4 h-4 text-gray-400" />
+                          <p className="text-sm">{dayjs(+list[currentPhotoIndex].createTime).format('YYYY-MM-DD HH:mm')}</p>
+                        </div>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   )
 }
