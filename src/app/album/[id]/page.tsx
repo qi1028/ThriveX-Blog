@@ -8,8 +8,8 @@ import { Photo } from '@/types/app/album'
 import { getImagesByAlbumIdAPI } from '@/api/album'
 import Masonry from "react-masonry-css"
 import Empty from '@/components/Empty'
-import "./page.scss"
 import dayjs from 'dayjs'
+import "./page.scss"
 
 const breakpointColumnsObj = {
   default: 4,
@@ -22,12 +22,7 @@ interface Props {
   searchParams: Promise<{ page: number; name: string }>;
 };
 
-export default async (props: Props) => {
-  const searchParams = await props.searchParams;
-  const params = await props.params;
-  const id = params.id;
-  const name = searchParams.name;
-
+export default function AlbumPage(props: Props) {
   const [list, setList] = useState<Photo[]>([])
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState<number | null>(null)
   const [showModal, setShowModal] = useState(false)
@@ -35,11 +30,27 @@ export default async (props: Props) => {
   const [page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const [loading, setLoading] = useState(false)
+  const [albumName, setAlbumName] = useState('')
+  const [albumId, setAlbumId] = useState<number>(0)
 
-  const getImagesByAlbumId = async (page: number = 1, isLoadMore: boolean = false) => {
+  useEffect(() => {
+    const initData = async () => {
+      const searchParams = await props.searchParams;
+      const params = await props.params;
+
+      setAlbumName(searchParams.name);
+      setAlbumId(params.id);
+      await getImagesByAlbumId(params.id);
+    };
+    initData();
+  }, [props.searchParams, props.params]);
+
+  const getImagesByAlbumId = async (id: number, page: number = 1, isLoadMore: boolean = false) => {
     try {
       setLoading(true)
-      const response = await getImagesByAlbumIdAPI(+id!, page)
+      const response = await getImagesByAlbumIdAPI(id, page)
+      console.log(response);
+      
       if (!response) return
 
       const { data } = response
@@ -66,18 +77,14 @@ export default async (props: Props) => {
 
     if (scrollHeight - scrollTop - clientHeight < 300) {
       setPage(prev => prev + 1)
-      getImagesByAlbumId(page + 1, true)
+      getImagesByAlbumId(albumId, page + 1, true)
     }
-  }, [loading, hasMore, page])
+  }, [loading, hasMore, page, albumId])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
-
-  useEffect(() => {
-    getImagesByAlbumId()
-  }, [])
 
   const openPhoto = async (index: number) => {
     setCurrentPhotoIndex(index)
@@ -115,8 +122,8 @@ export default async (props: Props) => {
 
   return (
     <>
-      <title>{`📷 ${name} - 照片墙`}</title>
-      <meta name="description" content={`📷 ${name} - 照片墙`} />
+      <title>{`📷 ${albumName} - 照片墙`}</title>
+      <meta name="description" content={`📷 ${albumName} - 照片墙`} />
 
       <div className="container mx-auto px-4 py-8 pt-[90px]">
         {/* 移除最大高度限制 */}
