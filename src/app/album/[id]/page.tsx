@@ -212,7 +212,7 @@ export default function AlbumPage(props: Props) {
 
                     {/* 导航按钮 */}
                     <button
-                      className="flex justify-center items-center absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#fff3] hover:bg-black/50 backdrop-blur-md transition-colors duration-200"
+                      className="flex justify-center items-center absolute left-4 top-1/2 z-10 -translate-y-1/2 p-2 rounded-full bg-[#fff3] hover:bg-black/50 backdrop-blur-md transition-colors duration-200"
                       onClick={(e) => {
                         e.stopPropagation()
                         prevPhoto()
@@ -222,7 +222,7 @@ export default function AlbumPage(props: Props) {
                     </button>
 
                     <button
-                      className="flex justify-center items-center absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#fff3] hover:bg-black/10 backdrop-blur-md transition-colors duration-200"
+                      className="flex justify-center items-center absolute right-4 top-1/2 z-10 -translate-y-1/2 p-2 rounded-full bg-[#fff3] hover:bg-black/10 backdrop-blur-md transition-colors duration-200"
                       onClick={(e) => {
                         e.stopPropagation()
                         nextPhoto()
