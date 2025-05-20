@@ -21,6 +21,7 @@ export interface Web {
     description: string,
     keyword: string,
     footer: string,
+    icp: string,
 }
 
 export type ArticleLayout = "classics" | "card" | "waterfall" | ""
