@@ -119,7 +119,7 @@ const Header = () => {
                                     </Link>
 
                                     <Show is={!!one.children.length} children={(
-                                        <ul className="hidden group-hover/one:block overflow-hidden absolute top-[50px] w-full rounded-md backdrop-blur-[5px] bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(44,51,62,0.9)]" style={{ boxShadow: '0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)' }}>
+                                        <ul className="hidden group-hover/one:block overflow-hidden absolute top-[50px] w-full rounded-md backdrop-blur-[5px] bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(44,51,62,0.95)]" style={{ boxShadow: '0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)' }}>
                                             {one.children?.map(two => (
                                                 <li key={two.id} className='group/two'>
                                                     <Link href={`/cate/${two.id}?name=${two.name}`} className="relative inline-block w-full p-2.5 text-[15px] box-border text-[#666] dark:text-white hover:!text-primary transition-all after:content-[''] after:absolute after:left-2.5 after:top-1/2 after:-translate-y-1/2 after:w-0 after:h-[3px] after:bg-primary after:transition-width group-hover/two:bg-[#f2f2f2] dark:group-hover/two:bg-[#323e50] group-hover/two:pl-8 hover:after:w-2.5">
@@ -142,7 +142,7 @@ const Header = () => {
                             </Link>
 
                             <Show is={true} children={(
-                                <ul className="hidden group-hover/one:block overflow-hidden absolute top-[50px] w-full rounded-md backdrop-blur-[5px] bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(44,51,62,0.9)]" style={{ boxShadow: '0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)' }}>
+                                <ul className="hidden group-hover/one:block overflow-hidden absolute top-[50px] w-full rounded-md backdrop-blur-[5px] bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(44,51,62,0.95)]" style={{ boxShadow: '0 12px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08)' }}>
                                     {cateList?.map(item => (
                                         item.type === "nav" &&
                                         (
