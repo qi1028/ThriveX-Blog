@@ -3,9 +3,39 @@
 import Image from 'next/image';
 import Timer from '@/assets/svg/other/timer.svg';
 import { useConfigStore } from '@/stores';
+import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+
+const AnimatedNumber = ({ value, suffix, onComplete }: { value: number, suffix: string, onComplete?: () => void }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+
+  useEffect(() => {
+    if (isInView) {
+      const animation = animate(count, value, {
+        duration: 2,
+        ease: "easeOut",
+        onComplete: () => {
+          onComplete?.();
+        }
+      });
+      return animation.stop;
+    }
+  }, [isInView, value]);
+
+  return (
+    <span ref={ref} className="inline-block">
+      <motion.span>{rounded}</motion.span>
+      {suffix}
+    </span>
+  );
+};
 
 export default () => {
-  const { web } = useConfigStore()
+  const { web } = useConfigStore();
+  const [showDetailed, setShowDetailed] = useState(false);
 
   const calculateTimeDifference = (startTimestamp: number) => {
     const startDate = new Date(+startTimestamp);
@@ -15,7 +45,6 @@ export default () => {
     let months = currentDate.getMonth() - startDate.getMonth();
     let days = currentDate.getDate() - startDate.getDate();
     
-    // 处理月份和天数的进位
     if (days < 0) {
       const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
       days += lastMonth.getDate();
@@ -26,7 +55,17 @@ export default () => {
       years--;
     }
 
-    return `${years}年 ${months}个月 ${days}天`;
+    // 计算总天数
+    const totalDays = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    return { years, months, days, totalDays };
+  };
+
+  const timeDiff = calculateTimeDifference(web?.create_time);
+
+  const handleTotalDaysComplete = () => {
+    // 总天数动画完成后立即切换到详细显示
+    setShowDetailed(true);
   };
 
   return (
@@ -35,8 +74,25 @@ export default () => {
         <Image src={Timer} alt="站点运行时间" width={33} height={23} /> 站点运行时间
       </div>
 
-
-      <div className="mt-2.5">{calculateTimeDifference(web?.create_time)}</div>
+      <div className="mt-2.5">
+        {!showDetailed ? (
+          <AnimatedNumber 
+            value={timeDiff.totalDays} 
+            suffix="天" 
+            onComplete={handleTotalDaysComplete}
+          />
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <AnimatedNumber value={timeDiff.years} suffix="年 " />
+            <AnimatedNumber value={timeDiff.months} suffix="个月 " />
+            <AnimatedNumber value={timeDiff.days} suffix="天" />
+          </motion.div>
+        )}
+      </div>
     </div>
   )
 }
