@@ -1,14 +1,14 @@
 "use client"
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Timer from '@/assets/svg/other/timer.svg';
+import { useConfigStore } from '@/stores';
 
 export default () => {
-  const [time, setTime] = useState(1547647320000);
+  const { web } = useConfigStore()
 
   const calculateTimeDifference = (startTimestamp: number) => {
-    const startDate = new Date(startTimestamp);
+    const startDate = new Date(+startTimestamp);
     const currentDate = new Date();
     
     let years = currentDate.getFullYear() - startDate.getFullYear();
@@ -35,7 +35,8 @@ export default () => {
         <Image src={Timer} alt="站点运行时间" width={33} height={23} /> 站点运行时间
       </div>
 
-      <div className="mt-2.5">{calculateTimeDifference(time)}</div>
+
+      <div className="mt-2.5">{calculateTimeDifference(web?.create_time)}</div>
     </div>
   )
 }

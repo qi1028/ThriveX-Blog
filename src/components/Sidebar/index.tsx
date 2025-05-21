@@ -16,8 +16,7 @@ export default async () => {
         {/* 作者介绍 */}
         {sidebar.includes("author") && <Author/>}
         {/* 站点已运行 */}
-        {/* {sidebar.includes("runTime") && <RunTime/>} */}
-        <RunTime/>
+        {sidebar.includes("runTime") && <RunTime/>}
         {/* 随机推荐 */}
         {sidebar.includes("randomArticle") && <RandomArticle/>}
         {/* 热门文章 */}
