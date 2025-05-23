@@ -15,8 +15,6 @@ import { getSwiperListAPI } from '@/api/swiper'
 export default async ({ page }: { page: number }) => {
   const { data: swiper } = await getSwiperListAPI() || { data: [] as SwiperType[] }
   const { data: theme } = await getConfigDataAPI<Theme>("layout") || { data: {} as Theme }
-  console.log(333, theme);
-
   const sidebar: string[] = theme?.right_sidebar && JSON.parse(theme?.right_sidebar)
 
   // 如果是瀑布流布局就显示28条数据，否则显示8条

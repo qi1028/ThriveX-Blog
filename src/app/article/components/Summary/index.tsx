@@ -32,34 +32,33 @@ export default function Summary({ content }: SummaryProps) {
   }, [currentIndex, content]);
 
   return (
-    <div className="post-ai" data-nosnippet="">
+    <div className="post-ai" data-nosnippet="" style={{ display: content.length ? 'block' : 'none' }}>
       <div className="ai-title">
         <div className="ai-title-left">
-          <div className="ai-title-text">文章摘要</div>
+          <div className="ai-title-text">AI总结</div>
         </div>
+
         <div
           className="ai-tag"
           id="ai-tag"
           title="了解助理"
-          onClick={handleThriveGPTClick} // TODO: 实现后完善交互逻辑
-        >
-          ThriveGPT
-        </div>
+          onClick={handleThriveGPTClick}
+        >ThriveX GPT</div>
       </div>
+
       <div className="ai-explanation">
         {displayText}
         {currentIndex < content.length && <span className="cursor">|</span>}
       </div>
+
       {showSuggestions && (
         <div className="ai-suggestions">
           {suggestions.map((item, index) => (
             <div
               key={index}
               className="ai-suggestions-item"
-              // TODO: 添加点击处理逻辑
-            >
-              {item}
-            </div>
+            // TODO: 添加点击处理逻辑
+            >{item}</div>
           ))}
         </div>
       )}
