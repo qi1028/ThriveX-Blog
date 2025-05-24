@@ -9,6 +9,7 @@ import Empty from "@/components/Empty";
 import Show from "@/components/Show";
 import { getConfigDataAPI } from "@/api/project";
 import { Theme } from "@/types/app/project";
+import Editor from "./components/Editor";
 
 interface Props {
   searchParams: Promise<{ page: number }>;
@@ -57,7 +58,7 @@ export default async (props: Props) => {
                     </div>
 
                     <div className="w-full p-4 border dark:border-black-b rounded-3xl rounded-tl-none bg-white dark:bg-black-b transition-colors">
-                      <p className="text-gray-600 dark:text-white transition-colors">{item.content}</p>
+                      <Editor value={item.content} />
 
                       <ImageList list={JSON.parse(item?.images as string || '[]')} />
                       {/* <Comment /> */}
