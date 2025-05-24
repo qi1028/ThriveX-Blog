@@ -32,14 +32,12 @@ export default ({ value }: { value: string }) => {
     }, [editor])
 
     return (
-        <div className='text-gray-600 dark:text-white transition-colors z-50'>
-            <Editor
-                defaultConfig={editorConfig}
-                value={html}
-                onCreated={setEditor}
-                onChange={editor => setHtml(editor.getHtml())}
-                mode="default"
-            />
-        </div>
+        <Editor
+            defaultConfig={editorConfig}
+            value={html}
+            onCreated={setEditor}
+            onChange={editor => setHtml(editor.getHtml())}
+            mode="default"
+        />
     )
 }
