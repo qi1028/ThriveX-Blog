@@ -57,7 +57,7 @@ export default async (props: Props) => {
                       <span className="text-xs">{dayFormat(item.createTime)}</span>
                     </div>
 
-                    <div className="w-full p-4 border dark:border-black-b rounded-3xl rounded-tl-none bg-white dark:bg-black-b transition-colors">
+                    <div className="w-full p-4 border dark:border-black-b rounded-3xl rounded-tl-none bg-[rgba(255,255,255,0.7)] dark:bg-[rgba(30,36,46,0.9)] backdrop-blur-sm transition-colors">
                       <Editor value={item.content} />
 
                       <ImageList list={JSON.parse(item?.images as string || '[]')} />
