@@ -9,6 +9,8 @@ import { getConfigDataAPI } from '@/api/project'
 import { Theme } from "@/types/app/project";
 import Lantern from "@/components/Lantern";
 
+import FloatingBlock from "@/components/FloatingBlock";
+
 interface Props {
   searchParams: Promise<{ page: number }>;
 };
@@ -34,6 +36,8 @@ export default async (props: Props) => {
         <ArticleLayout page={page} />
         {/* 侧边栏 */}
         <Sidebar />
+        {/* 悬浮块 */}
+        <FloatingBlock />
       </Container>
     </>
   );
