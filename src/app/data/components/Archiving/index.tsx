@@ -86,7 +86,7 @@ export default ({ list }: { list: Article[] }) => {
                     !!result.length
                         ? (
                             <Accordion
-                                className="[&>hr]:bg-[#eee] !px-0 [&>hr]:dark:bg-[#4e5969] [&>hr]:transition-colors"
+                                className="[&>hr]:bg-[#eee] !px-0 [&>hr]:dark:bg-[#4e5969] [&>hr]: "
                                 motionProps={{
                                     variants: {
                                         enter: {
@@ -130,7 +130,7 @@ export default ({ list }: { list: Article[] }) => {
                                             {
                                                 Object.keys(item.month).map((month, index) => (
                                                     <div key={index} className="ml-3">
-                                                        <div className="relative border-l border-gray-300 dark:border-[#4e5969] transition-colors">
+                                                        <div className="relative border-l border-gray-300 dark:border-[#4e5969]  ">
                                                             <div className="mb-8 ml-4">
                                                                 <div className="absolute w-3 h-3 bg-blue-500 rounded-full -left-1.5 border border-white"></div>
                                                                 <div className="ml-2 sm:ml-6">
@@ -143,8 +143,8 @@ export default ({ list }: { list: Article[] }) => {
                                                                     {
                                                                         item.month[+month].list.map((article: Article, index) => (
                                                                             <div key={index} className="group flex justify-between py-2">
-                                                                                <Link href={`/article/${article.id}`} target="_blank" className="dark:text-[#bfbfbf] group-hover:text-primary transition-colors">{dayjs(+article.createTime!).format('MM-DD')} {article.title}</Link>
-                                                                                <span className="hidden sm:flex items-center min-w-24 text-sm text-white group-hover:text-gray-400 transition-colors"><AiOutlineEye className="mr-1" />{article.view}</span>
+                                                                                <Link href={`/article/${article.id}`} target="_blank" className="dark:text-[#bfbfbf] group-hover:text-primary  ">{dayjs(+article.createTime!).format('MM-DD')} {article.title}</Link>
+                                                                                <span className="hidden sm:flex items-center min-w-24 text-sm text-white group-hover:text-gray-400  "><AiOutlineEye className="mr-1" />{article.view}</span>
                                                                             </div>
                                                                         ))
                                                                     }

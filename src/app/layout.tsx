@@ -56,7 +56,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       {/* 监听路由变化 */}
       <RouteChangeHandler />
 
-      <body id='root' className={`dark:!bg-black-a transition-all`}>
+      <body id='root' className={`dark:!bg-black-a`}>
         {/* 🎉 礼花效果 */}
         {/* <Confetti /> */}
 

@@ -11,7 +11,7 @@ import { useConfigStore } from '@/stores'
 import Search from '../Search'
 import Rss from './components/Rss'
 
-const itemSty = "p-2 hover:bg-[#edf5ff] dark:hover:bg-[#4e5969] cursor-pointer transition-colors"
+const itemSty = "p-2 hover:bg-[#edf5ff] dark:hover:bg-[#4e5969] cursor-pointer  "
 
 export default () => {
     const { isDark, setIsDark, web } = useConfigStore()
@@ -23,7 +23,7 @@ export default () => {
 
     return (
         <>
-            <div className="z-[999] overflow-hidden fixed top-[70%] right-[3%] flex flex-col w-12 bg-white dark:bg-black-b border dark:border-[#4e5969] rounded-md divide-y dark:divide-[#4e5969] transition-colors">
+            <div className="z-[999] overflow-hidden fixed top-[70%] right-[3%] flex flex-col w-12 bg-white dark:bg-black-b border dark:border-[#4e5969] rounded-md divide-y dark:divide-[#4e5969]  ">
                 {isDark
                     ? <Image src={sun.src} alt="太阳" width={46} height={46} className={itemSty} onClick={() => setIsDark(false)} />
                     : <Image src={moon.src} alt="月亮" width={46} height={46} className={itemSty} onClick={() => setIsDark(true)} />

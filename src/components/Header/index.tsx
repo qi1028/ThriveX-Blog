@@ -89,14 +89,14 @@ const Header = () => {
 
     return (
         <>
-            <div className={`header fixed top-0 w-full h-16 backdrop-blur-[5px] transition-colors z-50 after:content-[''] after:block after:w-full after:h-0 after:bg-[linear-gradient(#fff,transparent_70%)] dark:after:bg-[linear-gradient(#2b333e,transparent_70%)] after:transition-colors ${isPathSty || isScrolled ? 'bg-[rgba(255,255,255,0.9)] dark:bg-[rgba(44,51,62,0.9)] border-b dark:border-[#2b333e] after:!h-8 after:transition-height]' : 'border-transparent'} transition-all`}>
+            <div className={`header fixed top-0 w-full h-16 backdrop-blur-[5px] z-50 after:content-[''] after:block after:w-full after:h-0 after:bg-[linear-gradient(#fff,transparent_70%)] dark:after:bg-[linear-gradient(#2b333e,transparent_70%)] after:  ${isPathSty || isScrolled ? 'bg-[rgba(255,255,255,0.9)] dark:bg-[rgba(44,51,62,0.9)] border-b dark:border-[#2b333e] after:!h-8 after:transition-height]' : 'border-transparent'} transition-all`}>
                 <div className="relative flex justify-center lg:justify-start w-full lg:w-[1500px] h-16 mx-auto">
-                    <div className={`lg:hidden group absolute top-0 left-0 h-full py-2 px-3 pl-7 ${isPathSty || isScrolled ? 'hover:bg-[#e9edf4] dark:hover:bg-[#455162] rounded-lg' : ''} cursor-pointer transition-colors`} onClick={() => setIsOpenSidebarNav(true)}>
-                        <BsTextIndentLeft className={`group-hover:text-primary h-full text-[30px] ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'} transition-colors`} />
+                    <div className={`lg:hidden group absolute top-0 left-0 h-full py-2 px-3 pl-7 ${isPathSty || isScrolled ? 'hover:bg-[#e9edf4] dark:hover:bg-[#455162] rounded-lg' : ''} cursor-pointer  `} onClick={() => setIsOpenSidebarNav(true)}>
+                        <BsTextIndentLeft className={`group-hover:text-primary h-full text-[30px] ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}  `} />
                     </div>
 
                     {/* logo */}
-                    <Link href="/" className="flex items-center p-5 text-[15px] transition-colors">
+                    <Link href="/" className="flex items-center p-5 text-[15px]  ">
                         {
                             isDark
                                 ? <img src={theme?.dark_logo} alt="Logo" className='w-32 h-10 pr-5 hover:scale-90 transition-all' />
@@ -108,7 +108,7 @@ const Header = () => {
                         <li className="group/one relative" >
                             <Link
                                 href="/"
-                                className={`flex items-center p-5 text-[15px] group-hover/one:!text-primary transition-colors ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}
+                                className={`flex items-center p-5 text-[15px] group-hover/one:!text-primary   ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}
                             >💎 首页</Link>
                         </li>
 
@@ -119,7 +119,7 @@ const Header = () => {
                                 <li key={one.id} className="group/one relative" >
                                     <Link
                                         href={`/cate/${one.id}?name=${one.name}`}
-                                        className={`flex items-center p-5 text-[15px] group-hover/one:!text-primary transition-colors ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}
+                                        className={`flex items-center p-5 text-[15px] group-hover/one:!text-primary   ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}
                                     >
                                         {one.icon} {one.name}
                                         <Show is={!!one.children.length} children={(
@@ -143,7 +143,7 @@ const Header = () => {
                         ))}
 
                         <li className="group/one relative">
-                            <Link href="" className={`flex items-center p-5 px-10 text-[15px] group-hover/one:!text-primary transition-colors ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}>
+                            <Link href="" className={`flex items-center p-5 px-10 text-[15px] group-hover/one:!text-primary   ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}>
                                 🧩 探索
                                 <Show is={true} children={(
                                     <IoIosArrowDown className="ml-2" />

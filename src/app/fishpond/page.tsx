@@ -119,7 +119,7 @@ export default function FishpondPage() {
 
                     <div>
                       <h3 className="m-0 my-3 text-lg font-semibold leading-6">
-                        <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-[#333] dark:text-white no-underline transition-colors hover:text-[#539dfd]">
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-[#333] dark:text-white no-underline   hover:text-[#539dfd]">
                           {item.title}
                         </a>
                       </h3>
