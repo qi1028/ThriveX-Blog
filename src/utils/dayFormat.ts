@@ -26,7 +26,7 @@ dayjs.updateLocale('en', {
     }
 });
 
-export default function dayFormat(timestamp: number | string) {
+export function dayFormat(timestamp: number | string) {
     const now = dayjs();
     const target = dayjs(+timestamp);
 
