@@ -15,6 +15,7 @@ import { Web } from '@/types/app/project';
 import "@/styles/index.scss";
 import "@/styles/tailwind.scss";
 import BaiduStatis from '@/components/BaiduStatis';
+import FloatingBlock from '@/components/FloatingBlock';
 
 // 加载本地字体
 const LXGWWenKai = localFont({
@@ -74,7 +75,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         {/* 底部组件 */}
         <Footer />
         {/* 右侧工具栏组件 */}
-        <Tools />
+        {/* <Tools /> */}
+
+        {/* 悬浮块 */}
+        <FloatingBlock />
       </body>
     </html>
   );

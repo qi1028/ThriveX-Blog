@@ -2,59 +2,64 @@
 
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from '@heroui/react'
-import {
-    IoChevronUp,
-    IoChevronDown,
-    IoChatbubbleEllipsesOutline,
-    IoCallOutline,
-    IoMailOutline,
-    IoHelpCircleOutline
+import { Button, useDisclosure } from '@heroui/react'
+import { BiCog, BiCommand } from "react-icons/bi";
+import { 
+    IoSearchOutline, 
+    IoArrowUpOutline,
+    IoLogoRss
 } from 'react-icons/io5'
+import { useConfigStore } from '@/stores'
+import Search from '../Search'
+import Rss from '../Tools/components/Rss'
+import { LuMoonStar } from 'react-icons/lu';
+import { FaRegSun } from 'react-icons/fa';
 
 const FloatingBlock = () => {
     const [isExpanded, setIsExpanded] = useState(false) // 展开状态的变量
+    const { isDark, setIsDark, web } = useConfigStore()
+    const { isOpen: isSearchOpen, onClose: onSearchClose, onOpenChange: onSearchOpenChange } = useDisclosure()
+    const { isOpen: isRssOpen, onClose: onRssClose, onOpenChange: onRssOpenChange } = useDisclosure()
 
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded)
     }
 
+    // 返回顶部功能
+    const onReturnTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
+    // 主题切换功能
+    const onToggleTheme = () => {
+        setIsDark(!isDark)
+    }
+
     const actionItems = [
         {
-            icon: IoChatbubbleEllipsesOutline,
-            id: '1',
-            onClick: () => console.log('1')
+            icon: isDark ? FaRegSun : LuMoonStar,
+            id: 'theme',
+            label: isDark ? '切换到亮色模式' : '切换到暗色模式',
+            onClick: onToggleTheme
         },
         {
-            icon: IoCallOutline,
-            id: '2',
-            onClick: () => console.log('2')
+            icon: IoSearchOutline,
+            id: 'search',
+            label: '搜索',
+            onClick: onSearchOpenChange
         },
         {
-            icon: IoMailOutline,
-            id: '3',
-            onClick: () => console.log('3')
+            icon: IoLogoRss,
+            id: 'rss',
+            label: 'RSS 订阅',
+            onClick: onRssOpenChange
         },
         {
-            icon: IoHelpCircleOutline,
-            id: '4',
-            onClick: () => console.log('4')
-        },
-        {
-            icon: IoHelpCircleOutline,
-            id: '5',
-            onClick: () => console.log('5')
-        },
-        {
-            icon: IoHelpCircleOutline,
-            id: '6',
-            onClick: () => console.log('6')
-        },
-        {
-            icon: IoHelpCircleOutline,
-            id: '7',
-            onClick: () => console.log('7')
-        },
+            icon: IoArrowUpOutline,
+            id: 'top',
+            label: '返回顶部',
+            onClick: onReturnTop
+        }
     ]
 
     // 计算每个项目的位置（圆形分布）
@@ -67,7 +72,7 @@ const FloatingBlock = () => {
     }
 
     return (
-        <div className={`fixed bottom-[100px] right-[150px] z-50`}>
+        <div className={`fixed bottom-[180px] right-[60px] z-50`}>
             {/* 围绕的功能项 */}
             <AnimatePresence>
                 {isExpanded && (
@@ -118,7 +123,8 @@ const FloatingBlock = () => {
                                             className="bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300
                                             shadow-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-50
                                             dark:hover:bg-gray-700 -translate-x-5 -translate-y-5"
-                                            onClick={item.onClick}
+                                            onPress={item.onClick}
+                                            title={item.label}
                                         >
                                             <item.icon className="w-5 h-5" />
                                         </Button>
@@ -141,20 +147,27 @@ const FloatingBlock = () => {
                     isIconOnly
                     size="lg"
                     className="bg-blue-500 hover:bg-blue-600 text-white shadow-lg rounded-full"
-                    onClick={toggleExpanded}
+                    onPress={toggleExpanded}
                 >
                     <motion.div
                         animate={{ rotate: isExpanded ? 180 : 0 }}
                         transition={{ duration: 0.3 }}
                     >
                         {isExpanded ? (
-                            <IoChevronDown className="w-6 h-6" />
+                            <BiCommand className="w-6 h-6" />
+                            
                         ) : (
-                            <IoChevronUp className="w-6 h-6" />
+                            <BiCog className="w-6 h-6" />
                         )}
                     </motion.div>
                 </Button>
             </motion.div>
+
+            {/* 搜索组件 */}
+            <Search disclosure={{ isOpen: isSearchOpen, onClose: onSearchClose, onOpenChange: onSearchOpenChange }} />
+
+            {/* 查看Rss地址 */}
+            <Rss data={web} disclosure={{ isOpen: isRssOpen, onClose: onRssClose, onOpenChange: onRssOpenChange }} />
         </div>
     )
 }

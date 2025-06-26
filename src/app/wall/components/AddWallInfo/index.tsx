@@ -60,7 +60,7 @@ export default () => {
 
   return (
     <>
-      <div className='fixed bottom-[5%] right-[5%] flex justify-center items-center w-[70px] h-[70px] rounded-full bg-black-b cursor-pointer z-50' onClick={onOpen}>
+      <div className='fixed top-[15%] right-[5%] flex justify-center items-center w-[70px] h-[70px] rounded-full bg-black-b cursor-pointer z-50' onClick={onOpen}>
         <MdOutlineAdd className='text-white text-5xl' />
       </div>
 
