@@ -85,7 +85,7 @@ export default function FishpondPage() {
       <meta name="description" content="🐟 鱼塘" />
 
       <div className="w-full pt-20">
-        <h2 className="text-center text-5xl pb-8">鱼塘</h2>
+        <h2 className="text-center text-5xl py-8">鱼塘</h2>
 
         <div>
           {rssData && rssData.length > 0 ? (
@@ -96,7 +96,7 @@ export default function FishpondPage() {
             >
               {rssData.map((item, index) => {
                 return (
-                  <div key={`${item.url}-${index}`} className="border border-[#eee] dark:border-black-b rounded-md transition-all hover:shadow-[0_2px_8px_rgba(186,186,186,0.15)] bg-white dark:bg-black-b p-5 pb-3 hover:-translate-y-0.5 mb-5 break-inside-avoid">
+                  <div key={`${item.url}-${index}`} className="border border-[#eee] dark:border-black-b rounded-md transition-all hover:shadow-[0_2px_8px_rgba(186,186,186,0.15)] bg-white dark:bg-black-b p-5 pb-3 hover:-translate-y-0.5 mb-3 break-inside-avoid">
                     <div className="flex justify-between items-center mb-3.75">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#eee] dark:border-black-b">
