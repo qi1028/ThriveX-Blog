@@ -150,7 +150,7 @@ export default function AlbumPage(props: Props) {
                       <img
                         src={photo.image || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=100"}
                         alt={photo.name}
-                        className="w-full h-auto object-cover transform transition-transform duration-300 group-hover:scale-110"
+                        className="w-full h-auto object-cover transform transition-transform   group-hover:scale-110"
                       />
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">

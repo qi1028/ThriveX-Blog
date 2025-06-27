@@ -75,7 +75,7 @@ export default ({ data, className }: { data: SwiperType[], className?: string })
                         <div
                             key={index}
                             onClick={() => setCurrent(index)}
-                            className={`w-6 h-1 rounded-full hover:bg-white hover:w-8 ${index === current ? '!bg-[#539dfd] w-8 shadow-[0_0_10px_#539dfd]' : 'bg-[#fff5]'} transition-all cursor-pointer`}
+                            className={`w-6 h-1 rounded-full hover:bg-white hover:w-8 ${index === current ? '!bg-[#539dfd] w-8 shadow-[0_0_10px_#539dfd]' : 'bg-[#fff5]'} transition-shadow cursor-pointer`}
                         />
                     ))}
                 </div>
