@@ -30,7 +30,7 @@ export default async (props: Props) => {
 
       <Container>
         {/* 文章列表 */}
-        <ArticleLayout page={page} />
+        {/* <ArticleLayout page={page} /> */}
         {/* 侧边栏 */}
         <Sidebar />
       </Container>
