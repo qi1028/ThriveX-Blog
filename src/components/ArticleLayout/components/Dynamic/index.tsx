@@ -41,7 +41,7 @@ export default function Dynamic({ className }: { className?: string }) {
     return (
         <div className={`flex justify-between items-center w-full px-4 py-3 border dark:border-transparent rounded-lg bg-white dark:bg-black-b mb-2 ${className}`}>
             <div className="flex items-center">
-                <Image src={dynamic} alt='动态' width={25} height={25} className='mr-2' />
+                <Image src={dynamic} alt='动态' width={25} height={25} className='mr-2 w-[25px] h-[25px]' />
                 <span>最新动态：</span>
             </div>
 

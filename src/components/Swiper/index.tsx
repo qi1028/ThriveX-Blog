@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { BiChevronLeft } from "react-icons/bi";
 import { Swiper as SwiperType } from "@/types/app/swiper";
+import Image from "next/image";
 
 export default ({ data, className }: { data: SwiperType[], className?: string }) => {
     const [current, setCurrent] = useState(0);
@@ -54,7 +55,7 @@ export default ({ data, className }: { data: SwiperType[], className?: string })
 
                 {data?.map((item, index) => (
                     <div key={index} className={`absolute top-0 left-0 w-full h-full ${index === current ? 'opacity-100' : 'opacity-0'} transition-opacity`}>
-                        <img key={index} src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                        <Image key={index} src={item.image} alt={item.title} className="w-full h-full object-cover" width={1694} height={700} />
 
                         <div className="flex flex-col absolute bottom-7 left-5 z-10 gap-2 animation_bottom">
                             <h2 className="text-white text-xl lg:text-2xl font-bold text_shadow">{item.title}</h2>
