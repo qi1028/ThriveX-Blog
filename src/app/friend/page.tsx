@@ -65,7 +65,7 @@ export default async () => {
                     <div>
                         <h3 className="w-full text-center text-xl p-4 dark:text-white  ">本站信息</h3>
 
-                        <div className="mx-auto p-3 space-y-2 border-l-[3px] border-primary bg-[#ecf7fe] rounded-md text-sm text-black-b">
+                        <div className="mx-auto p-3 space-y-2 border-l-[3px] border-primary bg-[#ecf7fe] dark:bg-[#333b48] rounded-md text-sm text-black-b dark:text-gray-300">
                             <p>站点名称：<span className="hover:text-primary cursor-pointer">{web.title}</span></p>
                             <p>站点介绍：<span className="hover:text-primary cursor-pointer">{web.description}</span></p>
                             <p>站点图标：<span className="hover:text-primary cursor-pointer">{user?.avatar}</span></p>
