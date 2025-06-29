@@ -8,6 +8,7 @@ import { Web as WebLink, WebType } from "@/types/app/web";
 import Slide from "@/components/Slide";
 import Starry from "@/components/Starry";
 import ApplyForAdd from "./components/ApplyForAdd";
+import CopyableText from "./components/CopyableText";
 
 import { ToastContainer } from "react-toastify";
 import { getUserDataAPI } from "@/api/user";
@@ -66,11 +67,11 @@ export default async () => {
                         <h3 className="w-full text-center text-xl p-4 dark:text-white  ">本站信息</h3>
 
                         <div className="mx-auto p-3 space-y-2 border-l-[3px] border-primary bg-[#ecf7fe] dark:bg-[#333b48] rounded-md text-sm text-black-b dark:text-gray-300">
-                            <p>站点名称：<span className="hover:text-primary cursor-pointer">{web.title}</span></p>
-                            <p>站点介绍：<span className="hover:text-primary cursor-pointer">{web.description}</span></p>
-                            <p>站点图标：<span className="hover:text-primary cursor-pointer">{user?.avatar}</span></p>
-                            <p>站点地址：<span className="hover:text-primary cursor-pointer">{web.url}</span></p>
-                            <p>Rss地址：<span className="hover:text-primary cursor-pointer">{web.url + '/api/rss'}</span></p>
+                            <p>站点名称：<CopyableText text={web.title}>{web.title}</CopyableText></p>
+                            <p>站点介绍：<CopyableText text={web.description}>{web.description}</CopyableText></p>
+                            <p>站点图标：<CopyableText text={user?.avatar || ''}>{user?.avatar}</CopyableText></p>
+                            <p>站点地址：<CopyableText text={web.url}>{web.url}</CopyableText></p>
+                            <p>Rss地址：<CopyableText text={web.url + '/api/rss'}>{web.url + '/api/rss'}</CopyableText></p>
                         </div>
                     </div>
 
