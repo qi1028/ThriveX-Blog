@@ -20,6 +20,10 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'bu.dusays.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com',
             }
         ],
     },
