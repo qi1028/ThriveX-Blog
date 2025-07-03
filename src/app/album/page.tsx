@@ -60,7 +60,7 @@ export default function AlbumPage() {
                   <img
                     src={cate.cover || "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=100"}
                     alt={cate.name}
-                    className="w-full h-full object-cover transform transition-transform   group-hover:scale-110"
+                    className="w-full h-full object-cover transform transition-transform  group-hover:scale-110"
                   />
                 </div>
 
