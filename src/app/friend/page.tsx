@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 
-import { getConfigDataAPI } from "@/api/project";
+import { getWebConfigDataAPI } from "@/api/config";
 import { getWebListAPI, getWebTypeListAPI } from '@/api/web'
 import { Web as WebLink, WebType } from "@/types/app/web";
 
@@ -13,7 +13,7 @@ import CopyableText from "./components/CopyableText";
 import { ToastContainer } from "react-toastify";
 import { getUserDataAPI } from "@/api/user";
 import { User } from "@/types/app/user";
-import { Web } from "@/types/app/project";
+import { Web } from "@/types/app/config";
 
 export const metadata: Metadata = {
     title: "😇 朋友圈",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default async () => {
     const { data: user } = await getUserDataAPI() || { data: {} as User }
-    const { data: web } = await getConfigDataAPI<Web>("web") || { data: {} as Web }
+    const { data: web } = await getWebConfigDataAPI<Web>("web") || { data: {} as Web }
     const { data: linkList } = await getWebListAPI() || { data: [] as WebLink[] }
     const { data: typeList } = await getWebTypeListAPI() || { data: [] as WebType[] }
 

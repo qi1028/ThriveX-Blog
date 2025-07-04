@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-import { getEnvConfigDataAPI } from "@/api/project";
+import { getGaodeMapConfigDataAPI } from "@/api/config";
 
 export default function MapContainer() {
     let map: any;
@@ -15,7 +15,7 @@ export default function MapContainer() {
 
         // 确保代码仅在客户端执行
         import('@amap/amap-jsapi-loader').then(async AMapLoader => {
-            const { data } = await getEnvConfigDataAPI() || { data: {} }
+            const { data } = await getGaodeMapConfigDataAPI() || { data: {} }
             const { key_code, security_code } = data as { key_code: string, security_code: string }
 
             // @ts-ignore
