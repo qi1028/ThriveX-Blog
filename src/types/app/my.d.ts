@@ -46,7 +46,7 @@ export interface Project {
 
 export interface MyData {
     info: Info,
-    infoTwo: InfoTwo,
+    info_two: InfoTwo,
     character: Character[],
     goals: Goal[],
     project: Project[]

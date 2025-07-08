@@ -6,6 +6,8 @@ export const getWebConfigDataAPI = <T>(type: string) => Request<T>("GET", `/web_
 // 修改网站配置
 export const editWebConfigDataAPI = (type: string, data: object) => Request<{ [string: string]: string }>("PATCH", `/web_config/${type}`, { data })
 
-
 // 获取高德地图配置
 export const getGaodeMapConfigDataAPI = () => Request("GET", `/env_config/gaode_map`)
+
+// 根据名称获取页面配置
+export const getPageConfigDataByNameAPI = (name: string) => Request<object>("GET", `/page_config/name/${name}`)

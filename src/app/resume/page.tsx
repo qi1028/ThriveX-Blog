@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub, FaPhone, FaEnvelope } from 'react-icons/fa'
-import { Metadata } from 'next'
 
 const personalInfo = {
   "personalInfo": {

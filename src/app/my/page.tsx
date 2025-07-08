@@ -6,8 +6,6 @@ import Character from './component/Character'
 import Map from './component/Map'
 import Technology from './component/Technology'
 import Project from './component/Project'
-import CurriculumVitae from './component/CurriculumVitae'
-import Info from "./component/Info";
 import Calendar from "./component/Calendar"
 import InfoTwo from './component/InfoTwo'
 
@@ -17,9 +15,9 @@ export default () => {
       name: "Liu YuYang",
       avatar: 'https://q.qlogo.cn/g?b=qq&nk=3311118881&s=640',
       profession: "一名Web全栈开发工程师",
-      introduction: "我从小就对计算机编程技术有着无穷的兴趣，所以我的梦想是做一名技术顶尖的 架构师，因此我一直在朝着这个方向去努力、去坚持 直到梦想成真！",
+      introduction: "我从小就对计算机技术有着无穷的兴趣，因此我的梦想是做一名技术顶尖的 架构师。所以我一直在朝着这个方向去努力、去坚持 直到梦想成真！",
     },
-    infoTwo: {
+    info_two: {
       author: '宇阳',
       avatar_url: 'https://q.qlogo.cn/g?b=qq&nk=3311118881&s=640',
       left_tags: [
@@ -167,7 +165,7 @@ export default () => {
   }
 
   return (
-    <>
+    <>    
       <title>👋 关于我</title>
       <meta name="description" content="👋 关于我" />
 
@@ -175,7 +173,7 @@ export default () => {
         style={{ backgroundImage: `url(${bg.src})` }}>
         <div className="w-[90%] lg:w-[950px] mx-auto">
           {/* <Info data={data?.info} /> */}
-          <InfoTwo data={data?.infoTwo} />
+          <InfoTwo data={data?.info_two} />
         </div>
 
         <div className='flex justify-center mt-24 px-10'>
