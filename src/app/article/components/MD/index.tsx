@@ -92,14 +92,22 @@ const ContentMD = ({ data }: Props) => {
     const [expanded, setExpanded] = useState(false);
     const isLong = value.split("\n").length > 10;
 
-    const highlighted = useMemo(() => {
+    // 新增：将代码按行分割
+    const codeLines = useMemo(() => value.split("\n"), [value]);
+
+    const highlightedLines = useMemo(() => {
       try {
         if (hljs.getLanguage(language)) {
-          return hljs.highlight(value, { language }).value;
+          return hljs.highlight(value, { language }).value.split("\n");
         }
       } catch { }
-      return hljs.highlightAuto(value).value;
+      return hljs.highlightAuto(value).value.split("\n");
     }, [value, language]);
+
+    const linesToRender = highlightedLines;
+    if (linesToRender.length > 1 && linesToRender[linesToRender.length - 1] === "") {
+      linesToRender.pop();
+    }
 
     const handleCopy = () => {
       navigator.clipboard.writeText(value).then(
@@ -110,8 +118,7 @@ const ContentMD = ({ data }: Props) => {
 
     return (
       <pre
-        className={`mac-style ${isLong ? (expanded ? "expanded" : "collapsed") : ""
-          }`}
+        className={`mac-style with-line-number ${isLong ? (expanded ? "expanded" : "collapsed") : ""}`}
         onClick={() => {
           if (isLong && !expanded) setExpanded(true);
         }}
@@ -130,10 +137,19 @@ const ContentMD = ({ data }: Props) => {
           <BiCopy size={16} />
         </button>
 
-        <code
-          className={`hljs language-${language}`}
-          dangerouslySetInnerHTML={{ __html: highlighted }}
-        />
+        {/* 新增：带行号的代码渲染 */}
+        <code className={`hljs language-${language}`}>
+          {linesToRender.map((line, idx) => (
+            <div key={idx} className="code-line">
+              <span className="line-number">{idx + 1}</span>
+              <span
+                className="line-content"
+                dangerouslySetInnerHTML={{ __html: line || "\u200B" }}
+              />
+            </div>
+          ))}
+        </code>
+        
         {isLong && (
           <button
             className="toggle-btn"
@@ -145,7 +161,7 @@ const ContentMD = ({ data }: Props) => {
           >
             {expanded
               ? "收起代码"
-              : `展开代码 (${value.split("\n").length} 行)`}
+              : `展开代码 (${value.split("\n").length - 1} 行)`}
           </button>
         )}
       </pre>
@@ -231,6 +247,7 @@ const ContentMD = ({ data }: Props) => {
         autoClose={1000}
         hideProgressBar
       />
+
       <PhotoProvider>
         <div className="content markdown-body">
           <ReactMarkdown
