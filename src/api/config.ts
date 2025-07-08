@@ -1,4 +1,5 @@
 import Request from "@/utils/request";
+import { Config } from "@/types/app/config";
 
 // 获取网站配置
 export const getWebConfigDataAPI = <T>(type: string) => Request<T>("GET", `/web_config/list/${type}`)
@@ -10,4 +11,4 @@ export const editWebConfigDataAPI = (type: string, data: object) => Request<{ [s
 export const getGaodeMapConfigDataAPI = () => Request("GET", `/env_config/gaode_map`)
 
 // 根据名称获取页面配置
-export const getPageConfigDataByNameAPI = (name: string) => Request<object>("GET", `/page_config/name/${name}`)
+export const getPageConfigDataByNameAPI = (name: string) => Request<Config>("GET", `/page_config/name/${name}`)
