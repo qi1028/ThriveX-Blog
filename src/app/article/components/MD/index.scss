@@ -271,11 +271,13 @@
 // 代码块带行号样式
 .mac-style.with-line-number {
   position: relative;
+
   .hljs {
     display: block;
     padding: 0;
     background: none;
   }
+
   .code-line {
     display: flex;
     align-items: flex-start;
@@ -284,6 +286,7 @@
     line-height: 1.6;
     white-space: pre;
   }
+
   .line-number {
     display: inline-block;
     width: 2.5em;
@@ -295,6 +298,7 @@
     font-size: 0.95em;
     font-family: inherit;
   }
+  
   .line-content {
     flex: 1;
     word-break: break-all;
