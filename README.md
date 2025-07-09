@@ -75,7 +75,7 @@
 
 
 
-### 1.0 旧版（Vue3 + Python Flask）
+### 2.0 旧版（Vue3 + Python Flask）
 
 前端：[LiuYuYang01/Thrive-Blog (github.com)](https://github.com/LiuYuYang01/Thrive-Blog)
 
