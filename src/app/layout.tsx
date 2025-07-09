@@ -16,7 +16,6 @@ import "@/styles/index.scss";
 import "@/styles/tailwind.scss";
 import BaiduStatis from '@/components/BaiduStatis';
 import FloatingBlock from '@/components/FloatingBlock';
-import Empty from '@/components/Empty';
 
 // 加载本地字体
 const LXGWWenKai = localFont({
