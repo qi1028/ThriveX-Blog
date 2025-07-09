@@ -13,7 +13,7 @@ import { MyData } from '@/types/app/my'
 
 export default async () => {
   const { data } = await getPageConfigDataByNameAPI("my") || { data: {} as Config }
-  const { info, info_two, character, goals, project } = data.value as MyData
+  const { info_two, character, goals, project } = data.value as MyData
  
   return (
     <>
