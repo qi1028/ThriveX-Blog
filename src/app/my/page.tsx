@@ -9,10 +9,12 @@ import Calendar from "./component/Calendar"
 import InfoTwo from './component/InfoTwo'
 import { getPageConfigDataByNameAPI } from '@/api/config'
 import { Config } from '@/types/app/config'
+import { MyData } from '@/types/app/my'
 
 export default async () => {
-  const { data: { value: data } } = await getPageConfigDataByNameAPI("my") || { data: {} as Config }
-
+  const { data } = await getPageConfigDataByNameAPI("my") || { data: {} as Config }
+  const { info, info_two, character, goals, project } = data.value as MyData
+ 
   return (
     <>
       <title>👋 关于我</title>
@@ -22,7 +24,7 @@ export default async () => {
         style={{ backgroundImage: `url(${bg.src})` }}>
         <div className="w-[90%] lg:w-[950px] mx-auto">
           {/* <Info data={data?.info} /> */}
-          <InfoTwo data={data?.info_two} />
+          <InfoTwo data={info_two} />
         </div>
 
         <div className='flex justify-center mt-24 px-10'>
@@ -30,8 +32,8 @@ export default async () => {
         </div>
 
         <div className="flex flex-col md:flex-row w-[90%] sm:w-9/12 mt-52 mx-auto">
-          <Character data={data?.character} />
-          <Goals data={data?.goals} />
+          <Character data={character} />
+          <Goals data={goals} />
         </div>
 
         <div className="flex flex-col md:flex-row w-[90%] sm:w-9/12 mt-52 mx-auto">
@@ -40,7 +42,7 @@ export default async () => {
         </div>
 
         <div className="mt-52">
-          <Project data={data?.project} />
+          <Project data={project} />
         </div>
 
         {/* <div className="mt-52">
