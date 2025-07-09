@@ -1,4 +1,4 @@
-export interface Info {
+export interface InfoOne {
     name: string;
     avatar: StaticImageData;
     profession: string;
@@ -45,7 +45,8 @@ export interface Project {
 }
 
 export interface MyData {
-    info: Info,
+    info_style: "info_one" | "info_two",
+    info_one: InfoOne,
     info_two: InfoTwo,
     character: Character[],
     goals: Goal[],

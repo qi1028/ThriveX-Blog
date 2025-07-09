@@ -10,11 +10,12 @@ import InfoTwo from './component/InfoTwo'
 import { getPageConfigDataByNameAPI } from '@/api/config'
 import { Config } from '@/types/app/config'
 import { MyData } from '@/types/app/my'
+import InfoOne from './component/InfoOne'
 
 export default async () => {
   const { data } = await getPageConfigDataByNameAPI("my") || { data: {} as Config }
-  const { info_two, character, goals, project } = data.value as MyData
- 
+  const { info_style, info_one, info_two, character, goals, project } = data.value as MyData
+
   return (
     <>
       <title>👋 关于我</title>
@@ -23,8 +24,11 @@ export default async () => {
       <div className="bg-white dark:bg-black-a pt-20 bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${bg.src})` }}>
         <div className="w-[90%] lg:w-[950px] mx-auto">
-          {/* <Info data={data?.info} /> */}
-          <InfoTwo data={info_two} />
+          {
+            info_style === 'info_one'
+              ? <InfoOne data={info_one} />
+              : <InfoTwo data={info_two} />
+          }
         </div>
 
         <div className='flex justify-center mt-24 px-10'>
