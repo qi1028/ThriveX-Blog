@@ -182,7 +182,7 @@ const Header = () => {
             </div >
 
             {/* 侧边导航：移动端时候显示 */}
-            < SidebarNav list={cateList} open={isOpenSidebarNav} onClose={() => setIsOpenSidebarNav(false)} />
+            <SidebarNav list={cateList} open={isOpenSidebarNav} onClose={() => setIsOpenSidebarNav(false)} />
         </>
     );
 };
