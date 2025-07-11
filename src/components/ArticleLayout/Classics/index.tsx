@@ -19,7 +19,7 @@ interface ClassicsProps {
 const Classics = async ({ data }: ClassicsProps) => {
     const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("theme")) || { data: { value: {} as Theme } };
 
-    const covers = JSON.parse(theme.covers || '[]')
+    const covers = theme.covers || []
 
     // 生成文章摘要，取前100个字
     const genArticleInfo = (data: Article) => {

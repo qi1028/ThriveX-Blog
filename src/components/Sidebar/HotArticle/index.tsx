@@ -12,8 +12,8 @@ const RandomArticle = async () => {
     const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("theme")) || { data: { value: {} as Theme } };
     const { data: article } = await getArticleListAPI() || { data: [] as Article[] }
 
-    const ids = JSON.parse(theme.reco_article ? theme.reco_article : '[]')
-    const list = article?.filter((item: Article) => ids.includes(item.id + ''))
+    const ids = theme.reco_article || []
+    const list = article?.filter((item: Article) => ids.includes(item.id as number))
 
     return (
         <div className='hotArticleComponent'>
