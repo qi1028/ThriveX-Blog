@@ -17,7 +17,7 @@ interface ClassicsProps {
 }
 
 const Classics = async ({ data }: ClassicsProps) => {
-    const { data: theme } = await getWebConfigDataAPI<Theme>("layout") || { data: {} as Theme }
+    const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("layout")) || { data: { value: {} as Theme } };
 
     const covers = JSON.parse(theme.covers || '[]')
 

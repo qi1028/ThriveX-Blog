@@ -7,7 +7,7 @@ import { getWebConfigDataAPI } from '@/api/config'
 import { Theme } from "@/types/app/config"
 
 export default async () => {
-  const { data: theme } = await getWebConfigDataAPI<Theme>("layout") || { data: {} as Theme }
+  const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("layout")) || { data: { value: {} as Theme } };
   const sidebar: string[] = JSON.parse(theme?.right_sidebar || '[]')
 
   return (

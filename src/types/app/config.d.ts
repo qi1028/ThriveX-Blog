@@ -37,7 +37,7 @@ export interface Theme {
     swiper_image: string,
     swiper_text: string,
     reco_article: string,
-    social: string,
+    social: Social[],
     covers: string,
     record_name: string,
     record_info: string
