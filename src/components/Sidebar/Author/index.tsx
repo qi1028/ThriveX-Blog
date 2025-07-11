@@ -16,7 +16,7 @@ import { Social, Theme } from '@/types/app/config';
 
 const Author = async () => {
     const { data: user } = await getUserDataAPI() || { data: {} as User }
-    const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("layout")) || { data: { value: {} as Theme } };
+    const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("theme")) || { data: { value: {} as Theme } };
 
     const socialList = theme?.social || []
 

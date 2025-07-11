@@ -17,7 +17,7 @@ interface CardProps {
 }
 
 const Card = async ({ data }: CardProps) => {
-    const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("layout")) || { data: { value: {} as Theme } };
+    const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("theme")) || { data: { value: {} as Theme } };
 
     const covers = JSON.parse(theme.covers || '[]')
 

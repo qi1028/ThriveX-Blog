@@ -28,7 +28,7 @@ const Header = () => {
         const { data: { value: web } } = (await getWebConfigDataAPI<{ value: Web }>("web")) || { data: { value: {} as Web } };
         setWeb(web)
 
-        const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("layout")) || { data: { value: {} as Theme } };
+        const { data: { value: theme } } = (await getWebConfigDataAPI<{ value: Theme }>("theme")) || { data: { value: {} as Theme } };
         setTheme(theme)
     }
 
