@@ -60,7 +60,7 @@ export default async (props: Props) => {
                     <div className="w-full p-4 border dark:border-black-b rounded-3xl rounded-tl-none bg-[rgba(255,255,255,0.7)] dark:bg-[rgba(30,36,46,0.9)] backdrop-blur-sm  ">
                       <Editor value={item?.content} />
 
-                      <ImageList list={item?.images || []} />
+                      <ImageList list={JSON.parse(item?.images as string || '[]')} />
                       {/* <Comment /> */}
                     </div>
                   </div>
