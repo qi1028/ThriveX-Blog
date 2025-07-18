@@ -4,7 +4,6 @@ import { getWebConfigDataAPI } from '@/api/config'
 import { getArticleListAPI } from '@/api/article';
 import { IoIosArrowForward } from "react-icons/io";
 import fire from '@/assets/svg/other/fire.svg';
-import "./index.scss";
 import { Theme } from '@/types/app/config';
 import { Article } from '@/types/app/article';
 
