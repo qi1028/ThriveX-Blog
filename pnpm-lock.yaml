@@ -89,6 +89,9 @@ importers:
       react-hook-form:
         specifier: ^7.53.0
         version: 7.60.0(react@19.0.0)
+      react-icon-cloud:
+        specifier: ^4.1.7
+        version: 4.1.7(react@19.0.0)
       react-icons:
         specifier: ^5.3.0
         version: 5.5.0(react@19.0.0)
@@ -202,6 +205,10 @@ packages:
   '@babel/runtime@7.27.6':
     resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
     engines: {node: '>=6.9.0'}
+
+  '@csstools/convert-colors@2.0.0':
+    resolution: {integrity: sha512-P7BVvddsP2Wl5v3drJ3ArzpdfXMqoZ/oHOV/yFiGFb3JQr9Z9UXZ9tnHAKJsO89lfprR1F9ExW3Yij21EjEBIA==}
+    engines: {node: '>=6.0.0'}
 
   '@dicebear/adventurer-neutral@9.2.3':
     resolution: {integrity: sha512-yjsflrlGIZolEJDcIhdh5l8R6QoyZ0Fc5ZaRS95Na15GeCA0bcq92fDpyb/87F8QRYR4hcn8wYim+MZKyDnm3A==}
@@ -3568,6 +3575,11 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
 
+  react-icon-cloud@4.1.7:
+    resolution: {integrity: sha512-E5k93BlO7dNLmFZPd0JlJ1dO6pUI86IarVEXo3bkQg6oFqqwKv3XFkEKRl2iaxB9K2uOvOvoCJu2kjkoQWI6Mg==}
+    peerDependencies:
+      react: '>=16'
+
   react-icons@5.5.0:
     resolution: {integrity: sha512-MEFcXdkP3dLo8uumGI5xN3lDFNsRtrjbOEKDLD7yv76v4wpnEq2Lt2qeHaQOr34I/wPN3s3+N08WkQ+CW37Xiw==}
     peerDependencies:
@@ -4131,6 +4143,8 @@ snapshots:
   '@amap/amap-jsapi-loader@1.0.1': {}
 
   '@babel/runtime@7.27.6': {}
+
+  '@csstools/convert-colors@2.0.0': {}
 
   '@dicebear/adventurer-neutral@9.2.3(@dicebear/core@9.2.3)':
     dependencies:
@@ -8834,6 +8848,11 @@ snapshots:
 
   react-hook-form@7.60.0(react@19.0.0):
     dependencies:
+      react: 19.0.0
+
+  react-icon-cloud@4.1.7(react@19.0.0):
+    dependencies:
+      '@csstools/convert-colors': 2.0.0
       react: 19.0.0
 
   react-icons@5.5.0(react@19.0.0):

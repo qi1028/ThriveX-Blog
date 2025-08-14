@@ -52,7 +52,7 @@ export default function MapContainer() {
       <div data-aos="zoom-in" className="w-full md:w-5/12 flex flex-col mr-0 md:mr-20">
         <div className="text-center text-xl mb-8">我的家乡</div>
 
-        <div id="container" className="w-full h-60 sm:h-80 border rounded-3xl"></div>
+        <div id="container" className="w-full max-h-96 h-60 sm:h-96 border rounded-3xl"></div>
       </div>
     </>
   );
