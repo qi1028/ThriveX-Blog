@@ -36,7 +36,7 @@ export interface Theme {
     dark_logo: string,
     swiper_image: string,
     swiper_text: string[],
-    reco_article: number[],
+    reco_article: string[],
     social: Social[],
     covers: string,
     record_name: string,
