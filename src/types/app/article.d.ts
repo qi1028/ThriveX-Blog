@@ -14,7 +14,7 @@ export interface Config {
 }
 
 export interface Article {
-    id?: string,
+    id?: number,
     title: string,
     description: string,
     content: string,

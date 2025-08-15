@@ -12,10 +12,9 @@ const RandomArticle = async () => {
     data: { value: theme },
   } = (await getWebConfigDataAPI<{ value: Theme }>('theme')) || { data: { value: {} as Theme } };
   const { data: article } = (await getArticleListAPI()) || { data: [] as Article[] };
-
   const ids = theme.reco_article || [];
+  const list = article?.filter((item: Article) => ids.includes(item.id as number));
 
-  const list = article?.filter((item: Article) => ids.includes(String(item.id)));
   return (
     <div className="hotArticleComponent">
       <div className="flex flex-col tw_container bg-white dark:bg-black-b p-4 mb-5 tw_title">
