@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { getWebConfigDataAPI } from '@/api/config';
 import { getArticleListAPI } from '@/api/article';
 import { IoIosArrowForward } from 'react-icons/io';
-import fire from '@/assets/svg/other/fire.svg';
+import FireSvg from '@/assets/svg/other/fire.svg';
 import { Theme } from '@/types/app/config';
 import { Article } from '@/types/app/article';
 
@@ -19,7 +19,7 @@ const RandomArticle = async () => {
     <div className="hotArticleComponent">
       <div className="flex flex-col tw_container bg-white dark:bg-black-b p-4 mb-5 tw_title">
         <div className="tw_title w-full dark:text-white">
-          <Image src={fire} alt="作者推荐" width={30} height={20} />
+          <Image src={FireSvg} alt="作者推荐" width={30} height={20} />
           <span> 作者推荐</span>
         </div>
 
