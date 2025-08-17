@@ -27,8 +27,7 @@ export default async () => {
         {/* 最新评论 */}
         {sidebar.includes('newComments') && <Comment />}
         {/* 装饰组件 */}
-        {/* {sidebar.includes('study') && <Study />} */}
-        <Study />
+        {sidebar.includes('study') && <Study />}
       </div>
     </>
   );
