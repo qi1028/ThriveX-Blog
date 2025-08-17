@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaPhone, FaEnvelope, FaGlobe, FaBriefcase, FaGraduationCap, FaStar, FaCode, FaUser, FaProjectDiagram } from 'react-icons/fa';
+import { FaGithub, FaPhone, FaEnvelope, FaGlobe, FaBriefcase, FaGraduationCap, FaCode, FaUser, FaProjectDiagram } from 'react-icons/fa';
 import { Resume } from '@/types/app/resume';
 
 export default ({ data }: { data: Resume }) => {
@@ -18,9 +18,9 @@ export default ({ data }: { data: Resume }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -29,15 +29,15 @@ export default ({ data }: { data: Resume }) => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5
-      }
-    }
+        duration: 0.5,
+      },
+    },
   };
 
   // 技能标签云数据处理
   const getSkillTags = () => {
     if (!skills || skills.length === 0) return [];
-    return skills.map(skill => {
+    return skills.map((skill) => {
       // 提取技能名称和熟练度（如果有）
       const parts = skill.split('(');
       const name = parts[0].trim();
@@ -60,38 +60,19 @@ export default ({ data }: { data: Resume }) => {
       <meta name="description" content={`${personalInfo?.name ?? ''} - ${personalInfo?.title ?? ''} 的个人简历`} />
 
       <div className="min-h-screen py-8 mt-[60px] px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        <motion.div 
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="max-w-5xl mx-auto"
-        >
+        <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-5xl mx-auto">
           {/* 个人信息头部 */}
-          <motion.div 
-            variants={itemVariants}
-            className="mt-4 mb-8 bg-white dark:bg-gray-800 rounded-2xl border dark:border-black-a overflow-hidden"
-          >
+          <motion.div variants={itemVariants} className="mt-4 mb-8 bg-white dark:bg-gray-800 rounded-2xl border dark:border-black-a overflow-hidden">
             <div className="mt-8 px-8 pb-8 relative">
               <div className="flex flex-col md:flex-row items-center gap-6">
-                <motion.div 
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-gray-700"
-                >
-                  <img 
-                    src={personalInfo?.avatar} 
-                    alt={personalInfo?.name} 
-                    className="object-cover w-full h-full"
-                  />
+                <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ duration: 0.5 }} className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-gray-700">
+                  <img src={personalInfo?.avatar} alt={personalInfo?.name} className="object-cover w-full h-full" />
                 </motion.div>
 
                 <div className="flex-1 text-center md:text-left">
                   <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{personalInfo?.name}</h1>
-                  <h2 className="font-semibold text-blue-600 dark:text-blue-400 mb-3">
-                    {personalInfo?.title}
-                  </h2>
-                  
+                  <h2 className="font-semibold text-blue-600 dark:text-blue-400 mb-3">{personalInfo?.title}</h2>
+
                   <div className="flex flex-wrap justify-center md:justify-start gap-4 text-gray-600 dark:text-gray-300 mb-4">
                     <span className="flex items-center text-sm">
                       <span className="font-medium mr-1">年龄:</span>
@@ -102,29 +83,20 @@ export default ({ data }: { data: Resume }) => {
                       {personalInfo?.location}
                     </span>
                   </div>
-                  
+
                   <div className="flex flex-wrap justify-center md:justify-start gap-4 text-gray-700 dark:text-gray-300">
-                    <a 
-                      href={`tel:${personalInfo?.contact?.phone}`} 
-                      className="flex items-center hover:text-blue-600 transition-colors text-sm"
-                    >
-                      <FaPhone className="mr-1 text-blue-500" size={16} /> 
+                    <a href={`tel:${personalInfo?.contact?.phone}`} className="flex items-center hover:text-blue-600 text-sm">
+                      <FaPhone className="mr-1 text-blue-500" size={16} />
                       <span>{personalInfo?.contact?.phone}</span>
                     </a>
-                    <a 
-                      href={`mailto:${personalInfo?.contact?.email}`} 
-                      className="flex items-center hover:text-blue-600 transition-colors text-sm"
-                    >
-                      <FaEnvelope className="mr-1 text-blue-500" size={16} /> 
+
+                    <a href={`mailto:${personalInfo?.contact?.email}`} className="flex items-center hover:text-blue-600 text-sm">
+                      <FaEnvelope className="mr-1 text-blue-500" size={16} />
                       <span>{personalInfo?.contact?.email}</span>
                     </a>
-                    <a 
-                      href={personalInfo?.contact?.github} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex items-center hover:text-blue-600 transition-colors text-sm"
-                    >
-                      <FaGithub className="mr-1 text-blue-500" size={16} /> 
+
+                    <a href={personalInfo?.contact?.github} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-blue-600 text-sm">
+                      <FaGithub className="mr-1 text-blue-500" size={16} />
                       <span>GitHub</span>
                     </a>
                   </div>
@@ -137,10 +109,7 @@ export default ({ data }: { data: Resume }) => {
             {/* 左侧栏 */}
             <div className="lg:col-span-1 space-y-6">
               {/* 个人优势 */}
-              <motion.div 
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6"
-              >
+              <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6">
                 <div className="flex items-center mb-4 text-gray-900 dark:text-white">
                   <FaUser className="mr-3 text-blue-500" />
                   <h3 className="text-lg font-bold">个人优势</h3>
@@ -148,41 +117,29 @@ export default ({ data }: { data: Resume }) => {
 
                 <div className="space-y-3 text-gray-600 dark:text-gray-300 text-sm">
                   {advantages?.map((advantage, index) => (
-                    <p key={index} className="flex items-center">
-                      <span className="flex items-center justify-center bg-blue-500 min-w-2 min-h-2 mr-4 rounded-full mt-1"></span>
-                      <span>{advantage}</span>
-                    </p>
+                    <p key={index} className="flex items-center hover:text-blue-600 cursor-pointer">{advantage}</p>
                   ))}
                 </div>
               </motion.div>
 
               {/* 专业技能 */}
-              <motion.div 
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6"
-              >
+              <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6">
                 <div className="flex items-center mb-4 text-gray-900 dark:text-white">
                   <FaCode className="mr-3 text-blue-600 text-lg" />
                   <h3 className="text-lg font-bold">专业技能</h3>
                 </div>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4 text-gray-600">
                   {skillTags.map((tag, index) => (
-                    <div 
-                      key={index} 
-                      className="dark:bg-blue-900/30 py-1 rounded-full text-sm font-medium"
-                    >{tag.name}</div>
+                    <p key={index} className="dark:bg-blue-900/30 py-1 rounded-full text-sm font-medium hover:text-blue-600 cursor-pointer">{tag.name}</p>
                   ))}
                 </div>
               </motion.div>
 
               {/* 教育背景 */}
-              <motion.div 
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6"
-              >
+              <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6">
                 <div className="flex items-center mb-4 text-gray-900 dark:text-white">
-                  <FaGraduationCap className="mr-3 text-blue-500 text-lg" />
+                  <FaGraduationCap className="mr-3 text-blue-500 text-2xl" />
                   <h3 className="text-lg font-bold">教育背景</h3>
                 </div>
 
@@ -199,17 +156,17 @@ export default ({ data }: { data: Resume }) => {
 
                   <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1 text-sm">
                     {education?.achievements?.map((achievement, index) => (
-                      <li key={index}>{achievement}</li>
+                      <li key={index} className="flex items-center">
+                        <span className="flex items-center justify-center bg-blue-500 min-w-1.5 min-h-1.5 mr-2 rounded-full"></span>
+                        <span>{achievement}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
               </motion.div>
 
               {/* 相关链接 */}
-              <motion.div 
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6"
-              >
+              <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6">
                 <div className="flex items-center mb-4 text-gray-900 dark:text-white">
                   <FaGlobe className="mr-3 text-blue-500" />
                   <h3 className="text-lg font-bold">相关链接</h3>
@@ -217,34 +174,19 @@ export default ({ data }: { data: Resume }) => {
 
                 <div className="space-y-3">
                   {links?.github && (
-                    <a 
-                      href={links.github} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors"
-                    >
+                    <a href={links.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors">
                       <FaGithub className="mr-2" size={16} /> GitHub
                     </a>
                   )}
-                  
+
                   {links?.csdn && (
-                    <a 
-                      href={links.csdn} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors"
-                    >
+                    <a href={links.csdn} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors">
                       <FaGlobe className="mr-2" size={16} /> CSDN 技术博客
                     </a>
                   )}
-                  
+
                   {links?.project && (
-                    <a 
-                      href={links.project} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors"
-                    >
+                    <a href={links.project} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors">
                       <FaProjectDiagram className="mr-2" size={16} /> 开源项目作品
                     </a>
                   )}
@@ -255,10 +197,7 @@ export default ({ data }: { data: Resume }) => {
             {/* 右侧栏 */}
             <div className="lg:col-span-2 space-y-6">
               {/* 工作经历 */}
-              <motion.div 
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6"
-              >
+              <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6">
                 <div className="flex items-center mb-5 text-gray-900 dark:text-white">
                   <FaBriefcase className="mr-3 text-blue-500" />
                   <h3 className="text-lg font-bold">工作经历</h3>
@@ -270,15 +209,14 @@ export default ({ data }: { data: Resume }) => {
                       <div className="absolute left-[-7px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
                       <div className="flex flex-wrap justify-between items-start mb-1">
                         <h4 className="text-md font-bold text-gray-900 dark:text-white">{job.company}</h4>
-                        <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded mt-1 md:mt-0">
-                          {job.period}
-                        </span>
+                        <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded mt-1 md:mt-0">{job.period}</span>
                       </div>
                       <p className="text-gray-700 dark:text-gray-300 font-medium text-sm mb-2">{job.position}</p>
                       <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1 text-sm">
-                        {job.responsibilities?.map((responsibility, i) => (
-                          <li key={i}>
-                            {responsibility}
+                        {job.responsibilities?.map((responsibility, index) => (
+                          <li key={index} className="flex items-center">
+                            <span className="flex items-center justify-center bg-blue-500 min-w-1.5 min-h-1.5 mr-2 rounded-full"></span>
+                            <span>{responsibility}</span>
                           </li>
                         ))}
                       </ul>
@@ -288,10 +226,7 @@ export default ({ data }: { data: Resume }) => {
               </motion.div>
 
               {/* 项目经历 */}
-              <motion.div 
-                variants={itemVariants}
-                className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6"
-              >
+              <motion.div variants={itemVariants} className="bg-white dark:bg-gray-800 border dark:border-black-a rounded-xl p-6">
                 <div className="flex items-center mb-5 text-gray-900 dark:text-white">
                   <FaProjectDiagram className="mr-3 text-blue-500" />
                   <h3 className="text-lg font-bold">项目经历</h3>
@@ -303,23 +238,22 @@ export default ({ data }: { data: Resume }) => {
                       <div className="bg-gray-50 dark:bg-gray-700/50 p-4 border-b border-gray-100 dark:border-gray-700">
                         <div className="flex flex-wrap justify-between items-start mb-1">
                           <h4 className="text-md font-bold text-gray-900 dark:text-white">{project.name}</h4>
-                          <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded mt-1 md:mt-0">
-                            {project.period}
-                          </span>
+                          <span className="text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded mt-1 md:mt-0">{project.period}</span>
                         </div>
                         <p className="text-gray-700 dark:text-gray-300 font-medium text-sm">{project.role}</p>
                       </div>
-                      
+
                       <div className="p-4 space-y-3 text-sm">
                         <div>
                           <h5 className="font-bold text-gray-800 dark:text-white mb-1 flex items-center text-sm">
-                            <FaStar className="mr-1 text-yellow-500" size={14} />
                             项目描述
                           </h5>
                           <div className="text-gray-600 dark:text-gray-300 text-sm">
                             {Array.isArray(project.description)
                               ? project.description.map((desc, i) => (
-                                  <p key={i} className="mb-1.5">{desc}</p>
+                                  <p key={i} className="mb-1.5">
+                                    {desc}
+                                  </p>
                                 ))
                               : project.description}
                           </div>
@@ -348,7 +282,7 @@ export default ({ data }: { data: Resume }) => {
                             <ul className="space-y-1 text-gray-600 dark:text-gray-300 text-sm">
                               {project.highlights.map((highlight, i) => (
                                 <li key={i} className="flex items-center">
-                                  <span className="flex items-center justify-center bg-blue-500 w-1.5 h-1.5 mr-2 rounded-full"></span>
+                                  <span className="flex items-center justify-center bg-blue-500 min-w-1.5 min-h-1.5 mr-2 rounded-full"></span>
                                   <span>{highlight}</span>
                                 </li>
                               ))}
@@ -360,34 +294,19 @@ export default ({ data }: { data: Resume }) => {
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">相关链接</h5>
                             <div className="flex flex-wrap gap-2">
-                              {project.links && Object.entries(project.links).map(([key, value]) => (
-                                <a 
-                                  key={key}
-                                  href={value as string} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer" 
-                                  className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-xs font-medium bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded transition-colors"
-                                >
-                                  {key === 'preview' ? '项目预览' : 
-                                   key === 'website' ? '项目官网' : 
-                                   key === 'docs' ? '项目文档' : 
-                                   key === 'api' ? '项目接口' : 
-                                   key === 'dashboard' ? '项目后台' : key}
-                                </a>
-                              ))}
-                              
-                              {project.repositories && Object.entries(project.repositories).map(([key, value]) => (
-                                <a 
-                                  key={key}
-                                  href={value as string} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer" 
-                                  className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-xs font-medium bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded transition-colors"
-                                >
-                                  {key === 'frontend' ? '前端仓库' : 
-                                   key === 'admin' ? '控制端仓库' : '后端仓库'}
-                                </a>
-                              ))}
+                              {project.links &&
+                                Object.entries(project.links).map(([key, value]) => (
+                                  <a key={key} href={value as string} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-xs font-medium bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded transition-colors">
+                                    {key === 'preview' ? '项目预览' : key === 'website' ? '项目官网' : key === 'docs' ? '项目文档' : key === 'api' ? '项目接口' : key === 'dashboard' ? '项目后台' : key}
+                                  </a>
+                                ))}
+
+                              {project.repositories &&
+                                Object.entries(project.repositories).map(([key, value]) => (
+                                  <a key={key} href={value as string} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-xs font-medium bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded transition-colors">
+                                    {key === 'frontend' ? '前端仓库' : key === 'admin' ? '控制端仓库' : '后端仓库'}
+                                  </a>
+                                ))}
                             </div>
                           </div>
                         )}
@@ -396,17 +315,19 @@ export default ({ data }: { data: Resume }) => {
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">业绩</h5>
                             <ul className="space-y-1 text-gray-600 dark:text-gray-300 text-sm">
-                              {Array.isArray(project.achievements) 
-                                ? project.achievements.map((achievement, i) => (
-                                    <li key={i} className="flex items-center">
-                                      <span className="flex items-center justify-center bg-blue-500 w-1.5 h-1.5 mr-2 rounded-full">•</span>
-                                      <span>{achievement}</span>
-                                    </li>
-                                  ))
-                                : <li className="flex items-center">
-                                    <span className="flex items-center justify-center bg-blue-500 w-1.5 h-1.5 mr-2 rounded-full">•</span>
-                                    <span>{project.achievements}</span>
-                                  </li>}
+                              {Array.isArray(project.achievements) ? (
+                                project.achievements.map((achievement, i) => (
+                                  <li key={i} className="flex items-center">
+                                    <span className="flex items-center justify-center bg-blue-500 min-w-1.5 min-h-1.5 mr-2 rounded-full"></span>
+                                    <span>{achievement}</span>
+                                  </li>
+                                ))
+                              ) : (
+                                <li className="flex items-center">
+                                  <span className="flex items-center justify-center bg-blue-500 min-w-1.5 min-h-1.5 mr-2 rounded-full"></span>
+                                  <span>{project.achievements}</span>
+                                </li>
+                              )}
                             </ul>
                           </div>
                         )}
