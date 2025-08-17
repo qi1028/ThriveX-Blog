@@ -65,8 +65,10 @@ export default ({ data }: { data: Resume }) => {
           <motion.div variants={itemVariants} className="mt-4 mb-8 bg-white dark:bg-gray-800 rounded-2xl border dark:border-black-a overflow-hidden">
             <div className="mt-8 px-8 pb-8 relative">
               <div className="flex flex-col md:flex-row items-center gap-6">
-                <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ duration: 0.5 }} className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-gray-700">
-                  <img src={personalInfo?.avatar} alt={personalInfo?.name} className="object-cover w-full h-full" />
+                <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ duration: 0.5 }} className="relative flex justify-center items-center w-32 h-32 rounded-full overflow-hidden bg-white shadow-xl border-transparent border-4 dark:border-gray-700">
+                  <div className="flex justify-center items-center w-[98%] h-[98%] rounded-full overflow-hidden">
+                    <img src={personalInfo?.avatar} alt={personalInfo?.name} className="object-cover w-full h-full" />
+                  </div>
                 </motion.div>
 
                 <div className="flex-1 text-center md:text-left">
@@ -117,7 +119,9 @@ export default ({ data }: { data: Resume }) => {
 
                 <div className="space-y-3 text-gray-600 dark:text-gray-300 text-sm">
                   {advantages?.map((advantage, index) => (
-                    <p key={index} className="flex items-center hover:text-blue-600 cursor-pointer">{advantage}</p>
+                    <p key={index} className="flex items-center hover:text-blue-600 cursor-pointer">
+                      {advantage}
+                    </p>
                   ))}
                 </div>
               </motion.div>
@@ -131,7 +135,9 @@ export default ({ data }: { data: Resume }) => {
 
                 <div className="flex flex-wrap gap-2 mb-4 text-gray-600">
                   {skillTags.map((tag, index) => (
-                    <p key={index} className="dark:bg-blue-900/30 py-1 rounded-full text-sm font-medium hover:text-blue-600 cursor-pointer">{tag.name}</p>
+                    <p key={index} className="dark:bg-blue-900/30 py-1 rounded-full text-sm font-medium hover:text-blue-600 cursor-pointer">
+                      {tag.name}
+                    </p>
                   ))}
                 </div>
               </motion.div>
@@ -245,9 +251,7 @@ export default ({ data }: { data: Resume }) => {
 
                       <div className="p-4 space-y-3 text-sm">
                         <div>
-                          <h5 className="font-bold text-gray-800 dark:text-white mb-1 flex items-center text-sm">
-                            项目描述
-                          </h5>
+                          <h5 className="font-bold text-gray-800 dark:text-white mb-1 flex items-center text-sm">项目描述</h5>
                           <div className="text-gray-600 dark:text-gray-300 text-sm">
                             {Array.isArray(project.description)
                               ? project.description.map((desc, i) => (
