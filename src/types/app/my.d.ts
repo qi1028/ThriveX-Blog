@@ -51,4 +51,6 @@ export interface MyData {
     character: Character[],
     goals: Goal[],
     project: Project[]
+    technology_stack: string[],
+    hometown: number[]
 }

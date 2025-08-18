@@ -7,7 +7,7 @@ import 'aos/dist/aos.css';
 
 import { getGaodeMapConfigDataAPI } from '@/api/config';
 
-export default function MapContainer() {
+export default function MapContainer({ position }: { position: number[] }) {
   let map: any;
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function MapContainer() {
           });
 
           new AMap.Marker({
-            position: [113.625351, 34.746303], // 标记位置
+            position, // 标记位置
             map, // 将标记添加到地图
           });
         })
