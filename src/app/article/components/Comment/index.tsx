@@ -8,6 +8,9 @@ import { Spinner } from '@heroui/react';
 import List from './components/List';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
+import HCaptcha from '@/components/HCaptcha';
+import HCaptchaType from '@hcaptcha/react-hcaptcha';
+
 
 interface Props {
   articleId: number;
@@ -31,6 +34,12 @@ const CommentForm = ({ articleId }: Props) => {
 
   const commentRef = useRef<{ getCommentList: () => void }>(null);
 
+  const captchaRef = useRef<HCaptchaType>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState<string>('');
+  const isMachineVerification = process.env.NEXT_PUBLIC_VERIFICATION == 'true';
+
+
   const {
     register,
     formState: { errors },
@@ -48,6 +57,13 @@ const CommentForm = ({ articleId }: Props) => {
   }, [setValue]);
 
   const onSubmit = async (data: CommentForm) => {
+    // 清除之前的人机验证错误
+    setCaptchaError('');
+    
+    if (!captchaToken && isMachineVerification) {
+      setCaptchaError('请完成人机验证');
+      return;
+    }
     setLoading(true);
 
     // 判断是不是QQ邮箱，如果是就把QQ截取出来，然后用QQ当做头像
@@ -59,8 +75,17 @@ const CommentForm = ({ articleId }: Props) => {
       if (!isNaN(+qq)) data.avatar = `https://q1.qlogo.cn/g?b=qq&nk=${qq}&s=640`;
     }
 
-    const { code, message } = (await addCommentDataAPI({ ...data, articleId, commentId: commentId === articleId ? 0 : commentId, createTime: Date.now().toString() })) || { code: 0, message: '' };
-    if (code !== 200) return alert('发布评论失败：' + message);
+    const { code, message } = (await addCommentDataAPI({
+      ...data,
+      articleId,
+      commentId: commentId === articleId ? 0 : commentId,
+      createTime: Date.now().toString(),
+      h_captcha_response: captchaToken,
+    })) || { code: 0, message: '' };
+    if (code !== 200) {
+      captchaRef.current?.resetCaptcha();
+      return alert('发布评论失败：' + message);
+    }
 
     toast('🎉 提交成功, 请等待审核!');
 
@@ -70,9 +95,20 @@ const CommentForm = ({ articleId }: Props) => {
     setPlaceholder('来发一针见血的评论吧~');
     commentRef.current?.getCommentList();
     setLoading(false);
+    
+    // 清除验证相关状态
+    setCaptchaError('');
+    setCaptchaToken(null);
+    captchaRef.current?.resetCaptcha();
 
     // 提交成功后把评论的数据持久化到本地
     localStorage.setItem('comment_data', JSON.stringify(data));
+  };
+
+  // 处理人机验证成功回调
+  const handleCaptchaSuccess = (token: string) => {
+    setCaptchaToken(token);
+    setCaptchaError(''); // 清除错误提示
   };
 
   // 回复评论
@@ -120,6 +156,15 @@ const CommentForm = ({ articleId }: Props) => {
             <input type="text" className="tw_form w-full h-9 pl-4" placeholder="你的站点（选填）" {...register('url', { pattern: { value: /^https?:\/\//, message: '请输入正确的网站链接' } })} />
             <span className="text-red-400 text-sm pl-3 mt-1">{errors.url?.message}</span>
           </div>
+
+            {isMachineVerification && ( 
+              <div className="flex flex-col">
+                <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess} />
+                {captchaError && (
+                  <span className="text-red-400 text-sm pl-3 mt-1">{captchaError}</span>
+                )}
+              </div>
+            )}
 
           {loading ? (
             <div className="w-full h-10 flex justify-center !mt-4">
