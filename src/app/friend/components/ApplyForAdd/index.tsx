@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Select, SelectItem, Textarea } from '@heroui/react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Web, WebType } from '@/types/app/web';
 import { addWebDataAPI, getWebTypeListAPI } from '@/api/web';
 import { Bounce, toast, ToastOptions } from 'react-toastify';
+import HCaptchaType from '@hcaptcha/react-hcaptcha';
+import HCaptcha from '@/components/HCaptcha';
 import 'react-toastify/dist/ReactToastify.css';
 
 const toastConfig: ToastOptions = {
@@ -23,6 +25,11 @@ const toastConfig: ToastOptions = {
 export default () => {
   const [loading, setLoading] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  // 人机验证相关
+  const captchaRef = useRef<HCaptchaType>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState<string>('');
 
   // 获取网站类型列表
   const [typeList, setTypeList] = useState<WebType[]>([]);
@@ -48,17 +55,37 @@ export default () => {
     formState: { errors },
     trigger,
   } = useForm<Web>({ defaultValues: {} as Web });
+  
   const onSubmit: SubmitHandler<Web> = async (data, event) => {
     event?.preventDefault();
 
+    // 清除之前的人机验证错误
+    setCaptchaError('');
+
+    if (!captchaToken) return setCaptchaError('请完成人机验证');
+
     setLoading(true);
-    const { code, message } = (await addWebDataAPI({ ...data, createTime: Date.now().toString() })) || { code: 0, message: '' };
-    if (code !== 200) return toast.error(message, toastConfig);
+    const { code, message } = (await addWebDataAPI({ ...data, createTime: Date.now().toString(), h_captcha_response: captchaToken })) || { code: 0, message: '' };
+    if (code !== 200) {
+      captchaRef.current?.resetCaptcha();
+      return toast.error(message, toastConfig);
+    }
     setLoading(false);
+
+    // 清除验证相关状态
+    setCaptchaError('');
+    setCaptchaToken(null);
+    captchaRef.current?.resetCaptcha();
 
     localStorage.setItem('toastMessage', '🎉 提交成功, 请等待审核!');
     window.location.reload();
     onOpenChange();
+  };
+
+  // 处理人机验证成功回调
+  const handleCaptchaSuccess = (token: string) => {
+    setCaptchaToken(token);
+    setCaptchaError(''); // 清除错误提示
   };
 
   // 表单样式
@@ -181,6 +208,12 @@ export default () => {
                     </>
                   )}
                 />
+                
+                {/* 人机验证 */}
+                <div className="flex flex-col">
+                  <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess} />
+                  {captchaError && <span className="text-red-400 text-sm pl-3 mt-1">{captchaError}</span>}
+                </div>
               </ModalBody>
 
               <ModalFooter>

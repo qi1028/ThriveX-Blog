@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form';
 import { addCommentDataAPI } from '@/api/comment';
 import { ToastContainer, toast } from 'react-toastify';
 import { Spinner } from '@heroui/react';
+import HCaptchaType from '@hcaptcha/react-hcaptcha';
 import List from './components/List';
+import HCaptcha from '@/components/HCaptcha';
 import 'react-toastify/dist/ReactToastify.css';
 import './index.scss';
-import HCaptcha from '@/components/HCaptcha';
-import HCaptchaType from '@hcaptcha/react-hcaptcha';
 
 interface Props {
   articleId: number;
@@ -57,10 +57,8 @@ const CommentForm = ({ articleId }: Props) => {
     // 清除之前的人机验证错误
     setCaptchaError('');
 
-    if (!captchaToken) {
-      setCaptchaError('请完成人机验证');
-      return;
-    }
+    if (!captchaToken) return setCaptchaError('请完成人机验证');
+
     setLoading(true);
 
     // 判断是不是QQ邮箱，如果是就把QQ截取出来，然后用QQ当做头像
@@ -79,9 +77,10 @@ const CommentForm = ({ articleId }: Props) => {
       createTime: Date.now().toString(),
       h_captcha_response: captchaToken,
     })) || { code: 0, message: '' };
+
     if (code !== 200) {
       captchaRef.current?.resetCaptcha();
-      return alert('发布评论失败：' + message);
+      return toast.error('发布评论失败：' + message);
     }
 
     toast('🎉 提交成功, 请等待审核!');
