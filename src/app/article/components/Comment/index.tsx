@@ -11,7 +11,6 @@ import './index.scss';
 import HCaptcha from '@/components/HCaptcha';
 import HCaptchaType from '@hcaptcha/react-hcaptcha';
 
-
 interface Props {
   articleId: number;
   articleTitle: string;
@@ -37,8 +36,6 @@ const CommentForm = ({ articleId }: Props) => {
   const captchaRef = useRef<HCaptchaType>(null);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState<string>('');
-  const isMachineVerification = process.env.NEXT_PUBLIC_VERIFICATION == 'true';
-
 
   const {
     register,
@@ -59,8 +56,8 @@ const CommentForm = ({ articleId }: Props) => {
   const onSubmit = async (data: CommentForm) => {
     // 清除之前的人机验证错误
     setCaptchaError('');
-    
-    if (!captchaToken && isMachineVerification) {
+
+    if (!captchaToken) {
       setCaptchaError('请完成人机验证');
       return;
     }
@@ -95,7 +92,7 @@ const CommentForm = ({ articleId }: Props) => {
     setPlaceholder('来发一针见血的评论吧~');
     commentRef.current?.getCommentList();
     setLoading(false);
-    
+
     // 清除验证相关状态
     setCaptchaError('');
     setCaptchaToken(null);
@@ -157,14 +154,10 @@ const CommentForm = ({ articleId }: Props) => {
             <span className="text-red-400 text-sm pl-3 mt-1">{errors.url?.message}</span>
           </div>
 
-            {isMachineVerification && ( 
-              <div className="flex flex-col">
-                <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess} />
-                {captchaError && (
-                  <span className="text-red-400 text-sm pl-3 mt-1">{captchaError}</span>
-                )}
-              </div>
-            )}
+          <div className="flex flex-col">
+            <HCaptcha ref={captchaRef} setToken={handleCaptchaSuccess} />
+            {captchaError && <span className="text-red-400 text-sm pl-3 mt-1">{captchaError}</span>}
+          </div>
 
           {loading ? (
             <div className="w-full h-10 flex justify-center !mt-4">
