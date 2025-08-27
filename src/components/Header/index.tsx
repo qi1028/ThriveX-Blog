@@ -70,15 +70,14 @@ const Header = () => {
 
   // 手动切换主题
   const toTheme = () => {
-    const html = document.querySelector('html');
-    if (html) {
-      setIsDark(html.classList.toggle('dark'));
-    }
+    setIsDark(!isDark);
   };
   // 判断当前主题
   useEffect(() => {
     const html = document.querySelector('html');
-    html?.classList.toggle('dark', isDark);
+    if (html && html.classList) {
+      html?.classList?.toggle('dark', isDark);
+    }
   }, [isDark]);
 
   // 是否打开侧边栏导航

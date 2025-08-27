@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { addCommentDataAPI } from '@/api/comment';
-import { ToastContainer, toast } from 'react-toastify';
+import { Bounce, ToastOptions, toast } from 'react-toastify';
 import { Spinner } from '@heroui/react';
 import HCaptchaType from '@hcaptcha/react-hcaptcha';
 import List from './components/List';
@@ -23,6 +23,18 @@ interface CommentForm {
   url: string;
   avatar: string;
 }
+
+const toastConfig: ToastOptions = {
+  position: 'top-right',
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: 'colored',
+  transition: Bounce,
+};
 
 const CommentForm = ({ articleId }: Props) => {
   const contentRef = useRef<HTMLTextAreaElement>(null);
@@ -80,10 +92,10 @@ const CommentForm = ({ articleId }: Props) => {
 
     if (code !== 200) {
       captchaRef.current?.resetCaptcha();
-      return toast.error('发布评论失败：' + message);
+      return toast.error('发布评论失败：' + message, toastConfig);
     }
 
-    toast('🎉 提交成功, 请等待审核!');
+    toast.success('🎉 提交成功, 请等待审核!', toastConfig);
 
     // 发布成功后初始化表单
     setCommentId(articleId);
@@ -171,7 +183,6 @@ const CommentForm = ({ articleId }: Props) => {
 
         <List ref={commentRef} id={articleId} reply={replyComment} />
       </div>
-      <ToastContainer />
     </div>
   );
 };
