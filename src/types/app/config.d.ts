@@ -21,6 +21,7 @@ export interface Web {
     description: string,
     keyword: string,
     footer: string,
+    baidu_token: string,
     icp: string,
     create_time: number,
 }

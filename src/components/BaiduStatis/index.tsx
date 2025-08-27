@@ -1,21 +1,24 @@
 'use client';
 
-import Script from 'next/script';
+import { useEffect } from 'react';
+import { useConfigStore } from '@/stores';
 
-export default () => {
-  return (
-    <Script
-      dangerouslySetInnerHTML={{
-        __html: `
-              var _hmt = _hmt || [];
-              (function() {
-                var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?e5bf799a3e49312141c8b677b7bec1c2";
-                var s = document.getElementsByTagName("script")[0]; 
-                s.parentNode.insertBefore(hm, s);
-              })();
-            `,
-      }}
-    />
-  );
-};
+export default function BaiduAnalytics() {
+  const web = useConfigStore((state) => state.web);
+
+  useEffect(() => {
+    if (web?.baidu_token) {
+      window._hmt = window._hmt || [];
+      const baiduScript = document.createElement('script');
+      baiduScript.src = `https://hm.baidu.com/hm.js?${web.baidu_token}`;
+      baiduScript.async = true;
+      document.head.appendChild(baiduScript);
+
+      return () => {
+        document.head.removeChild(baiduScript);
+      };
+    }
+  }, [web]);
+
+  return null;
+}
