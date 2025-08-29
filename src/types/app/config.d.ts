@@ -21,7 +21,6 @@ export interface Web {
     description: string,
     keyword: string,
     footer: string,
-    baidu_token: string,
     icp: string,
     create_time: number,
 }
@@ -46,7 +45,7 @@ export interface Theme {
 
 // 其他配置
 export interface Other {
-    email: string
+    baidu_token: string,
 }
 
 

@@ -17,11 +17,11 @@ import { getCateListAPI } from '@/api/cate';
 import { getWebConfigDataAPI } from '@/api/config';
 
 import { useConfigStore } from '@/stores';
-import { Theme, Web } from '@/types/app/config';
+import { Other, Theme, Web } from '@/types/app/config';
 
 const Header = () => {
   // 是否暗黑模式
-  const { isDark, setIsDark, setWeb, theme, setTheme } = useConfigStore();
+  const { isDark, setIsDark, setWeb, theme, setTheme, setOther } = useConfigStore();
 
   // 获取项目配置
   const getConfigData = async () => {
@@ -34,6 +34,11 @@ const Header = () => {
       data: { value: theme },
     } = (await getWebConfigDataAPI<{ value: Theme }>('theme')) || { data: { value: {} as Theme } };
     setTheme(theme);
+
+    const {
+      data: { value: other },
+    } = (await getWebConfigDataAPI<{ value: Other }>('other')) || { data: { value: {} as Other } };
+    setOther(other);
   };
 
   const patchName = usePathname();
