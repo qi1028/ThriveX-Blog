@@ -42,7 +42,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <title>{`${data?.title} - ${data?.subhead}`}</title>
         <meta name="description" content={data?.description} />
         <meta name="keywords" content={data?.keyword} />
-        <link rel="icon" href={data?.favicon || '/favicon.ico'} />
+        <link rel="icon" type="image/x-icon" href={data?.favicon || '/favicon.ico'} />
+        <link rel="shortcut icon" type="image/x-icon" href={data?.favicon || '/favicon.ico'} />
 
         {/* 百度统计 */}
         <BaiduStatis />
