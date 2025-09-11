@@ -21,7 +21,7 @@ import { Other, Theme, Web } from '@/types/app/config';
 
 const Header = () => {
   const patchName = usePathname();
-  
+
   // 是否暗黑模式
   const { isDark, setIsDark, setWeb, theme, setTheme, setOther } = useConfigStore();
 
@@ -111,10 +111,10 @@ const Header = () => {
 
             {/* 文章分类 */}
             {cateList?.map((one) => (
-              <>
+              <div key={one.id}>
                 {/* 渲染分类 */}
                 {one.type === 'cate' && (
-                  <li key={one.id} className="group/one relative">
+                  <li className="group/one relative">
                     <Link href={`/cate/${one.id}?name=${one.name}`} className={`flex items-center p-5 text-[15px] group-hover/one:!text-primary   ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}>
                       {one.icon} {one.name}
                       <Show is={!!one.children.length}>
@@ -138,7 +138,7 @@ const Header = () => {
 
                 {/* 渲染导航 */}
                 {one.type === 'nav' && (
-                  <li key={one.id} className="group/one relative">
+                  <li className="group/one relative">
                     <Link href={one.url} className={`flex items-center p-5 px-10 text-[15px] group-hover/one:!text-primary ${isPathSty || isScrolled ? 'text-[#333] dark:text-white' : 'text-white'}`}>
                       {one.icon} {one.name}
                       {/* 如果有子分类就显示下拉三角 */}
@@ -160,7 +160,7 @@ const Header = () => {
                     </Show>
                   </li>
                 )}
-              </>
+              </div>
             ))}
           </ul>
 
