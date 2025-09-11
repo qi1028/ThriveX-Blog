@@ -250,18 +250,18 @@ export default ({ data }: { data: Resume }) => {
                       </div>
 
                       <div className="p-4 space-y-3 text-sm">
-                        <div>
-                          <h5 className="font-bold text-gray-800 dark:text-white mb-1 flex items-center text-sm">项目描述</h5>
-                          <div className="text-gray-600 dark:text-gray-300 text-sm">
-                            {Array.isArray(project.description)
-                              ? project.description.map((desc, i) => (
-                                  <p key={i} className="mb-1.5">
-                                    {desc}
-                                  </p>
-                                ))
-                              : project.description}
+                        {!!project.description?.length && (
+                          <div>
+                            <h5 className="font-bold text-gray-800 dark:text-white mb-1 flex items-center text-sm">项目介绍</h5>
+                            <div className="text-gray-600 dark:text-gray-300 text-sm">
+                              {project.description?.map((item: string, i: number) => (
+                                <p key={i} className="mb-1.5">
+                                  {item}
+                                </p>
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        )}
 
                         {project.techStack && (
                           <div>
@@ -280,7 +280,7 @@ export default ({ data }: { data: Resume }) => {
                           </div>
                         )}
 
-                        {project.highlights && (
+                        {!!project.highlights?.length && (
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">项目亮点</h5>
                             <ul className="space-y-1 text-gray-600 dark:text-gray-300 text-sm">
@@ -294,7 +294,21 @@ export default ({ data }: { data: Resume }) => {
                           </div>
                         )}
 
-                        {(project.links || project.repositories) && (
+                        {!!project.challenges?.length && (
+                          <div>
+                            <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">项目难点</h5>
+                            <ul className="space-y-1 text-gray-600 dark:text-gray-300 text-sm">
+                              {project.challenges.map((item, i) => (
+                                <li key={i} className="flex items-center">
+                                  <span className="flex items-center justify-center bg-blue-500 min-w-1.5 min-h-1.5 mr-2 rounded-full"></span>
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {!!(project.links || project.repositories)?.length && (
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">相关链接</h5>
                             <div className="flex flex-wrap gap-2">
@@ -315,7 +329,7 @@ export default ({ data }: { data: Resume }) => {
                           </div>
                         )}
 
-                        {project.achievements && (
+                        {!!project.achievements?.length && (
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">业绩</h5>
                             <ul className="space-y-1 text-gray-600 dark:text-gray-300 text-sm">
