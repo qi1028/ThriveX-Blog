@@ -191,8 +191,8 @@ export default ({ data }: { data: Resume }) => {
                     </a>
                   )}
 
-                  {links?.project && (
-                    <a href={links.project} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors">
+                  {links?.blog && (
+                    <a href={links.blog} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors">
                       <FaProjectDiagram className="mr-2" size={16} /> 开源项目作品
                     </a>
                   )}
@@ -308,23 +308,18 @@ export default ({ data }: { data: Resume }) => {
                           </div>
                         )}
 
-                        {!!(project.links || project.repositories)?.length && (
+                        {!!project.repositories?.length && (
                           <div>
                             <h5 className="font-bold text-gray-800 dark:text-white mb-1 text-sm">相关链接</h5>
                             <div className="flex flex-wrap gap-2">
-                              {project.links &&
-                                Object.entries(project.links).map(([key, value]) => (
-                                  <a key={key} href={value as string} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-xs font-medium bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded transition-colors">
-                                    {key === 'preview' ? '项目预览' : key === 'website' ? '项目官网' : key === 'docs' ? '项目文档' : key === 'api' ? '项目接口' : key === 'dashboard' ? '项目后台' : key}
+                              {project.repositories?.map((item, index) => (
+                                <div key={index} className="flex items-center">
+                                  <span>{item.name}：</span>
+                                  <a href={item.url as string} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-xs font-medium bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded transition-colors">
+                                    {item.url}
                                   </a>
-                                ))}
-
-                              {project.repositories &&
-                                Object.entries(project.repositories).map(([key, value]) => (
-                                  <a key={key} href={value as string} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-xs font-medium bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded transition-colors">
-                                    {key === 'frontend' ? '前端仓库' : key === 'admin' ? '控制端仓库' : '后端仓库'}
-                                  </a>
-                                ))}
+                                </div>
+                              ))}
                             </div>
                           </div>
                         )}

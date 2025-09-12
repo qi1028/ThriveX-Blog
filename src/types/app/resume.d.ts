@@ -20,7 +20,7 @@ export interface Resume {
   links?: {
     github?: string;
     csdn?: string;
-    project?: string;
+    blog?: string;
   };
   skills?: string[];
   workExperience?: Array<{
@@ -43,7 +43,7 @@ export interface Resume {
         };
     highlights?: string[];
     links?: Record<string, string>;
-    repositories?: Record<string, string>;
+    repositories?: { name: string; url: string }[];
     achievements?: string | string[];
     challenges?: string[];
     responsibilities?: string[];
