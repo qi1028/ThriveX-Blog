@@ -14,34 +14,13 @@ import { BsFillMoonStarsFill, BsTextIndentLeft } from 'react-icons/bs';
 
 import { Cate } from '@/types/app/cate';
 import { getCateListAPI } from '@/api/cate';
-import { getWebConfigDataAPI } from '@/api/config';
 
 import { useConfigStore } from '@/stores';
-import { Other, Theme, Web } from '@/types/app/config';
 
 const Header = () => {
   const patchName = usePathname();
 
-  // 是否暗黑模式
-  const { isDark, setIsDark, setWeb, theme, setTheme, setOther } = useConfigStore();
-
-  // 获取项目配置
-  const getConfigData = async () => {
-    const {
-      data: { value: web },
-    } = (await getWebConfigDataAPI<{ value: Web }>('web')) || { data: { value: {} as Web } };
-    setWeb(web);
-
-    const {
-      data: { value: theme },
-    } = (await getWebConfigDataAPI<{ value: Theme }>('theme')) || { data: { value: {} as Theme } };
-    setTheme(theme);
-
-    const {
-      data: { value: other },
-    } = (await getWebConfigDataAPI<{ value: Other }>('other')) || { data: { value: {} as Other } };
-    setOther(other);
-  };
+  const { isDark, setIsDark, theme } = useConfigStore();
 
   // 这些路径段不需要改变导航样式
   const isPathSty = ['/my', '/wall', '/record', '/equipment', '/tags', '/resume', '/album', '/fishpond'].some((path) => patchName.includes(path));
@@ -62,7 +41,6 @@ const Header = () => {
       setIsDark(e.matches);
     });
 
-    getConfigData();
     getCateList();
 
     const handleScroll = () => {
