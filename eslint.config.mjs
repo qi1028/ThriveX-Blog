@@ -34,7 +34,10 @@ export default defineConfig([
       quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
       'jsx-quotes': ['error', 'prefer-double'],
       'react-hooks/exhaustive-deps': 'off',
+      'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
+      // 添加 React 新 JSX 转换规则，解决 'React' must be in scope 错误
       'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off'
     },
   },
 ]);

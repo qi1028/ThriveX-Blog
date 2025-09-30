@@ -131,7 +131,7 @@ export default () => {
                   control={control}
                   render={({ field }) => (
                     <>
-                      <Input {...field} type="text" label="你的名称（选填）" variant="bordered" placeholder="示例：宇阳" isInvalid={!!errors.name?.message} errorMessage={errors.name?.message} onBlur={() => trigger('name')} classNames={{ inputWrapper }} />
+                      <Input {...field} type="text" label="你的名称（选填）" variant="bordered" placeholder="示例：琦" isInvalid={!!errors.name?.message} errorMessage={errors.name?.message} onBlur={() => trigger('name')} classNames={{ inputWrapper }} />
                     </>
                   )}
                 />
@@ -141,7 +141,7 @@ export default () => {
                   control={control}
                   render={({ field }) => (
                     <>
-                      <Input {...field} type="text" label="你的邮箱（选填）" variant="bordered" placeholder="示例：3311118881@qq.com" isInvalid={!!errors.email?.message} errorMessage={errors.email?.message} onBlur={() => trigger('email')} classNames={{ inputWrapper }} />
+                      <Input {...field} type="text" label="你的邮箱（选填）" variant="bordered" placeholder="示例：123456789@qq.com" isInvalid={!!errors.email?.message} errorMessage={errors.email?.message} onBlur={() => trigger('email')} classNames={{ inputWrapper }} />
                     </>
                   )}
                 />
