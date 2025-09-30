@@ -5,5 +5,5 @@ import Request from '@/utils/request'
 export const getAlbumCatePagingAPI = (page: number = 1, size: number = 10) => Request<Paginate<Cate[]>>('POST', `/album/cate/paging?page=${page}&size=${size}`)
 
 // 获取指定相册中的所有照片
-export const getImagesByAlbumIdAPI = (id: number, page: number = 1, size: number = 10) =>
-  Request<Paginate<Photo[]>>('GET', `/album/cate/${id}/images?page=${page}&size=${size}`)
+export const getImagesByAlbumIdAPI = (id: number, page: number = 1, size: number = 10, password?: string) =>
+  Request<Paginate<Photo[]>>('GET', `/album/cate/${id}/images?page=${page}&size=${size}${password ? `&password=${password}` : ''}`)

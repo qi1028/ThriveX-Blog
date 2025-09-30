@@ -6,6 +6,7 @@ export interface Photo {
   image: string;
   cateId: number;
   createTime: number;
+  sort?: number;
 }
 
 interface Cate {
@@ -13,4 +14,5 @@ interface Cate {
   name: string;
   cover: string;
   images: string[];
+  password?: string;
 }

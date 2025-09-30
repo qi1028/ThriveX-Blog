@@ -14,6 +14,7 @@ interface ConfigState {
   // 主题配置
   theme: Theme;
   setTheme: (data: Theme) => void;
+  setSwiperText: (texts: string[]) => void; // 添加设置swiper_text的方法
 
   // 其他配置
   other: Other;
@@ -31,6 +32,9 @@ export default create(
 
       theme: {} as Theme,
       setTheme: (data: Theme) => set(() => ({ theme: data })),
+      setSwiperText: (texts: string[]) => set((state) => ({ 
+        theme: { ...state.theme, swiper_text: texts } 
+      })),
 
       other: {} as Other,
       setOther: (data: Other) => set(() => ({ other: data }))

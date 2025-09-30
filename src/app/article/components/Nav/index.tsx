@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { MdOutlineKeyboardDoubleArrowLeft } from 'react-icons/md';
+import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md';
 import directory from '@/assets/svg/other/directory.svg';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -106,7 +106,7 @@ const ContentNav = () => {
           className="fixed bottom-5 right-5 sm:top-[80%] sm:left-[320px] z-50 cursor-pointer flex justify-center items-center w-12 h-12 rounded-xl bg-white dark:bg-black-b dark:border-[#4e5969] p-3 border"
           onClick={() => setOpen(false)}
         >
-          <MdOutlineKeyboardDoubleArrowLeft className="w-full text-4xl text-primary" />
+          <MdOutlineKeyboardDoubleArrowRight className="w-full text-4xl text-primary" />
         </div>
       ) : (
         !!navs?.length && (

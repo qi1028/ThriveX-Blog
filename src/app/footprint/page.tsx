@@ -49,7 +49,7 @@ export default function MapContainer() {
       AMapLoader.load({
         key: key_code,
         version: '2.0',
-        plugins: ['AMap.Scale', 'AMap.Marker', 'AMap.InfoWindow'],
+        plugins: ['AMap.Scale', 'AMap.Marker', 'AMap.InfoWindow', 'AMap.ToolBar'],
       })
         .then((AMap) => {
           map = new AMap.Map('container', {
@@ -58,6 +58,60 @@ export default function MapContainer() {
             zoom: 4.8,
             center: [105.625368, 37.746599],
           });
+          
+          // 添加工具栏控件（包含缩放按钮）
+          const toolbar = new AMap.ToolBar({
+            position: {
+              top: '760px',
+              right: '70px'
+            }, // 工具栏位置
+            ruler: false, // 不显示比例尺
+            noIpLocate: true, // 不显示定位按钮
+            locate: false, // 不显示定位按钮
+            liteStyle: true, // 精简风格
+            direction: false, // 不显示方向按钮
+            autoPosition: false, // 不自动定位
+            locationMarker: false, // 不显示定位标记
+          });
+          map.addControl(toolbar);
+
+          // 添加一键缩小按钮
+          const zoomOutButton = document.createElement('div');
+          zoomOutButton.style.position = 'absolute';
+          zoomOutButton.style.right = '70px';
+          zoomOutButton.style.bottom = '70px'; // 调整位置，使其在原生控件上方
+          zoomOutButton.style.width = '30px';
+          zoomOutButton.style.height = '30px';
+          zoomOutButton.style.backgroundColor = '#fff';
+          zoomOutButton.style.border = '1px solid #ccc';
+          zoomOutButton.style.borderRadius = '4px';
+          zoomOutButton.style.cursor = 'pointer';
+          zoomOutButton.style.display = 'flex';
+          zoomOutButton.style.justifyContent = 'center';
+          zoomOutButton.style.alignItems = 'center';
+          zoomOutButton.style.fontSize = '18px';
+          zoomOutButton.style.fontWeight = 'bold';
+          zoomOutButton.style.color = '#333';
+          zoomOutButton.style.boxShadow = '0 0 3px rgba(0,0,0,0.2)';
+          zoomOutButton.style.zIndex = '100';
+          zoomOutButton.style.transition = 'background-color 0.3s';
+          zoomOutButton.innerHTML = '⇊';
+          zoomOutButton.title = '一键缩小';
+          
+          // 添加悬停效果
+          zoomOutButton.onmouseover = () => {
+            zoomOutButton.style.backgroundColor = '#f0f0f0';
+          };
+          
+          zoomOutButton.onmouseout = () => {
+            zoomOutButton.style.backgroundColor = '#fff';
+          };
+          
+          zoomOutButton.onclick = () => {
+            map.setZoom(4); // 设置为最小缩放级别
+          };
+          
+          document.getElementById('container')?.appendChild(zoomOutButton);
 
           // 创建信息窗体
           infoWindow = new AMap.InfoWindow({
