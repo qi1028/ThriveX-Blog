@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Slide from '@/components/Slide';
 import Starry from '@/components/Starry';
 import RainbowText from '@/components/RainbowText';
@@ -190,15 +191,15 @@ export default function HQPage() {
 
       {/* 新增的跳转卡片 */}
       <div className="myCenter mt-8">
-        <a 
-          href="/message" 
+        <Link 
+          href="/xf" 
           className="relative w-full max-w-sm h-32 bg-cover bg-center rounded-xl shadow-lg overflow-hidden transform transition-transform hover:scale-105 cursor-pointer"
           style={{ backgroundImage: 'url(https://cdn.cloveq.chat/thrive/default/68da357ae4b01cd5d3d3e6e5.jpg)' }}
         >
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
             <span className="text-white text-xl font-bold">飞车传信</span>
           </div>
-        </a>
+        </Link>
       </div>
 
       {/* 自定义动画样式 - 使用标准 style 标签替代 styled-jsx */}
