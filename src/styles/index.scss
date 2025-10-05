@@ -1,4 +1,57 @@
-@use "./fun.scss";
+@import './var.scss';
+@import './tailwind.scss';
+@import './fun.scss';
+
+/* 添加彩虹循环渐变动画 */
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-rainbow {
+  background-size: 200% 200%;
+  animation: rainbow 3s linear infinite;
+  background-image: linear-gradient(
+    to right,
+    #ff0000, #ff8000, #ffff00,
+    #80ff00, #00ff00, #00ff80,
+    #00ffff, #0080ff, #0000ff,
+    #8000ff, #ff00ff, #ff0080
+  );
+}
+
+/* 全局滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+.dark {
+  ::-webkit-scrollbar-thumb {
+    background: #666;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888;
+  }
+}
 
 html.dark {
     // 闪念编辑器主题
@@ -131,25 +184,3 @@ body {
     padding-left: 10px;
     background-clip: padding-box;
 }
-
-// 渐变背景
-// .bg_gradient {
-//     background-image: linear-gradient(to right, #fff1eb 0%, #d0edfb 100%);
-//     background-image: linear-gradient(180deg, #edf6ff 0%, rgb(255, 255, 255) 100%);
-// }
-
-// #root {
-//     transition-duration: 0s !important;
-
-//     * {
-//         transition-duration: 0s !important;
-//     }
-
-//     *::after {
-//         transition-duration: 0s !important;
-//     }
-
-//     *::before {
-//         transition-duration: 0s !important;
-//     }
-// }
