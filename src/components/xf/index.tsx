@@ -68,6 +68,36 @@ const XFEnvelope: React.FC = () => {
             perspective: '1000px',
           }}
         >
+          
+          {/* 信封盖 - 替换之前的白色模块 */}
+          <div 
+            className="absolute w-full h-[150px] rounded-b-lg shadow"
+            style={{ 
+              maxWidth: '600px',
+              bottom: '100%',
+              left: '0',
+              marginBottom: '0px',
+              backgroundColor: '#908172', // 四周颜色
+              borderBottomLeftRadius: '35px', // 左右圆角
+              borderBottomRightRadius: '35px',
+              borderBottom: '1px solid #00000040', // 底部细线
+              transform: 'rotateX(180deg)', // 修正旋转角度为180度
+              boxShadow: '0 -1px 0 black' // 添加底部黑色细线（负值是因为元素被翻转了180度）
+            }}
+          >
+            {/* 中心区域保持原来的样子 */}
+            <div
+              className="absolute"
+              style={{
+                top: '0px',
+                left: '35px',
+                width: '530px',
+                height: '115px',
+                backgroundColor: '#7F705F' // 中心区域颜色保持不变
+              }}
+            ></div>
+          </div>
+          
           <div
             className="relative w-full h-full transition-all duration-[1000ms] ease-in-out"
             style={{ 
@@ -77,7 +107,7 @@ const XFEnvelope: React.FC = () => {
           >
             {/* 信封正面 */}
             <div 
-              className="absolute w-full h-full bg-cover bg-center rounded-lg shadow-xl overflow-hidden"
+              className="absolute w-full h-full bg-cover bg-center shadow-xl overflow-hidden"
               style={{ 
                 backgroundImage: "url('/letterBg.jpeg')",
                 backfaceVisibility: 'hidden',
@@ -113,7 +143,7 @@ const XFEnvelope: React.FC = () => {
             
             {/* 信封背面 */}
             <div 
-              className="absolute w-full h-full rounded-lg shadow-xl overflow-hidden"
+              className="absolute w-full h-full shadow-xl overflow-hidden"
               style={{ 
                 backfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)',
