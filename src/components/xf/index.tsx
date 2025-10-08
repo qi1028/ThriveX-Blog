@@ -60,7 +60,7 @@ const XFEnvelope: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#FFFFF1' }}>
-      <div className="relative w-full max-w-[600px]">
+      <div className="relative w-full max-w-[600px]" style={{ marginTop: '120px' }}>
         {/* 翻转容器 */}
         <div 
           className="relative w-full h-[300px]"
@@ -113,14 +113,33 @@ const XFEnvelope: React.FC = () => {
             
             {/* 信封背面 */}
             <div 
-              className="absolute w-full h-full bg-cover bg-center rounded-lg shadow-xl overflow-hidden"
+              className="absolute w-full h-full rounded-lg shadow-xl overflow-hidden"
               style={{ 
-                backgroundImage: "url('/letterBg.jpeg')", // 使用相同的背景图片
                 backfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)',
               }}
             >
+              {/* 新增信封底部背景 - 600*200尺寸 */}
+              <div 
+                className="absolute bottom-0 w-full"
+                style={{
+                  height: '200px',
+                  backgroundImage: "url('/letterBg.jpeg')",
+                  backgroundSize: '600px 200px',
+                  backgroundPosition: 'bottom',
+                  backgroundRepeat: 'no-repeat'
+                }}
+              ></div>
               
+              {/* 新增信封顶部区域 - 600*100尺寸，颜色为#7F705F */}
+              <div 
+                className="absolute top-0 w-full"
+                style={{
+                  height: '100px',
+                  backgroundColor: '#7F705F'
+                }}
+              ></div>
+
               {/* 新增信封盖背景 */}
               <div 
                 className={`absolute top-0 left-0 w-full h-1/2 bg-cover bg-center rounded-b-lg transition-all duration-[800ms] ease-in-out`}
